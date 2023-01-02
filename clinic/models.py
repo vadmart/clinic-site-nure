@@ -1,5 +1,6 @@
 from django.db import models
 import textwrap
+from django.utils import timezone
 
 
 # Create your models here.
@@ -22,6 +23,21 @@ class Doctors(models.Model):
         return f"{self.lastname} {self.name} {self.patronymic}"
 
 
+class Cabinets(models.Model):
+    no = models.CharField(max_length=4)
+
+    def __str__(self):
+        return self.no
+
+
+class DoctorsCabinets(models.Model):
+    doctor_id = models.ForeignKey(Doctors, on_delete=models.CASCADE)
+    cabinet_id = models.ForeignKey(Cabinets, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Doctor: {self.doctor_id.lastname} {self.doctor_id.name}, CabinetNo.: {self.cabinet_id.no}"
+
+
 class Persons(models.Model):
     doctor_id = models.ForeignKey(to=Doctors, on_delete=models.CASCADE)
     name = models.CharField(max_length=15)
@@ -42,7 +58,7 @@ class Reviews(models.Model):
     doctor_id = models.ForeignKey(to=Doctors, on_delete=models.CASCADE)
     person_id = models.ForeignKey(to=Persons, on_delete=models.CASCADE)
     text = models.CharField(max_length=1000)
-    datetime = models.DateTimeField()
+    datetime = models.DateTimeField(default=timezone.now())
 
     def __str__(self):
         return textwrap.shorten(self.text, 30)

@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Харківська районна клініка №496</title>
-    <link rel="stylesheet" href="css/style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 <div class="wrapper">
@@ -13,7 +14,7 @@
         <ul class="menu">
             <li class="menu-item">
                 <a href="index.html" class="logo disabled">
-                    <img src="img/clinic_logo.png" alt="">
+                    <img src="{% static 'img/clinic_logo.png' %}" alt="">
                 </a>
             </li>
             <li class="menu-item dropdown">
@@ -31,7 +32,7 @@
                 </ul>
             </li>
             <li class="menu-item">
-                <a class="btn" href="pages/staff.html">Наші лікарі</a>
+                <a class="btn" href="pages/staff">Наші лікарі</a>
             </li>
             <li class="menu-item">
                 <a class="btn" href="pages/making-an-appointment.html">Запис на прийом</a>
@@ -98,9 +99,9 @@
                     </div>
                 </div>
                 <picture>
-                    <source media="(min-width: 641px) and (max-width: 768px)" srcset="img/200w/photo_about.png">
-                    <source media="(max-width: 1300px)" srcset="img/300w/photo_about.png">
-                    <img src="img/400w/photo_about.png" alt="">
+                    <source media="(min-width: 641px) and (max-width: 768px)" srcset="../../static/img/200w/photo_about.png">
+                    <source media="(max-width: 1300px)" srcset="../../static/img/300w/photo_about.png">
+                    <img src="../../static/img/400w/photo_about.png" alt="">
                 </picture>
             </div>
         </section>
@@ -138,24 +139,24 @@
             </div>
             <div class="what-makes-us-special-grid">
                 <article class="what-makes-us-special-article">
-                    <img src="icons/uzi.png" alt="">
+                    <img src="{% static 'icons/uzi.png' %}" alt="">
                     <h4>Якісні лабораторії</h4>
                     <p>Клініка забезпечена сучасним обладнанням. Саме тому результати діагностики швидкі та точні, а
                         отже, й лікування ефективне</p>
                 </article>
                 <article class="what-makes-us-special-article">
-                    <img src="icons/staff.png" alt="">
+                    <img src="../../static/icons/staff.png" alt="">
                     <h4>Позитивний персонал</h4>
                     <p>У клініці на вас чекатимуть позитивні, зацікавлені у своїй роботі спеціалісти. Вони знають, як
                         знайти підхід до будь-якого пацієнта!</p>
                 </article>
                 <article class="what-makes-us-special-article">
-                    <img src="icons/vacuum-cleaner.png" alt="">
+                    <img src="../../static/icons/vacuum-cleaner.png" alt="">
                     <h4>Чистота та гарна санітарія</h4>
                     <p>Уборка нашої клініки відбувається за допомогою німецьких професійних порохотягів Kärcher.</p>
                 </article>
                 <article class="what-makes-us-special-article">
-                    <img src="icons/fist-up.png" alt="">
+                    <img src="{% static 'icons/fist-up.png' %}" alt="">
                     <h4>Методи лікування</h4>
                     <p>Наші лікарі навчалися у ліпших ВНЗ України та навіть Німеччини! Завдяки такому міцному фундаменту
                         та наполегливій практиці клініка пропонує
@@ -199,7 +200,7 @@
     </footer>
 </div>
 <script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
-<script src="js/header.js"></script>
-<script src="js/testReminder.js"></script>
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/testReminder.js' %}"></script>
 </body>
 </html>
