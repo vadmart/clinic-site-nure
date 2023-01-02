@@ -1,0 +1,95 @@
+.table-wrapper {
+    display: grid;
+    justify-items: center;
+    row-gap: 40px;
+    min-width: 768px;
+}
+
+.table-block {
+    display: grid;
+    row-gap: 40px;
+    margin: 0 auto;
+    position: relative;
+    overflow: auto;
+    min-width: 768px;
+}
+
+.table-wrapper .working-table {
+    font-family: "Arial", sans-serif;
+    font-weight: lighter;
+    border-collapse: collapse;
+    min-width: 768px;
+    width: 100%;
+}
+
+.working-table .table-title {
+    font-size: 1.6rem;
+    padding-bottom: 20px;
+}
+
+.working-table thead,
+.working-table tbody {
+    background-color: rgb(255, 255, 255, .7);
+}
+
+.working-table thead th {
+    padding: 10px 0;
+}
+
+.table-wrapper .working-table,
+.table-wrapper .working-table tr {
+    border: solid 1px rgb(100, 100, 100, 0.5);
+}
+
+.working-table .schedule-name {
+    padding: 20px;
+}
+
+.working-table .schedule-info {
+    border-left: solid 2px rgba(108, 192, 192, 1);
+    padding: 4px;
+}
+
+.working-table td {
+    width: 190px;
+    height: 80px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 1031px) {
+    .working-table td {
+        font-size: 0.9rem;
+        width: 160px;
+        height: 60px;
+    }
+
+    .working-table .table-title {
+        font-size: 1.4rem;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 932px) {
+    .working-table {
+        min-width: 849px;
+    }
+
+    .working-table td {
+        font-size: 0.8rem;
+        width: 130px;
+        height: 50px;
+    }
+
+    .working-table .table-title {
+        font-size: 1rem;
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        overflow-x: scroll;
+    }
+}

@@ -1,0 +1,122 @@
+.doctor-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.doctor-info, .reviews .review {
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+.doctor-info .doctor-description .prof-info {
+    display: grid;
+    grid-row-gap: 10px;
+}
+
+.doctor-info {
+    display: flex;
+    border: solid 2px #000000;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.doctor-info img {
+    width: 210px;
+    height: 300px;
+}
+
+.doctor-info > * {
+    margin: 0 20px;
+}
+
+.doctor-info .doctor-description {
+    font-size: 25px;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    position: relative;
+}
+
+.doctor-description .profession {
+    font-style: italic;
+}
+
+.doctor-description .category-info {
+    font-weight: 800;
+}
+
+.doctor-info .feedback_btn {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #0CC5EE;
+    position: absolute;
+    bottom: 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.doctor-info .feedback_btn:hover {
+    background-color: #1975BB;
+}
+
+.reviews {
+    display: grid;
+    justify-items: center;
+    row-gap: 20px;
+}
+
+.reviews * {
+    font-size: 20px;
+}
+
+.reviews .review {
+    padding: 5px 10px 30px 10px;
+    max-width: 60%;
+    border: solid 1px #000000;
+    border-radius: 10px;
+}
+
+.reviews .review > * {
+    margin: 10px 0;
+}
+
+.review .account > * {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.reviews__menu {
+    width: 80%;
+    display: grid;
+    grid-row-gap: 20px;
+    background-color: rgba(100, 100, 100, 0.1);
+    padding: 10px;
+}
+
+.reviews__menu__title {
+    text-align: center;
+    font-size: 1.3em;
+    font-family: Inter, sans-serif;
+}
+
+.reviews__menu__elems {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu__elem {
+    font-family: Inter, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    .doctor-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .doctor-info .feedback_btn {
+        position: relative;
+        text-align: center;
+        margin: 10px 0;
+    }
+}

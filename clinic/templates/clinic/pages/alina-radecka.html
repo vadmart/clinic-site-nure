@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відгуки</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reviews.css">
+</head>
+<body>
+<div class="wrapper">
+    <header class="clinic-head">
+        <div class="site-name">Харківська районна клініка №496</div>
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="../index.html" class="logo">
+                    <img src="../img/clinic_logo.png" alt="">
+                </a>
+            </li>
+            <li class="menu-item dropdown">
+                <a class="btn dropbtn">Лікарня</a>
+                <ul class="dropdown-content">
+                    <li>
+                        <a class="inner-btn" href="">Галерея</a>
+                    </li>
+                    <li>
+                        <a class="inner-btn" href="contacts.html">Контакти</a>
+                    </li>
+                    <li>
+                        <a class="inner-btn" href="vacancy.html">Вакансії</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="btn" href="staff.html">Наші лікарі</a>
+            </li>
+            <li class="menu-item">
+                <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
+            </li>
+            <li class="menu-item">
+                <a class="btn" href="schedule-work.html">Графік роботи</a>
+            </li>
+            <li class="menu-item">
+                <a class="btn" href="quiz.html">Опитування</a>
+            </li>
+        </ul>
+        <div class="mobile-menu">
+            <div class="mobile-menu-btn-wrapper">
+                <button>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <ul class="mobile-menu-content">
+                <li class="dropdown-mobile"></li>
+                <li class="menu-item">
+                    <a class="btn" href="../index.html">Додому</a>
+                </li>
+                <li class="menu-item dropdown-content">
+                    <a class="btn dropbtn">Лікарня</a>
+                    <ul>
+                        <li>
+                            <a class="btn" href="">Галерея</a>
+                        </li>
+                        <li>
+                            <a class="btn" href="contacts.html">Контакти</a>
+                        </li>
+                        <li>
+                            <a class="btn" href="vacancy.html">Вакансії</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a class="btn" href="staff.html">Наші лікарі</a>
+                </li>
+                <li class="menu-item">
+                    <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
+                </li>
+                <li class="menu-item">
+                    <a class="btn" href="schedule-work.html">Графік роботи</a>
+                </li>
+                <li class="menu-item">
+                    <a class="btn" href="quiz.html">Опитування</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="title-box">
+            <h2>Інформація про лікаря</h2>
+        </div>
+        <div class="doctor-wrapper">
+            <div class="doctor-info">
+                <img src="../img/250w/alina-radecka.png" alt="">
+                <div class="doctor-description">
+                    <h3 class="header">Радецька Аліна Іванівна</h3>
+                    <div class="prof-info">
+                        <span class="category-info">Перша кваліфікаційна категорія</span>
+                        <div class="work-experience">Стаж: 35 років</div>
+                    </div>
+                    <a href="" class="feedback_btn">Залишити відгук</a>
+                </div>
+            </div>
+        </div>
+        <div class="title-box">
+            <h2>Відгуки</h2>
+        </div>
+        <div class="reviews">
+            <form class="reviews__menu">
+                <div class="reviews__menu__title">Налаштування відгуків</div>
+                <div class="reviews__menu__elems">
+                    <div class="menu__elem">
+                        <label for="background">Фон</label>
+                        <select name="options" id="background">
+                            <option value="">--Оберіть колір фону--</option>
+                            <option value="red">Червоний</option>
+                            <option value="blue">Синій</option>
+                            <option value="green">Зелений</option>
+                            <option value="yellow">Жовтий</option>
+                        </select>
+                    </div>
+                    <div class="menu__elem">
+                        <label for="font-size">Розмір шрифта</label>
+                        <select name="options" id="font-size">
+                            <option value="">--Оберіть розмір шрифта--</option>
+                            <option value="0.8em">0.8em</option>
+                            <option value="1em">1em</option>
+                            <option value="1.2em">1.2em</option>
+                            <option value="1.5em">1.5em</option>
+                        </select>
+                    </div>
+                    <div class="menu__elem">
+                        <label for="font-type">Тип шрифта</label>
+                        <select name="options" id="font-type">
+                            <option value="">--Оберіть тип шрифту--</option>
+                            <option value="serif">Serif</option>
+                            <option value="sans-serif">Sans-serif</option>
+                        </select>
+                    </div>
+                    <div class="menu__elem">
+                        <input type="reset" id="default-button" value="За замовченням">
+                    </div>
+                </div>
+            </form>
+            <blockquote class="review">
+                <div class="account">
+                    <cite>Олег</cite>
+                    <time datetime="2018-08-18 14:50">09.08.18 14:50</time>
+                </div>
+                <p class="comment">
+                    Нечасто залишаю відгуки, але важко стриматися: лікар дуже класний! Майже з дитинства були проблеми
+                    із зором, але після надання консультації та лік вже є результати.
+                </p>
+            </blockquote>
+            <blockquote class="review">
+                <div class="account">
+                    <cite>Богдан</cite>
+                    <time datetime="2021-10-26 11:10">26.10.21 11:10</time>
+                </div>
+                <p class="comment">
+                    Добрий день! Хотів би щиро вдячити Вам, Аліна Іванівна, за дуже ефективний курс лікування. Я навіть
+                    не міг повірити, що одужання за 1 день - це реально. Ви дійсно талановита, а також пильна та добра
+                    людина, бажаю Вам успіху)
+                </p>
+            </blockquote>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <h3>Харківська районна клініка</h3>
+            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
+            <ul class="socials">
+                <li>
+                    <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2008-2022</p>
+            <p>Міністерство охорони здоров'я</p>
+        </div>
+    </footer>
+</div>
+<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
+<script src="../js/header.js"></script>
+<script src="../js/reviews.js"></script>
+</body>
+</html>
