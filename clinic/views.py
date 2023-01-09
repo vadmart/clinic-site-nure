@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
+from clinic.models import Doctors, DoctorsCabinets, PhoneNumbers
+from datetime import date
 
 
 # Create your views here.
@@ -8,4 +10,14 @@ def index(request):
 
 
 def staff(request):
-    return render(request, template_name="clinic/pages/staff.html", context={})
+    doctors = Doctors.objects.all()
+    doc_cabs = DoctorsCabinets.objects.all()
+    dates = [(date.today() - doctor.work_start_date).days // 365 for doctor in doctors]
+    phones = PhoneNumbers.objects.all()
+    return render(request, template_name="clinic/pages/staff.html", context={"doctors": doctors,
+    									     "doc_cabs": doc_cabs,
+    									     "phones": phones,
+    									     "dates": dates})
+    
+def schedule(request):
+    return render(request, template_name="clinic/pages/schedule-work.html", context={})

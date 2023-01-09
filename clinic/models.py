@@ -18,13 +18,15 @@ class Doctors(models.Model):
     patronymic = models.CharField(max_length=20)
     category_id = models.ForeignKey(DoctorCategories, on_delete=models.SET_NULL, null=True)
     work_start_date = models.DateField()
-
+    image_name = models.CharField(max_length=255, default="")
+    
     def __str__(self):
         return f"{self.lastname} {self.name} {self.patronymic}"
 
 
 class Cabinets(models.Model):
     no = models.CharField(max_length=4)
+    floor = models.IntegerField(default=0)
 
     def __str__(self):
         return self.no

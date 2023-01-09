@@ -89,29 +89,42 @@
         <div class="title-box">
             <h2>Наші лікарі</h2>
         </div>
+        {% load clinic_extras %}
         <div class="doctors">
+            {% for doctor in doctors %}
             <div class="block-doctor">
                 <div class="photo">
-                    <img srcset="{% static 'img/250w/alina-radecka.png' %} 250w,
-                                 {% static 'img/200w/alina-radecka.png' %} 200w,
-                                 {% static 'img/150w/alina-radecka.png' %} 150w"
+                    <img srcset="{% static 'img/250w/' %}{{ doctor.image_name }} 250w,
+                                 {% static 'img/200w/' %}{{ doctor.image_name }} 200w,
+                                 {% static 'img/150w/' %}{{ doctor.image_name }} 150w"
                          sizes="(max-width: 768px) 150px,
                                 (max-width: 1300px) 200px,
                                 250px"
-                         src="{% static 'img/250w/alina-radecka.png' %}" alt="">
+                         src="{% static 'img/250w/' %}{{ doctor.image_name }}" alt="">
                 </div>
                 <div class="full-description">
-                    <h5 class="description-header">Радецька Аліна Миколаївна</h5>
+                    <h5 class="description-header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h5>
                     <div class="description-block">
-                        <p class="description">Перша кваліфікаційна категорія<br>
-                            Номер кабінету: № 4<br>
-                            Номер телефону: 548-69-213, 0664586771<br>
+                        <p class="description">{{ doctor.category_id.name}} кваліфікаційна категорія<br>
+                            Номер кабінету: №
+                            {% for dc in doc_cabs %}
+                            	{% if doctor.id == dc.doctor_id.id %}
+                            		{{ dc.cabinet_id.no }}
+                            	{% endif %}
+                            {% endfor %}<br>
+                            Номер телефону: 
+                            {% for phone in phones %}
+                            	{% if doctor.id == phone.doctor_id.id %}
+                            		{{ phone.value }}
+                            	{% endif %}
+                            {% endfor %}
                         </p>
-                        <p class="experience-description">Стаж роботи: 10 років</p>
-                        <a class="doctor-btn" href="alina-radecka.html">Докладніше...</a>
+                        <p class="experience-description">Стаж роботи: {{ doctor.work_start_date|years_to_now }} років</p>
+                        <a class="doctor-btn" href="reviews.html">Докладніше...</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </main>
     <footer>
