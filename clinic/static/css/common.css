@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap');
+
+* {
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+html, body {
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.btn.disabled,
+.inner-btn.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: rgb(100, 100, 100) !important;
+}
+
+
+main {
+    margin: 140px 0;
+    flex: 1 1 auto;
+}
+
+.brief-info-wrapper * {
+    background-color: #fff;
+}
+
+.title-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+}
+
+.title-box h2 {
+    text-transform: uppercase;
+    position: absolute;
+    font-size: 25px;
+    margin-top: 0;
+    background-color: #fff;
+    white-space: normal;
+    padding: 0 5px;
+    color: rgba(80, 170, 170, 1);
+}
+
+.title-box:before {
+    content: '';
+    display: block;
+    background-color: rgba(80, 170, 170, 1);
+    height: 4px;
+    width: 95%;
+    top: 35px;
+    position: absolute;
+}
+
+.clinic-head {
+    background-color: rgba(80, 170, 170, 1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    position: fixed;
+    z-index: 1000;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+
+.clinic-head .site-name {
+    background-color: rgba(100, 244, 255, 0.5);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.menu {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+}
+
+.mobile-menu__button {
+    background-repeat: no-repeat;
+    background-image: url("../icons/white-menu-button.png");
+    width: 24px;
+    height: 24px;
+}
+
+.mobile-menu__button:active {
+    background-image: url("../icons/black-menu-button.png");
+}
+
+.mobile-menu-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.mobile-menu button {
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: inherit;
+    border: none;
+}
+
+.mobile-menu button:active {
+    color: #777;
+}
+
+.mobile-menu-content {
+    list-style: none;
+    padding: 10px 0 0 0;
+    width: 100%;
+    display: none;
+    background-color: rgba(100, 200, 200, 0.7);
+    left: 0;
+}
+
+.menu-item {
+    list-style: none;
+    padding: 0 10px;
+    position: relative;
+}
+
+.menu-item .btn {
+    position: relative;
+    display: block;
+    font-size: 1.4rem;
+    padding-bottom: 15px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: rgb(255, 255, 255, .7);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 100ms;
+}
+
+.menu-item .btn:hover {
+    color: rgb(255, 255, 255, 1);
+}
+
+.menu-item a img {
+    height: 80px;
+}
+
+.menu-item .btn:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: #fff;
+    left: 0;
+    bottom: 5px;
+    width: 0;
+    transition: width .35s;
+}
+
+.menu-item .btn:hover:after {
+    width: 100%;
+}
+
+.menu .menu-item .dropdown-content {
+    display: none;
+    list-style: none;
+    padding: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(80, 150, 150, 1);
+}
+
+.menu .dropdown-content .inner-btn {
+    float: none;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+.menu .dropdown-content .inner-btn:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+footer {
+    width: 100vw;
+    background-color: rgba(208, 255, 255, 1);
+    height: auto;
+    font-family: "Arial", sans-serif;
+    padding-top: 10px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-content p {
+    margin: 0 auto;
+}
+
+.footer-content h3 {
+    word-spacing: 2px;
+    line-height: 3rem;
+}
+
+footer .socials {
+    list-style: none;
+    display: flex;
+    margin: 15px 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials li a {
+    color: #aaa;
+}
+
+.socials a i {
+    font-size: 20px;
+    transition: color .3s;
+}
+
+.socials li a:hover .fa-youtube {
+    color: red;
+}
+
+.socials li a:hover .fa-facebook {
+    color: #0CC5FF;
+}
+
+.socials li a:hover .fa-instagram {
+    color: darkviolet;
+}
+
+.socials li a:hover .fa-twitter {
+    color: #0CC5BF;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    background-color: rgba(80, 170, 170, 1);
+    text-align: center;
+    width: 100vw;
+}
+
+@media screen and (max-width: 1031px) {
+    .menu-item .btn {
+        font-size: 1.3rem;
+    }
+
+    .menu-item a img {
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .clinic-head .site-name {
+        font-size: calc(1rem + 0.3 * (100vw / 768));
+    }
+
+    main {
+        margin: 80px 0;
+    }
+
+    .title-box {
+        margin: 20px 0;
+    }
+
+    .footer-content {
+        margin: 0 10%;
+    }
+
+    .menu-item .btn {
+        font-size: calc(1rem + 0.1 * (100vw / 768));
+    }
+}
+
+
+@media screen and (max-width: 932px) {
+    .menu-item a img {
+        height: 50px;
+    }
+
+    .menu-item .btn {
+        font-size: 1.2rem;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    .title-box h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 384px) {
+    .footer-content h3 {
+        font-size: 1rem;
+    }
+
+    .footer-content h3 {
+        line-height: 1.5rem;
+    }
+
+    .title-box:before {
+        height: 1px;
+    }
+}

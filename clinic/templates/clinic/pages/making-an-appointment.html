@@ -1,179 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/making-an-appointment.css' %}">
     <title>Запис на прийом</title>
-    <link rel="stylesheet" href="../../../static/css/style.css">
-    <link rel="stylesheet" href="../../../static/css/making-an-appointment.css">
-</head>
-<body>
-<div class="wrapper">
-    <header class="clinic-head">
-        <div class="site-name">Харківська районна клініка №496</div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="../index.html" class="logo">
-                    <img src="../../../static/img/clinic_logo.png" alt="">
-                </a>
-            </li>
-            <li class="menu-item dropdown">
-                <a class="btn dropbtn">Лікарня</a>
-                <ul class="dropdown-content">
-                    <li>
-                        <a class="inner-btn" href="">Галерея</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="contacts.html">Контакти</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="vacancy.html">Вакансії</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="staff.html">Наші лікарі</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn disabled" href="making-an-appointment.html">Запис на прийом</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="schedule-work.html">Графік роботи</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="quiz.html">Опитування</a>
-            </li>
-        </ul>
-        <div class="mobile-menu">
-            <div class="mobile-menu-btn-wrapper">
-                <button>
-                    <div class="mobile-menu__button"></div>
-                </button>
-            </div>
-            <ul class="mobile-menu-content">
-                <li class="dropdown-mobile"></li>
-                <li class="menu-item">
-                    <a class="btn" href="../index.html">Додому</a>
-                </li>
-                <li class="menu-item dropdown-content">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul>
-                        <li>
-                            <a class="btn" href="">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="contacts.html">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="vacancy.html">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="staff.html">Наші лікарі</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn disabled" href="making-an-appointment.html">Запис на прийом</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="schedule-work.html">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="quiz.html">Опитування</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <main>
-        <div class="form-wrapper">
-            <div class="form-container">
-                <div class="title-block">Запис на прийом</div>
-                <form action="#">
-                    <div class="user-details">
-                        <div class="inner-box" id="patient-lastname">
-                            <label for="lastname" class="details">Прізвище</label>
-                            <input class="textholder" id="lastname" type="text" placeholder="Введіть прізвище"
-                                   required>
-                        </div>
-                        <div class="inner-box" id="patient-firstname">
-                            <label for="firstname" class="details">Ім'я</label>
-                            <input class="textholder" id="firstname" type="text" placeholder="Введіть ім'я"
-                                   required>
-                        </div>
-                        <div class="inner-box" id="patient-contract">
-                            <label for="contract" class="details">Номер контракту із сімейним лікарем</label>
-                            <input class="textholder" id="contract" type="text" placeholder="Введіть номер контракту, що заключено із сімейним лікарем"
-                                   required>
-                        </div>
-                        <div class="inner-box" id="family-doctor-block">
-                            <label for="family-doctor" class="details">Сімейний лікар</label><br>
-                            <div class="info-block" id="family-doctor">
-                                <span class="unknown-block">не визначено</span>
-                            </div>
-                        </div>
-                        <div class="inner-box" id="record-date-block">
-                            <label class="details">Дата </label><br>
-                            <div class="info-block" id="date">
-                                <span class="unknown-block">не визначено</span>
-                            </div>
-                        </div>
-                        <div class="inner-box" id="record-time-block">
-                            <label class="details">Час</label><br>
-                            <div class="info-block" id="time">
-                                <span class="unknown-block">не визначено</span>
-                            </div>
-                        </div>
-                        <div class="inner-box" id="health-complaint">
-                            <label for="complaint" class="details">Скарги на здоров'я <small
-                                    style="color: rgb(50, 200, 100)">(необов'язково)</small></label>
-                            <textarea class="textholder" id="complaint"
-                                      placeholder="Опишіть недоліки Вашого здоров'я..."></textarea>
-                        </div>
+{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <div class="title-block">Запис на прийом</div>
+        <form action="#">
+            <div class="user-details">
+                <div class="inner-box" id="patient-lastname">
+                    <label for="lastname" class="details">Прізвище</label>
+                    <input class="textholder" id="lastname" type="text" placeholder="Введіть прізвище"
+                           required>
+                </div>
+                <div class="inner-box" id="patient-firstname">
+                    <label for="firstname" class="details">Ім'я</label>
+                    <input class="textholder" id="firstname" type="text" placeholder="Введіть ім'я"
+                           required>
+                </div>
+                <div class="inner-box" id="patient-contract">
+                    <label for="contract" class="details">Номер контракту із сімейним лікарем</label>
+                    <input class="textholder" id="contract" type="text"
+                           placeholder="Введіть номер контракту, що заключено із сімейним лікарем"
+                           required>
+                </div>
+                <div class="inner-box" id="family-doctor-block">
+                    <label for="family-doctor" class="details">Сімейний лікар</label><br>
+                    <div class="info-block" id="family-doctor">
+                        <span class="unknown-block">не визначено</span>
                     </div>
-                    <div id="buttons">
-                        <input class="button" id="record" type="submit" href="" value="Записатися">
-                        <input class="button" type="reset" value="Очистити все" id="clear">
+                </div>
+                <div class="inner-box" id="record-date-block">
+                    <label class="details">Дата </label><br>
+                    <div class="info-block" id="date">
+                        <span class="unknown-block">не визначено</span>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div id="popup" class="popup">
-            <div class="popup__body">
-                <div class="popup__content">
-                    <a href="#" class="popup__close">x</a>
-                    <div class="popup__title"></div>
-                    <div class="popup__text"></div>
+                </div>
+                <div class="inner-box" id="record-time-block">
+                    <label class="details">Час</label><br>
+                    <div class="info-block" id="time">
+                        <span class="unknown-block">не визначено</span>
+                    </div>
+                </div>
+                <div class="inner-box" id="health-complaint">
+                    <label for="complaint" class="details">Скарги на здоров'я <small
+                            style="color: rgb(50, 200, 100)">(необов'язково)</small></label>
+                    <textarea class="textholder" id="complaint"
+                              placeholder="Опишіть недоліки Вашого здоров'я..."></textarea>
                 </div>
             </div>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <h3>Харківська районна клініка</h3>
-            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
-            <ul class="socials">
-                <li>
-                    <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                    <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2008-2022</p>
-            <p>Міністерство охорони здоров'я</p>
-        </div>
-    </footer>
+            <div id="buttons">
+                <input class="button" id="record" type="submit" href="" value="Записатися">
+                <input class="button" type="reset" value="Очистити все" id="clear">
+            </div>
+        </form>
+    </div>
 </div>
-<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
-<script src="../../../static/js/header.js"></script>
-<script src="../../../static/js/form.js"></script>
-</body>
-</html>
+<div id="popup" class="popup">
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="#" class="popup__close">x</a>
+            <div class="popup__title"></div>
+            <div class="popup__text"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/form.js' %}"></script>
+{% endblock %}

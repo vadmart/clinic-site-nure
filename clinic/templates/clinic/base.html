@@ -1,19 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Успіх</title>
-    <link rel="stylesheet" href="../../../static/css/style.css">
-    <link rel="stylesheet" href="../../../static/css/success_form.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/x-icon" href="{% static 'icons/clinic_favicon.ico' %}" rel="shortcut icon">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    {% block head %}{% endblock %}
 </head>
 <body>
 <div class="wrapper">
     <header class="clinic-head">
-        <div class="site-name">Харківська районна клініка №496</div>
+        <div class="site-name">Тестова робота (клініка)</div>
         <ul class="menu">
             <li class="menu-item">
-                <a href="../index.html" class="logo">
-                    <img src="../../../static/img/clinic_logo.png" alt="">
+                <a href="/" class="logo">
+                    <img src="{% static 'img/clinic_logo.png' %}" alt="">
                 </a>
             </li>
             <li class="menu-item dropdown">
@@ -23,75 +25,68 @@
                         <a class="inner-btn" href="">Галерея</a>
                     </li>
                     <li>
-                        <a class="inner-btn" href="contacts.html">Контакти</a>
+                        <a class="inner-btn" href="contacts">Контакти</a>
                     </li>
                     <li>
-                        <a class="inner-btn" href="vacancy.html">Вакансії</a>
+                        <a class="inner-btn" href="vacancy">Вакансії</a>
                     </li>
                 </ul>
             </li>
             <li class="menu-item">
-                <a class="btn" href="staff.html">Наші лікарі</a>
+                <a class="btn" href="staff">Наші лікарі</a>
             </li>
             <li class="menu-item">
-                <a class="btn disabled" href="making-an-appointment.html">Запис на прийом</a>
+                <a class="btn" href="making-an-appointment">Запис на прийом</a>
             </li>
             <li class="menu-item">
-                <a class="btn" href="schedule-work.html">Графік роботи</a>
+                <a class="btn" href="schedule">Графік роботи</a>
             </li>
             <li class="menu-item">
-                <a class="btn" href="quiz.html">Опитування</a>
+                <a class="btn" href="quiz">Опитування</a>
             </li>
         </ul>
         <div class="mobile-menu">
             <div class="mobile-menu-btn-wrapper">
                 <button>
-                    <div class="mobile-menu__button"></div>
+                    <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
             <ul class="mobile-menu-content">
                 <li class="dropdown-mobile"></li>
                 <li class="menu-item">
-                    <a class="btn" href="../index.html">Додому</a>
+                    <a class="btn" href="/">Додому</a>
                 </li>
                 <li class="menu-item dropdown-content">
                     <a class="btn dropbtn">Лікарня</a>
                     <ul>
                         <li>
-                            <a class="btn" href="">Галерея</a>
+                            <a class="btn" href="#">Галерея</a>
                         </li>
                         <li>
-                            <a class="btn" href="contacts.html">Контакти</a>
+                            <a class="btn" href="contacts">Контакти</a>
                         </li>
                         <li>
-                            <a class="btn" href="vacancy.html">Вакансії</a>
+                            <a class="btn" href="vacancy">Вакансії</a>
                         </li>
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a class="btn" href="staff.html">Наші лікарі</a>
+                    <a class="btn" href="staff">Наші лікарі</a>
                 </li>
                 <li class="menu-item">
-                    <a class="btn disabled" href="making-an-appointment.html">Запис на прийом</a>
+                    <a class="btn" href="making-an-appointment">Запис на прийом</a>
                 </li>
                 <li class="menu-item">
-                    <a class="btn" href="schedule-work.html">Графік роботи</a>
+                    <a class="btn" href="schedule">Графік роботи</a>
                 </li>
                 <li class="menu-item">
-                    <a class="btn" href="quiz.html">Опитування</a>
+                    <a class="btn" href="quiz">Опитування</a>
                 </li>
             </ul>
         </div>
     </header>
     <main>
-        <div id="popup" class="popup">
-            <div class="popup__body">
-                <div class="popup__content">
-                    <div class="popup__title">Успіх</div>
-                    <div class="popup__text">Дані відправлені на сервер. Можете повернутися на головну сторінку</div>
-                </div>
-            </div>
-        </div>
+        {% block content %}{% endblock %}
     </main>
     <footer>
         <div class="footer-content">
@@ -113,10 +108,12 @@
             </ul>
         </div>
         <div class="footer-bottom">
+            <p>z9661744@gmail.com</p>
             <p>&copy; 2008-2022</p>
-            <p>Міністерство охорони здоров'я</p>
         </div>
     </footer>
 </div>
+<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

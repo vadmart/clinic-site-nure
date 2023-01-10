@@ -27,7 +27,8 @@ const complaint = document.getElementById("complaint");
 const plainText = document.createElement("span");
 
 const errSpan = document.createElement("span");
-errSpan.className = "err-msg";
+errSpan.className = "err-msg, olovo";
+console.log(errSpan);
 errSpan.innerText = "Поле не може бути порожнім";
 
 console.log(window.lastname);

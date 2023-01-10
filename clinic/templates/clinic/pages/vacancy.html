@@ -1,152 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вакансії</title>
-    <link rel="stylesheet" href="../../../static/css/style.css">
-    <link rel="stylesheet" href="../../../static/css/vacancy.css">
-</head>
-<body>
-<div class="wrapper">
-    <header class="clinic-head">
-        <div class="site-name">Харківська районна клініка №496</div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="../index.html" class="logo">
-                    <img src="../../../static/img/clinic_logo.png" alt="">
-                </a>
-            </li>
-            <li class="menu-item dropdown">
-                <a class="btn dropbtn">Лікарня</a>
-                <ul class="dropdown-content">
-                    <li>
-                        <a class="inner-btn" href="">Галерея</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="contacts.html">Контакти</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn disabled" href="vacancy.html">Вакансії</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="staff.html">Наші лікарі</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="schedule-work.html">Графік роботи</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="quiz.html">Опитування</a>
-            </li>
-        </ul>
-        <div class="mobile-menu">
-            <div class="mobile-menu-btn-wrapper">
-                <button>
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <ul class="mobile-menu-content">
-                <li class="dropdown-mobile"></li>
-                <li class="menu-item">
-                    <a class="btn" href="../index.html">Додому</a>
-                </li>
-                <li class="menu-item dropdown-content">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul>
-                        <li>
-                            <a class="btn" href="#">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="contacts.html">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="btn disabled" href="vacancy.html">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="staff.html">Наші лікарі</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="schedule-work.html">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="quiz.html">Опитування</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <main>
-        <div class="title-box">
-            <h2>Вакансії</h2>
-        </div>
-        <div class="vacancy-wrapper">
-            <section class="vacancy">
-                <img src="../../../static/img/vacancy_photo.jpg" alt="">
-                <div class="vacancy-info">
-                    <span>Харківській регіональній клініці №496 потребуються:</span><br>
-                    <ul>
-                        <li>Сімейний лікар</li>
-                        <li>Вбиральник</li>
-                        <li>Менеджер</li>
-                    </ul>
-                    <br>
-                    <span>Повна зайнятість.</span><br>
-                    <span>Резюме висилати за адресою: <a
-                            href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
-                    <span>Запис за тел.:</span>
-                    <ul>
-                        <li>
-                            <a href="tel:0573119098">057 311 90 98</a>
-                        </li>
-                        <li>
-                            <a href="tel:0937198888">093 719 88 88</a>
-                        </li>
-                        <li>
-                            <a href="tel:0977198888">097 719 88 88</a>
-                        </li>
-                        <li>
-                            <a href="tel:0997198888">099 719 88 88</a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <h3>Харківська районна клініка</h3>
-            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
-            <ul class="socials">
-                <li>
-                    <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                    <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2008-2022</p>
-            <p>Міністерство охорони здоров'я</p>
-        </div>
-    </footer>
+{% extends "clinic/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/vacancy.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="title-box">
+    <h2>Вакансії</h2>
 </div>
-<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
-<script src="../../../static/js/header.js"></script>
-</body>
-</html>
+<div class="vacancy-wrapper">
+    <section class="vacancy">
+        <img src="{% static 'img/vacancy_photo.jpg' %}" alt="">
+        <div class="vacancy-info">
+            <span>Харківській регіональній клініці №496 потребуються:</span><br>
+            <ul>
+                <li>Сімейний лікар</li>
+                <li>Вбиральник</li>
+                <li>Менеджер</li>
+            </ul>
+            <br>
+            <span>Повна зайнятість.</span><br>
+            <span>Резюме висилати за адресою: <a
+                    href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
+            <span>Запис за тел.:</span>
+            <ul>
+                <li>
+                    <a href="tel:0573119098">057 311 90 98</a>
+                </li>
+                <li>
+                    <a href="tel:0937198888">093 719 88 88</a>
+                </li>
+                <li>
+                    <a href="tel:0977198888">097 719 88 88</a>
+                </li>
+                <li>
+                    <a href="tel:0997198888">099 719 88 88</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock %}

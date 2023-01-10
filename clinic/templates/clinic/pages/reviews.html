@@ -1,0 +1,91 @@
+{% extends "clinic/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+    <title>Відгуки</title>
+{% endblock %}
+
+{% block content %}
+    <div class="title-box">
+        <h2>Інформація про лікаря</h2>
+    </div>
+    <div class="doctor-wrapper">
+        <div class="doctor-info">
+            <img src="{% static 'img/250w/alina-radecka.png' %}" alt="">
+            <div class="doctor-description">
+                <h3 class="header">Радецька Аліна Іванівна</h3>
+                <div class="prof-info">
+                    <span class="category-info">Перша кваліфікаційна категорія</span>
+                    <div class="work-experience">Стаж: 35 років</div>
+                </div>
+                <a href="" class="feedback_btn">Залишити відгук</a>
+            </div>
+        </div>
+    </div>
+    <div class="title-box">
+        <h2>Відгуки</h2>
+    </div>
+    <div class="reviews">
+        <form class="reviews__menu">
+            <div class="reviews__menu__title">Налаштування відгуків</div>
+            <div class="reviews__menu__elems">
+                <div class="menu__elem">
+                    <label for="background">Фон</label>
+                    <select name="options" id="background">
+                        <option value="">--Оберіть колір фону--</option>
+                        <option value="red">Червоний</option>
+                        <option value="blue">Синій</option>
+                        <option value="green">Зелений</option>
+                        <option value="yellow">Жовтий</option>
+                    </select>
+                </div>
+                <div class="menu__elem">
+                    <label for="font-size">Розмір шрифта</label>
+                    <select name="options" id="font-size">
+                        <option value="">--Оберіть розмір шрифта--</option>
+                        <option value="0.8em">0.8em</option>
+                        <option value="1em">1em</option>
+                        <option value="1.2em">1.2em</option>
+                        <option value="1.5em">1.5em</option>
+                    </select>
+                </div>
+                <div class="menu__elem">
+                    <label for="font-type">Тип шрифта</label>
+                    <select name="options" id="font-type">
+                        <option value="">--Оберіть тип шрифту--</option>
+                        <option value="serif">Serif</option>
+                        <option value="sans-serif">Sans-serif</option>
+                    </select>
+                </div>
+                <div class="menu__elem">
+                    <input type="reset" id="default-button" value="За замовченням">
+                </div>
+            </div>
+        </form>
+        <blockquote class="review">
+            <div class="account">
+                <cite>Олег</cite>
+                <time datetime="2018-08-18 14:50">09.08.18 14:50</time>
+            </div>
+            <p class="comment">
+                Нечасто залишаю відгуки, але важко стриматися: лікар дуже класний! Майже з дитинства були проблеми
+                із зором, але після надання консультації та лік вже є результати.
+            </p>
+        </blockquote>
+        <blockquote class="review">
+            <div class="account">
+                <cite>Богдан</cite>
+                <time datetime="2021-10-26 11:10">26.10.21 11:10</time>
+            </div>
+            <p class="comment">
+                Добрий день! Хотів би щиро вдячити Вам, Аліна Іванівна, за дуже ефективний курс лікування. Я навіть
+                не міг повірити, що одужання за 1 день - це реально. Ви дійсно талановита, а також пильна та добра
+                людина, бажаю Вам успіху)
+            </p>
+        </blockquote>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/reviews.js' %}"></script>
+{% endblock %}

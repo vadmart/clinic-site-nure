@@ -1,97 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Наші лікарі</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends "clinic/base.html" %}
+
+{% load static %}
+
+{% block head %}
+    <title>Наша команда</title>
     <link rel="stylesheet" href="{% static 'css/staff.css' %}">
-</head>
-<body>
-<div class="wrapper">
-    <header class="clinic-head">
-        <div class="site-name">Харківська районна клініка №496</div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="../" class="logo">
-                    <img src="{% static 'img/clinic_logo.png' %}" alt="">
-                </a>
-            </li>
-            <li class="menu-item dropdown">
-                <a class="btn dropbtn">Лікарня</a>
-                <ul class="dropdown-content">
-                    <li>
-                        <a class="inner-btn" href="">Галерея</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="contacts.html">Контакти</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="vacancy.html">Вакансії</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a class="btn disabled" href="staff.html">Наші лікарі</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="schedule-work.html">Графік роботи</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="quiz.html">Опитування</a>
-            </li>
-        </ul>
-        <div class="mobile-menu">
-            <div class="mobile-menu-btn-wrapper">
-                <button>
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <ul class="mobile-menu-content">
-                <li class="dropdown-mobile"></li>
-                <li class="menu-item">
-                    <a class="btn" href="../">Додому</a>
-                </li>
-                <li class="menu-item dropdown-content">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul>
-                        <li>
-                            <a class="btn" href="#">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="contacts.html">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="vacancy.html">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn disabled" href="staff.html">Наші лікарі</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="schedule-work.html">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="quiz.html">Опитування</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <main>
-        <div class="title-box">
-            <h2>Наші лікарі</h2>
-        </div>
-        {% load clinic_extras %}
-        <div class="doctors">
-            {% for doctor in doctors %}
+{% endblock %}
+
+{% block content %}
+    <div class="title-box">
+        <h2>Наші лікарі</h2>
+    </div>
+    {% load clinic_extras %}
+    <div class="doctors">
+        {% for doctor in doctors %}
             <div class="block-doctor">
                 <div class="photo">
                     <img srcset="{% static 'img/250w/' %}{{ doctor.image_name }} 250w,
@@ -105,54 +27,26 @@
                 <div class="full-description">
                     <h5 class="description-header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h5>
                     <div class="description-block">
-                        <p class="description">{{ doctor.category_id.name}} кваліфікаційна категорія<br>
+                        <p class="description">{{ doctor.category_id.name }} кваліфікаційна категорія<br>
                             Номер кабінету: №
                             {% for dc in doc_cabs %}
-                            	{% if doctor.id == dc.doctor_id.id %}
-                            		{{ dc.cabinet_id.no }}
-                            	{% endif %}
+                                {% if doctor.id == dc.doctor_id.id %}
+                                    {{ dc.cabinet_id.no }}
+                                {% endif %}
                             {% endfor %}<br>
-                            Номер телефону: 
+                            Номер телефону:
                             {% for phone in phones %}
-                            	{% if doctor.id == phone.doctor_id.id %}
-                            		{{ phone.value }}
-                            	{% endif %}
+                                {% if doctor.id == phone.doctor_id.id %}
+                                    {{ phone.value }}
+                                {% endif %}
                             {% endfor %}
                         </p>
-                        <p class="experience-description">Стаж роботи: {{ doctor.work_start_date|years_to_now }} років</p>
-                        <a class="doctor-btn" href="reviews.html">Докладніше...</a>
+                        <p class="experience-description">Стаж роботи: {{ doctor.work_start_date|years_to_now }}
+                            років</p>
+                        <a class="doctor-btn" href="reviews">Докладніше...</a>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <h3>Харківська районна клініка</h3>
-            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
-            <ul class="socials">
-                <li>
-                    <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                    <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2008-2022</p>
-            <p>Міністерство охорони здоров'я</p>
-        </div>
-    </footer>
-</div>
-<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
-<script src="../../../static/js/header.js"></script>
-</body>
-</html>
+        {% endfor %}
+    </div>
+{% endblock %}

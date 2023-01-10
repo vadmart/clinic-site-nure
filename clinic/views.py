@@ -15,9 +15,26 @@ def staff(request):
     dates = [(date.today() - doctor.work_start_date).days // 365 for doctor in doctors]
     phones = PhoneNumbers.objects.all()
     return render(request, template_name="clinic/pages/staff.html", context={"doctors": doctors,
-    									     "doc_cabs": doc_cabs,
-    									     "phones": phones,
-    									     "dates": dates})
-    
+                                                                             "doc_cabs": doc_cabs,
+                                                                             "phones": phones,
+                                                                             "dates": dates})
+
+
 def schedule(request):
     return render(request, template_name="clinic/pages/schedule-work.html", context={})
+
+
+def contacts(request):
+    return render(request, template_name="clinic/pages/contacts.html", context={})
+
+
+def vacancy(request):
+    return render(request, template_name="clinic/pages/vacancy.html", context={})
+
+
+def reviews(request):
+    return render(request, template_name="clinic/pages/reviews.html", context={})
+
+
+def make_appointment(request):
+    return render(request, template_name="clinic/pages/making-an-appointment.html", context={})
