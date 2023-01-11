@@ -89,7 +89,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    main {
+    main .table-wrapper {
         overflow-x: scroll;
     }
 }

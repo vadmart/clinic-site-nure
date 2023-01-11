@@ -1,10 +1,11 @@
 const reviewOptions = {
-    "backgroundColor": window["background"],
-    "fontSize": window["font-size"],
-    "fontType": window["font-type"]
+    backgroundColor: window["background"],
+    fontSize: window["font-size"],
+    fontType: window["font-type"],
+
 };
 
-const reviewBlocks = document.getElementsByClassName("review");
+const reviewCommentsBlocks = document.getElementsByClassName("review comment");
 const comments = document.getElementsByClassName("comment");
 const defaultButton = window["default-button"];
 
@@ -58,7 +59,7 @@ function setSettings() {
 }
 
 function setBackgroundColor(val) {
-    for (let block of reviewBlocks) {
+    for (let block of reviewCommentsBlocks) {
         block.style.backgroundColor = val;
     }
 }

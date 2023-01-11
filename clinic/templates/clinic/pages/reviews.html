@@ -12,7 +12,13 @@
     </div>
     <div class="doctor-wrapper">
         <div class="doctor-info">
-            <img src="{% static 'img/250w/alina-radecka.png' %}" alt="">
+            <img srcset="{% static 'img/250w/alina-radecka.png' %} 250w,
+                             {% static 'img/200w/alina-radecka.png' %} 200w,
+                             {% static 'img/150w/alina-radecka.png' %} 150w"
+                 sizes="(max-width: 1024px) 150px,
+                        (max-width: 1452px) 200px,
+                        250px"
+                 src="{% static 'img/250w/alina-radecka.png' %}" alt="">
             <div class="doctor-description">
                 <h3 class="header">Радецька Аліна Іванівна</h3>
                 <div class="prof-info">
@@ -31,7 +37,7 @@
             <div class="reviews__menu__title">Налаштування відгуків</div>
             <div class="reviews__menu__elems">
                 <div class="menu__elem">
-                    <label for="background">Фон</label>
+                    <label for="background" class="menu__option__title">Фон</label>
                     <select name="options" id="background">
                         <option value="">--Оберіть колір фону--</option>
                         <option value="red">Червоний</option>
@@ -41,9 +47,11 @@
                     </select>
                 </div>
                 <div class="menu__elem">
-                    <label for="font-size">Розмір шрифта</label>
+                    <label for="font-size" class="menu__option__title">Розмір шрифта</label>
                     <select name="options" id="font-size">
                         <option value="">--Оберіть розмір шрифта--</option>
+                        <option value="0.4em">0.4em</option>
+                        <option value="0.6em">0.6em</option>
                         <option value="0.8em">0.8em</option>
                         <option value="1em">1em</option>
                         <option value="1.2em">1.2em</option>
@@ -51,7 +59,7 @@
                     </select>
                 </div>
                 <div class="menu__elem">
-                    <label for="font-type">Тип шрифта</label>
+                    <label for="font-type" class="menu__option__title">Тип шрифта</label>
                     <select name="options" id="font-type">
                         <option value="">--Оберіть тип шрифту--</option>
                         <option value="serif">Serif</option>

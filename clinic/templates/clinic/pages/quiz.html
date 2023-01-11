@@ -1,191 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Опитування про знання заходів у протидії COVID-19</title>
-    <link rel="stylesheet" href="../../../static/css/style.css">
-    <link rel="stylesheet" href="../../../static/css/quiz.css">
-</head>
-<body>
-<div class="wrapper">
-    <header class="clinic-head">
-        <div class="site-name">Харківська районна клініка №496</div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="../index.html" class="logo">
-                    <img src="../../../static/img/clinic_logo.png" alt="">
-                </a>
-            </li>
-            <li class="menu-item dropdown">
-                <a class="btn dropbtn">Лікарня</a>
-                <ul class="dropdown-content">
-                    <li>
-                        <a class="inner-btn" href="">Галерея</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="contacts.html">Контакти</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="vacancy.html">Вакансії</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="staff.html">Наші лікарі</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="schedule-work.html">Графік роботи</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn disabled" href="quiz.html">Опитування</a>
-            </li>
-        </ul>
-        <div class="mobile-menu">
-            <div class="mobile-menu-btn-wrapper">
-                <button>
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <ul class="mobile-menu-content">
-                <li class="dropdown-mobile"></li>
-                <li class="menu-item">
-                    <a class="btn" href="../index.html">Додому</a>
-                </li>
-                <li class="menu-item dropdown-content">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul>
-                        <li>
-                            <a class="btn" href="">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="contacts.html">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="vacancy.html">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="staff.html">Наші лікарі</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="making-an-appointment.html">Запис на прийом</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="schedule-work.html">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn disabled" href="quiz.html">Опитування</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <main>
-        <div class="title-box">
-            <h2>Опитування щодо знання заходів на протидію COVID</h2>
-        </div>
-        <div class="form-wrapper">
-            <form class="form-wrapper__form" action="quiz_results.html" method="POST">
-                <h2 id="form__title"></h2><br>
-                <fieldset id="form__content">
-                    <legend>Оберіть варіант</legend>
-                    <div id="form__variants">
-                    </div>
-                </fieldset>
-                <input type="submit" class="form__button" value="Продовжити">
-            </form>
-        </div>
-        <div class="results-wrapper hidden">
-            <div class="results">
-                <div class="variants">
-                    <p class="variants__title"></p>
-                    <div class="variants__answers">
-                        <div class="variants__answer chosen"></div>
-                        <div class="variants__answer correct"></div>
-                    </div>
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+    <title>Опитування</title>
+{% endblock %}
+
+{% block content %}
+    <div class="title-box">
+        <h2>Опитування щодо знання заходів на протидію COVID</h2>
+    </div>
+    <div class="form-wrapper">
+        <form class="form-wrapper__form" action="quiz" method="POST">
+            <h2 id="form__title"></h2><br>
+            <fieldset id="form__content">
+                <legend>Оберіть варіант</legend>
+                <div id="form__variants">
                 </div>
-                <div class="variants">
-                    <p class="variants__title"></p>
-                    <div class="variants__answers">
-                        <div class="variants__answer chosen"></div>
-                        <div class="variants__answer correct"></div>
-                    </div>
-                </div>
-                <div class="variants">
-                    <p class="variants__title"></p>
-                    <div class="variants__answers">
-                        <div class="variants__answer chosen"></div>
-                        <div class="variants__answer correct"></div>
-                    </div>
-                </div>
-                <div class="variants">
-                    <p class="variants__title"></p>
-                    <div class="variants__answers">
-                        <div class="variants__answer chosen"></div>
-                        <div class="variants__answer correct"></div>
-                    </div>
-                </div>
-                <div class="total">
-                    <p class="total__title">Висновки</p>
-                    <div class="total__diagrams">
-                        <div class="result">
-                            <div class="variant"><p>Правильно</p></div>
-                            <div class="scale-wrapper">
-                                <div class="scale green"></div>
-                            </div>
-                            <div class="percentage"></div>
-                        </div>
-                        <div class="result">
-                            <div class="variant"><p>Неправильно</p></div>
-                            <div class="scale-wrapper">
-                                <div class="scale red"></div>
-                            </div>
-                            <div class="percentage"></div>
-                        </div>
-                    </div>
-                    <div class="verdict-wrapper">
-                        <p class="verdict">Ви пройшли тестування, а отже, гарно знаєтеся на заходах протидії COVID-19.
-                            Бувайте
-                            здорові!</p>
-                    </div>
-                </div>
-                <div class="home-wrapper">
-                    <a href="../index.html" class="home">Повернутися до головної сторінки</a>
+            </fieldset>
+            <input type="submit" class="form__button" value="Продовжити">
+        </form>
+    </div>
+    <div class="results-wrapper hidden">
+        <div class="results">
+            <div class="variants">
+                <p class="variants__title"></p>
+                <div class="variants__answers">
+                    <div class="variants__answer chosen"></div>
+                    <div class="variants__answer correct"></div>
                 </div>
             </div>
+            <div class="variants">
+                <p class="variants__title"></p>
+                <div class="variants__answers">
+                    <div class="variants__answer chosen"></div>
+                    <div class="variants__answer correct"></div>
+                </div>
+            </div>
+            <div class="variants">
+                <p class="variants__title"></p>
+                <div class="variants__answers">
+                    <div class="variants__answer chosen"></div>
+                    <div class="variants__answer correct"></div>
+                </div>
+            </div>
+            <div class="variants">
+                <p class="variants__title"></p>
+                <div class="variants__answers">
+                    <div class="variants__answer chosen"></div>
+                    <div class="variants__answer correct"></div>
+                </div>
+            </div>
+            <div class="total">
+                <p class="total__title">Висновки</p>
+                <div class="total__diagrams">
+                    <div class="result">
+                        <div class="variant"><p>Правильно</p></div>
+                        <div class="scale-wrapper">
+                            <div class="scale green"></div>
+                        </div>
+                        <div class="percentage"></div>
+                    </div>
+                    <div class="result">
+                        <div class="variant"><p>Неправильно</p></div>
+                        <div class="scale-wrapper">
+                            <div class="scale red"></div>
+                        </div>
+                        <div class="percentage"></div>
+                    </div>
+                </div>
+                <div class="verdict-wrapper">
+                    <p class="verdict">Ви пройшли тестування, а отже, гарно знаєтеся на заходах протидії COVID-19.
+                        Бувайте
+                        здорові!</p>
+                </div>
+            </div>
+            <div class="home-wrapper">
+                <a href="../index.html" class="home">Повернутися до головної сторінки</a>
+            </div>
         </div>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <h3>Харківська районна клініка</h3>
-            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
-            <ul class="socials">
-                <li>
-                    <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                    <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2008-2022</p>
-            <p>Міністерство охорони здоров'я</p>
-        </div>
-    </footer>
-</div>
-<script src="https://kit.fontawesome.com/c3664bd84b.js" crossorigin="anonymous"></script>
-<script src="../../../static/js/header.js"></script>
-<script src="../../../static/js/quiz.js"></script>
-</body>
-</html>
+    </div>
+{% endblock %}

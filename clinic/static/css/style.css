@@ -304,4 +304,7 @@ select:focus .select {
         font-size: 1rem;
     }
 
+    .about-clinic .description {
+        font-size: 0.9rem;
+    }
 }

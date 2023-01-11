@@ -38,3 +38,7 @@ def reviews(request):
 
 def make_appointment(request):
     return render(request, template_name="clinic/pages/making-an-appointment.html", context={})
+
+
+def quiz(request):
+    return render(request, template_name="clinic/pages/quiz.html", context={})

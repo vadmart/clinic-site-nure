@@ -6,24 +6,25 @@ const mobMenuContent = document.querySelector(".mobile-menu-content");
 mobMenu();
 
 // when resizing the window
-window.addEventListener("resize", function (event) {
+window.addEventListener("resize", function () {
     //make "display: none" for menu elements id window's width less than 768px
     mobMenu();
+});
+menuBtn.addEventListener("click", function () {
+    if (mobMenuContent.style.display === "none") {
+        mobMenuContent.style.display = "block";
+    } else {
+        mobMenuContent.style.display = "none";
+    }
 })
 
 function mobMenu() {
     if (window.outerWidth <= 1024) {
         menu.style.display = "none";
         mobileMenu.style.display = "flex";
-        menuBtn.addEventListener("click", function (event) {
-            if (mobMenuContent.style.display === "none") {
-                mobMenuContent.style.display = "block";
-            } else {
-                mobMenuContent.style.display = "none";
-            }
-        })
     } else {
         menu.style.display = "flex";
+        mobMenuContent.style.display = "none";
         mobileMenu.style.display = "none";
     }
 }
