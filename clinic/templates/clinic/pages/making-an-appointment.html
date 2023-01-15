@@ -10,7 +10,8 @@
 <div class="form-wrapper">
     <div class="form-container">
         <div class="title-block">Запис на прийом</div>
-        <form action="#">
+        <form method="POST" action="record" id="record-form">
+            {% csrf_token %}
             <div class="user-details">
                 <div class="inner-box" id="patient-lastname">
                     <label for="lastname" class="details">Прізвище</label>
@@ -54,7 +55,7 @@
                 </div>
             </div>
             <div id="buttons">
-                <input class="button" id="record" type="submit" href="" value="Записатися">
+                <input class="button" id="record" type="submit" value="Записатися">
                 <input class="button" type="reset" value="Очистити все" id="clear">
             </div>
         </form>
@@ -63,7 +64,7 @@
 <div id="popup" class="popup">
     <div class="popup__body">
         <div class="popup__content">
-            <a href="#" class="popup__close">x</a>
+            <a href="/" class="popup__close">x</a>
             <div class="popup__title"></div>
             <div class="popup__text"></div>
         </div>

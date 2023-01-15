@@ -2,14 +2,13 @@ from django.contrib import admin
 from clinic.models import *
 
 # Register your models here.
-admin.site.register(DoctorCategories)
-admin.site.register(Doctors)
-admin.site.register(Cabinets)
-admin.site.register(DoctorsCabinets)
-admin.site.register(Persons)
-admin.site.register(Reviews)
-admin.site.register(Recordings)
-admin.site.register(WeekDays)
-admin.site.register(DoctorWorkingSchedule)
-admin.site.register(PhoneNumbers)
+admin.site.register(DoctorCategory)
+admin.site.register(Doctor)
+admin.site.register(Cabinet)
+admin.site.register(DoctorCabinet)
+admin.site.register(Person)
+admin.site.register(Review)
+admin.site.register(Recording)
+admin.site.register(Schedule)
+admin.site.register(PhoneNumber)
 

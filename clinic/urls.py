@@ -7,7 +7,9 @@ urlpatterns = [
     path("schedule", views.schedule, name="schedule"),
     path("contacts", views.contacts, name="contacts"),
     path("vacancy", views.vacancy, name="vacancy"),
-    path("reviews", views.reviews, name="reviews"),
+    path("reviews/<int:doctor_id>", views.reviews, name="reviews"),
     path("making-an-appointment", views.make_appointment, name="make_appointment"),
-    path("quiz", views.quiz, name="quiz")
+    path("quiz", views.quiz, name="quiz"),
+    path("doctor-info", views.doctor_info, name="doctor_info"),
+    path("record", views.record, name="record")
 ]

@@ -10,20 +10,21 @@
     <div class="title-box">
         <h2>Інформація про лікаря</h2>
     </div>
+    {% load clinic_extras %}
     <div class="doctor-wrapper">
         <div class="doctor-info">
-            <img srcset="{% static 'img/250w/alina-radecka.png' %} 250w,
-                             {% static 'img/200w/alina-radecka.png' %} 200w,
-                             {% static 'img/150w/alina-radecka.png' %} 150w"
+            <img srcset="{% static 'img/250w/' %}{{ doctor.image_name }} 250w,
+                             {% static 'img/200w/' %}{{ doctor.image_name }} 200w,
+                             {% static 'img/150w/' %}{{ doctor.image_name }} 150w"
                  sizes="(max-width: 1024px) 150px,
                         (max-width: 1452px) 200px,
                         250px"
-                 src="{% static 'img/250w/alina-radecka.png' %}" alt="">
+                 src="{% static 'img/250w/' %}{{ doctor.image_name }}" alt="">
             <div class="doctor-description">
-                <h3 class="header">Радецька Аліна Іванівна</h3>
+                <h3 class="header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h3>
                 <div class="prof-info">
-                    <span class="category-info">Перша кваліфікаційна категорія</span>
-                    <div class="work-experience">Стаж: 35 років</div>
+                    <span class="category-info">{{ doctor.category_id.name }} кваліфікаційна категорія</span>
+                    <div class="work-experience">Стаж: {{ doctor.work_start_date|years_to_now }} років</div>
                 </div>
                 <a href="" class="feedback_btn">Залишити відгук</a>
             </div>
@@ -71,27 +72,45 @@
                 </div>
             </div>
         </form>
-        <blockquote class="review">
-            <div class="account">
-                <cite>Олег</cite>
-                <time datetime="2018-08-18 14:50">09.08.18 14:50</time>
-            </div>
-            <p class="comment">
-                Нечасто залишаю відгуки, але важко стриматися: лікар дуже класний! Майже з дитинства були проблеми
-                із зором, але після надання консультації та лік вже є результати.
-            </p>
-        </blockquote>
-        <blockquote class="review">
-            <div class="account">
-                <cite>Богдан</cite>
-                <time datetime="2021-10-26 11:10">26.10.21 11:10</time>
-            </div>
-            <p class="comment">
-                Добрий день! Хотів би щиро вдячити Вам, Аліна Іванівна, за дуже ефективний курс лікування. Я навіть
-                не міг повірити, що одужання за 1 день - це реально. Ви дійсно талановита, а також пильна та добра
-                людина, бажаю Вам успіху)
-            </p>
-        </blockquote>
+        {% if not revs %}
+            <p class="no-reviews">Немає жодного відгуку</p>
+        {% else %}
+            {% for rev in revs %}
+                <blockquote class="review">
+                    <div class="account">
+                        <cite>{{ rev.person_id.name }}</cite>
+                        <time datetime="{{ rev.datetime }}">{{ rev.datetime }}</time>
+                    </div>
+                    <p class="comment">{{ rev.text }}</p>
+                </blockquote>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="review-blank-wrapper hidden">
+        <div class="review-blank">
+            <a href="" class="close-button">X</a>
+            <form method="post" action="{{ doctor.id }}" class="blank">
+                <div class="inner-box" id="lastname-box">
+                    <label for="lastname">Прізвище</label>
+                    <input class="review-input" id="lastname" type="text" placeholder="Введіть прізвище">
+                </div>
+                <div class="inner-box" id="name-box">
+                    <label for="name">Ім'я</label>
+                    <input class="review-input" id="name" type="text" placeholder="Введіть ім'я">
+                </div>
+                <div class="inner-box" id="contract-num-box">
+                    <label for="contract-num">Номер контракту</label>
+                    <input class="review-input" id="contract-num" type="text" placeholder="Введіть номер контракту">
+                </div>
+                <div class="inner-box" id="review-box">
+                    <label for="review-text">Текст відгуку</label>
+                    <textarea class="review-textarea" id="review-text"></textarea>
+                </div>
+                <div class="inner-box" id="submit-button-wrapper">
+                    <input type="submit" class="submit-review-button" value="Відправити">
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
 {% block scripts %}

@@ -5,16 +5,20 @@ const reviewOptions = {
 
 };
 
-const reviewCommentsBlocks = document.getElementsByClassName("review comment");
+const accounts = document.getElementsByClassName("account");
 const comments = document.getElementsByClassName("comment");
+const reviews = document.getElementsByClassName("review");
 const defaultButton = window["default-button"];
+const addReviewButton = document.querySelector(".feedback_btn");
+
+addReviewButton.addEventListener("click", showModal);
 
 
 setSettings();
 
 defaultButton.addEventListener("click", () => {
     setBackgroundColor("");
-    setFontType("");
+    setFontType("serif");
     setFontSize("");
     localStorage.clear();
 })
@@ -59,20 +63,40 @@ function setSettings() {
 }
 
 function setBackgroundColor(val) {
-    for (let block of reviewCommentsBlocks) {
+    for (let block of reviews) {
         block.style.backgroundColor = val;
     }
 }
 
 function setFontSize(val) {
+    for (let acc of accounts) {
+        for (let ch of acc.children) {
+            ch.style.fontSize = val;
+        }
+    }
     for (let comm of comments) {
         comm.style.fontSize = val;
     }
 }
 
 function setFontType(val) {
+    for (let acc of accounts) {
+        for (let ch of acc.children) {
+            ch.style.fontFamily = `Inter, ${val}`;
+        }
+    }
     for (let comm of comments) {
         comm.style.fontFamily = `Inter, ${val}`;
     }
 }
 
+function showModal(e) {
+    const reviewWrapper = document.querySelector(".review-blank-wrapper");
+    const closeButton = document.querySelector(".close-button");
+    reviewWrapper.classList.remove("hidden");
+    closeButton.addEventListener("click", (e) => {
+        reviewWrapper.classList.add("hidden");
+        e.preventDefault();
+    })
+    e.preventDefault();
+}

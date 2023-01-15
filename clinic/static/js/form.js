@@ -1,37 +1,33 @@
-const URL = "../json/info.json";
+const URL = "doctor-info";
 const necessaryFields = {
     lastname: window["lastname"],
     firstname: window["firstname"],
     contractNum: window["contract"]
 };
 
+const formElems = {
+    form: window["record-form"],
+    familyDoctor: window["family-doctor"],
+    dateBlock: window["date"],
+    timeBlock: window["time"],
+    complaint: window["complaint"],
+    submitButton: window["record"],
+    clearButton: window["clear"]
+}
+
+const plainText = document.createElement("span");
+const errSpan = document.createElement("span");
+errSpan.className = "err-msg";
+errSpan.innerText = "Поле не може бути порожнім";
+
 for (var elem in necessaryFields) {
     necessaryFields[elem].addEventListener("change", checkInvalid);
     necessaryFields[elem].addEventListener("change", (e) => makeRequest(e, URL));
 }
 
-const familyDoctor = document.getElementById("family-doctor");
-const date = document.getElementById("date");
-const time = document.getElementById("time");
+formElems.submitButton.addEventListener("click", submitForm);
+formElems.clearButton.addEventListener("click", clearForm);
 
-const clear = document.getElementById("clear");
-clear.addEventListener("click", clearForm);
-
-const submitButton = document.getElementById("record");
-submitButton.addEventListener("click", (e) => {
-    submitForm(e);
-});
-
-const complaint = document.getElementById("complaint");
-
-const plainText = document.createElement("span");
-
-const errSpan = document.createElement("span");
-errSpan.className = "err-msg, olovo";
-console.log(errSpan);
-errSpan.innerText = "Поле не може бути порожнім";
-
-console.log(window.lastname);
 
 Object.compare = function (obj1, obj2) {
     for (var el in obj1) {
@@ -53,8 +49,8 @@ Object.compare = function (obj1, obj2) {
     return true;
 }
 
-
 function makeRequest(event, url) {
+    if (!checkNecessary()) return false;
     var httpRequest = false;
     if (window.XMLHttpRequest) {
         httpRequest = new XMLHttpRequest();
@@ -65,21 +61,33 @@ function makeRequest(event, url) {
         httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
     }
     if (!httpRequest) {
-        alert("Невозможно создать экземпляр класса XMLHTTP");
+        alert("Неможливо створити екземпляр класу XMLHTTP");
         return false;
     }
+    httpRequest.open("POST", url);
+    httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpRequest.send(
+        `lastname=${necessaryFields.lastname.value}&name=${necessaryFields.firstname.value}&contract_num=${necessaryFields.contractNum.value}`
+    );
     httpRequest.onreadystatechange = function () {
         getInfo(event, httpRequest);
     };
-    httpRequest.open("POST", url);
-    httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpRequest.send(null);
+
+    function checkNecessary() {
+        for (let elem in necessaryFields) {
+            if (!necessaryFields[elem].checkValidity()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 function getInfo(event, httpRequest) {
     try {
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
+                console.log(JSON.parse(httpRequest.responseText))
                 showDoctor(event, JSON.parse(httpRequest.responseText));
             } else {
                 alert("Із запитом виникла проблема");
@@ -92,38 +100,22 @@ function getInfo(event, httpRequest) {
 }
 
 
-
 function showDoctor(e, doctorData) {
-    clearFields(time, date, familyDoctor);
-    const patient = {
-        "lastName": necessaryFields.lastname.value,
-        "firstName": necessaryFields.firstname.value,
-        "contractNum": necessaryFields.contractNum.value
-    };
-    const doctor = findDoctor(patient, doctorData);
-    if (doctor) {
-        plainText.innerText = doctor;
+    clearFields(formElems.timeBlock, formElems.dateBlock, formElems.familyDoctor);
+    if (doctorData["status"] !== "undefined") {
+        formElems.form.dataset.personId = doctorData["personId"];
+        formElems.form.dataset.doctorId = doctorData["doctorId"];
+        plainText.innerText = `${doctorData["lastname"]} ${doctorData["name"]} ${doctorData["patronymic"]}`;
         plainText.className = "doctor-block";
-        familyDoctor.appendChild(plainText);
-        showDateTime(doctorData[doctor]);
+        formElems.familyDoctor.appendChild(plainText);
+        showDateTime(doctorData);
     } else {
         plainText.innerText = "не визначено";
         plainText.className = "unknown-block";
-        familyDoctor.appendChild(plainText);
-        date.appendChild(plainText.cloneNode(true));
-        time.appendChild(plainText.cloneNode(true));
+        formElems.familyDoctor.appendChild(plainText);
+        formElems.dateBlock.appendChild(plainText.cloneNode(true));
+        formElems.timeBlock.appendChild(plainText.cloneNode(true));
     }
-}
-
-function findDoctor(patient, doctorData) {
-    for (var doctor in doctorData) {
-        for (var pat of doctorData[doctor]["patients"]) {
-            if (Object.compare(pat, patient)) {
-                return doctor;
-            }
-        }
-    }
-    return null;
 }
 
 function checkInvalid(event) {
@@ -146,23 +138,30 @@ function clearFields(...fields) {
 
 function showDateTime(doctorInfo) {
     const workDatetimeObj = doctorInfo["workSchedule"];
-    const calendar = document.createElement("input");
-    var min_date_value = "2500-01-01";
-    var max_date_value = "";
-    calendar.type = "date";
-    for (var dt in workDatetimeObj) {
-        if (dt > max_date_value) max_date_value = dt;
-        if (dt < min_date_value) min_date_value = dt;
+    let min_dt = ""
+    let max_dt = ""
+    let i = 0
+    for (let key in workDatetimeObj) {
+        if (!i) {
+            min_dt = key
+        }
+        if (Object.keys(workDatetimeObj).length - 1 == i) {
+            max_dt = key
+        }
+        i++;
     }
-    calendar.min = min_date_value;
-    calendar.max = max_date_value;
+    if (min_dt === "") return;
+    const calendar = document.createElement("input");
+    calendar.type = "date";
+    calendar.min = min_dt;
+    calendar.max = max_dt;
     calendar.required = true;
     calendar.id = "calendar";
-    date.appendChild(calendar);
+    formElems.dateBlock.appendChild(calendar);
     calendar.addEventListener("change", showTime);
 
     function showTime(e = null) {
-        clearFields(time);
+        clearFields(formElems.timeBlock);
         clearIds(document.getElementsByClassName(e.target.className));
         // створюємо кнопки із часом та додаємо у блок часів
         for (var tm of workDatetimeObj[e.target.value]) {
@@ -171,7 +170,7 @@ function showDateTime(doctorInfo) {
             timeBtn.value = tm;
             timeBtn.id = tm;
             timeBtn.className = "time-button";
-            time.appendChild(timeBtn);
+            formElems.timeBlock.appendChild(timeBtn);
             timeBtn.addEventListener("click", function (e) {
                 // убирати id кнопок часу при натисканні на одну з них
                 clearIds(document.getElementsByClassName(e.target.className));
@@ -192,25 +191,29 @@ function showDateTime(doctorInfo) {
 }
 
 function submitForm(e) {
-    const form = document.querySelector(".form-container form");
-    if (form.checkValidity() && document.getElementById("active-time")) {
-        showModal();
-        e.preventDefault();
+    e.preventDefault();
+    if (formElems.form.checkValidity() && document.getElementById("active-time")) {
+        const formAJAX = new XMLHttpRequest();
+        formAJAX.open("POST", "record");
+        formAJAX.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        formAJAX.onreadystatechange = function () {
+            if (formAJAX.readyState == 4) {
+                if (formAJAX.status == 200) {
+                    showModal();
+                } else {
+                    showModal(false);
+                }
+            }
+        }
+        formAJAX.send(`person_id=${formElems.form.dataset.personId}&` +
+            `doctor_id=${formElems.form.dataset.doctorId}&` +
+            `dt_tm=${window["calendar"].value} ${window["active-time"].value}&` +
+            `complaint=${formElems.complaint.value}&` +
+            `csrfmiddlewaretoken=${document.querySelector("input[name=csrfmiddlewaretoken]").value}`);
     } else {
         checkTimeButtons();
         showModal(false);
-        return
     }
-    const dt = document.getElementById("calendar").value.split("-").map((elem) => Number(elem));
-    const tm = document.getElementById("active-time").value.split(":").map((elem) => Number(elem));
-    const obj = JSON.stringify({
-        firstName: necessaryFields.firstname.value,
-        lastName: necessaryFields.lastname.value,
-        contractNum: necessaryFields.contractNum.value,
-        familyDoctor: familyDoctor.innerText,
-        dateTime: new Date(dt[0], dt[1] - 1, dt[2], tm[0] + 2, tm[1]),
-        complaint: complaint.value
-    });
 
     function showModal(isValid = true) {
         const popUp = document.getElementById("popup");
@@ -220,7 +223,7 @@ function submitForm(e) {
         if (!isValid) {
             popupTitle.innerText = "Помилка";
             popupTitle.style.color = "rgb(217, 36, 36)";
-            popupText.innerText = "Дані на сервер НЕ відправлені. Перевірте, будь-ласка, правильність введених полів та спробуйте ще";
+            popupText.innerText = "Дані на сервер НЕ відправлені. Перевірте, будь-ласка, правильність введених полів або з'єднання та спробуйте ще";
         } else {
             popupTitle.innerText = "Успіх!";
             popupTitle.style.color = "rgb(36, 217, 36)";
@@ -230,7 +233,7 @@ function submitForm(e) {
         modalCloseButton.addEventListener("click", closeModal)
 
         function closeModal(e) {
-            e.preventDefault();
+            if (!isValid) e.preventDefault();
             popUp.classList.remove("open");
         }
     }
@@ -241,16 +244,14 @@ function submitForm(e) {
                 btn.style.backgroundColor = "red";
             }
     }
-
-    console.log(obj);
 }
 
 function clearForm() {
-    clearFields(time, date, familyDoctor, complaint);
+    clearFields(formElems.timeBlock, formElems.dateBlock, formElems.familyDoctor, formElems.complaint);
     plainText.innerText = "не визначено";
     plainText.className = "unknown-block";
-    familyDoctor.appendChild(plainText);
-    date.appendChild(plainText.cloneNode(true));
-    time.appendChild(plainText.cloneNode(true));
+    formElems.familyDoctor.appendChild(plainText);
+    formElems.dateBlock.appendChild(plainText.cloneNode(true));
+    formElems.timeBlock.appendChild(plainText.cloneNode(true));
     window.scrollTo(0, 0);
 }

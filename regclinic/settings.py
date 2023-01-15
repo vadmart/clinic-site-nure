@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-v(l07qvqd1q0@1_521)pho5_lzw_ttgjjcvt-fhink_o0*#^ot
 DEBUG = True
 
 ALLOWED_HOSTS = ["polyclinic.pp.ua", "0.0.0.0", "192.168.137.110", "192.168.1.230", "google.com", "localhost",
-                 "192.168.1.246"]
+                 "192.168.1.246", "127.0.0.1", "localhost"]
 
 # Application definition
 

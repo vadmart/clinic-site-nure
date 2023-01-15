@@ -84,7 +84,7 @@
     width: 100%;
     display: grid;
     grid-row-gap: 20px;
-    background-color: rgba(100, 100, 100, 0.1);
+    background-color: rgba(100, 100, 100, 0.2);
     padding: 10px;
     border-radius: 10px;
 }
@@ -104,6 +104,119 @@
     font-family: Inter, sans-serif;
     font-size: 1em;
 }
+
+.no-reviews {
+    font-size: 1.5em;
+    color: #777777;
+    font-style: italic;
+}
+
+.review-blank-wrapper {
+    top: 0;
+    position: absolute;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+.review-blank {
+    top: 20%;
+    background-color: rgba(105, 223, 223, 1);
+    padding: 10px;
+    position: fixed;
+    border-radius: 10px;
+    max-height: 550px;
+}
+
+.close-button {
+    text-decoration: none;
+    color: #ffffff;
+    position: absolute;
+    right: 10px;
+    font-size: 1.3rem;
+    font-family: "Inter", sans-serif;
+}
+
+.review-blank .blank {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 4fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    margin: 30px 0 0 0;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+.blank #review-box {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.review-blank .inner-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-box label {
+    font-size: 1.3rem;
+}
+
+.inner-box > * {
+    width: 100%;
+}
+
+.review-input {
+    height: 30px;
+    font-size: 1.2rem;
+}
+
+.inner-box#name-box {
+    justify-items: right;
+}
+
+.inner-box#contract-num-box {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.review-textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+}
+
+#submit-button-wrapper {
+    justify-items: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.submit-review-button {
+    width: 50%;
+    background-color: rgba(94, 140, 72, 1);
+    color: #ffffff;
+    border: 1px solid rgb(100, 150, 230);
+    border-radius: 15px;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.submit-review-button:hover {
+    background-color: rgba(60, 100, 50, 1);
+    color: #aaaaaa;
+}
+
 
 @media screen and (max-width: 1452px) {
     .reviews__menu__title {
