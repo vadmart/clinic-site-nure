@@ -1,99 +1,115 @@
-const isStorageAllowed = window.confirm("Чи дозволяєте Ви запис даних у локальне сховище?");
-const questions = [["Скільки разів можна використовувати маску для захисту дихальних шляхів?", ["radio", "1 раз", "Скільки завгодно", "Взагалі не має сенсу надягати"]],
-    ["Яку відстань необхідно тримати у відношенні до інших людей? Оберіть декілька варіантів",
-        ["checkbox", "3м", "5м", "1м", "0.5м"]],
-    ["Скільки днів необхідно залишатися вдома після одужання від COVID-19?", ["radio", "14 днів", "2 дні", "Жодної різниці", "5 днів"]],
-    ["Із якого віку можна з'являтися у місцях масового скупчення людей під час посилення пандемії COVID-19", ["radio", "Вік значення не має - взагалі не можна", "З 18 років", "З 21 року"]]];
-const correctAnswers = [["1 раз"], ["3м", "5м"], ["14 днів"], ["Вік значення не має - взагалі не можна"]];
-var userAnswers = [];
+var qa = null;
 const formWrapper = document.querySelector(".form-wrapper");
 const form = document.querySelector(".form-wrapper__form");
 const fieldset = window["form__content"];
-const formTitle = window["form__title"];
+let formTitle = window["form__title"];
 const formVariants = window["form__variants"];
 const nextButton = document.querySelector(".form__button");
 const variantsBlock = document.getElementById("form__variants");
-var ind = 1;
+let ind = 2;
+
+function receiveQuestions(method, requestURL) {
+    return new Promise((resolve, reject) => {
+            let ajax_obj = new XMLHttpRequest();
+            ajax_obj.open(method, requestURL);
+            ajax_obj.responseType = "json";
+            ajax_obj.setRequestHeader("Content-Type", "application/json");
+            ajax_obj.onload = function () {
+                if (ajax_obj.status >= 400) {
+                    reject(ajax_obj.response)
+                } else {
+                    resolve(ajax_obj.response);
+                }
+            }
+            ajax_obj.onerror = () => {
+                console.error(ajax_obj.response);
+            }
+            ajax_obj.send(null);
+        }
+    )
+}
+
+receiveQuestions("POST", "get-questions")
+    .then(data => {
+        qa = data;
+        form.classList.remove("hidden");
+        document.getElementById("loader").classList.add("hidden");
+        getQuestion(qa[1]["question"], qa[1]["correctAnswers"], qa[1]["incorrectAnswers"], qa[1]["inputType"]);
+    })
+    .catch(err => console.error(err));
 
 
-getQuestion(questions[0][0], questions[0][1]);
+nextButton.addEventListener("click", switchQuestions);
 
-nextButton.addEventListener("click", (e) => {
+function switchQuestions(e) {
     e.preventDefault();
-    if (!validateAnswer()) {
-        form.style.borderColor = "red";
-        fieldset.style.borderColor = "red";
+    if (!validateAnswer(ind - 1)) {
+        form.style.backgroundColor = "rgba(220, 70, 50, 0.6)";
+        fieldset.style.backgroundColor = "rgba(220, 70, 50, 0.6)";
         alert("Оберіть варіант відповіді!");
         return;
     }
-    form.style.borderColor = "#000";
-    fieldset.style.borderColor = "";
-    if (ind <= questions.length - 1) {
-        getQuestion(questions[ind][0], questions[ind][1]);
-        if (ind == questions.length - 1) {
+    form.style.backgroundColor = "";
+    fieldset.style.backgroundColor = "";
+    if (ind <= Object.keys(qa).length) {
+        getQuestion(qa[ind]["question"], qa[ind]["correctAnswers"], qa[ind]["incorrectAnswers"], qa[ind]["inputType"]);
+        if (ind == Object.keys(qa).length) {
+            getQuestion(qa[ind]["question"], qa[ind]["correctAnswers"], qa[ind]["incorrectAnswers"], qa[ind]["inputType"]);
             nextButton.value = "Показати результати";
+            nextButton.addEventListener("click", showResults);
         }
         ind++;
-    } else {
-        const testFailed = showResults();
-        if (isStorageAllowed && !testFailed) {
-            addDataToWebStorage(testFailed);
-        } else {
-            localStorage.clear();
-        }
     }
-});
-
-function validateAnswer() {
-    var answerFlag = false;
-    var answer = [];
-    for (var el of document.getElementsByName("variant")) {
-        if (el.checked) {
-            answerFlag = true;
-            answer.push(el.value);
-        }
-    }
-    if (answerFlag) {
-        userAnswers.push(answer);
-    }
-    return answerFlag;
 }
 
-function getQuestion(question, variants) {
+function validateAnswer(i) {
+    let flag = false;
+    for (let el of document.getElementsByName("variant")) {
+        if (el.checked) {
+            flag = true;
+            qa[i]["chosenAnswers"].push(el.value);
+        }
+    }
+    return flag;
+}
+
+function getQuestion(question, correct, incorrect, inputType) {
     clearVariants();
+    let allVariants = correct.concat(incorrect);
     formTitle.innerText = question;
-    for (var i = 1; i < variants.length; i++) {
+    for (let i = 0; i < allVariants.length; i++) {
         const btn = document.createElement("input");
-        btn.type = variants[0];
+        btn.type = inputType;
         btn.name = "variant";
-        btn.value = variants[i];
+        btn.value = allVariants[i];
         btn.id = `var${i}`;
         const label = document.createElement("label");
-        label.innerText = variants[i];
+        label.innerText = allVariants[i];
         label.htmlFor = btn.id;
         variantsBlock.appendChild(btn);
         variantsBlock.appendChild(label);
     }
 }
 
-function showResults() {
+function showResults(e) {
+    e.preventDefault();
     const resultsWrapper = document.querySelector(".results-wrapper");
     const questionsTitles = document.getElementsByClassName("variants__title");
     const chosenAnswers = document.getElementsByClassName("variants__answer chosen");
     const corrAnswers = document.getElementsByClassName("variants__answer correct");
-    var corr_answ_amount = 0;
+    let totalPoints = 0;
+    let correctAnswersAmount = 0;
     document.querySelector(".title-box h2").innerText = "Результати тестування";
     formWrapper.classList.add("hidden");
     resultsWrapper.classList.remove("hidden");
-    for (var i = 0; i < questionsTitles.length; i++) {
-        questionsTitles[i].innerText = `Питання: ${questions[i][0]}`;
-        chosenAnswers[i].innerText = `Обрана відповідь: ${userAnswers[i]}`;
-        corrAnswers[i].innerText = `Правильна відповідь: ${correctAnswers[i]}`;
-        if (Array.compare(userAnswers[i], correctAnswers[i])) {
-            corr_answ_amount++;
-        }
+    for (let i = 0; i < questionsTitles.length; i++) {
+        questionsTitles[i].innerText = `Питання: ${qa[i + 1]["question"]}`;
+        chosenAnswers[i].innerText = `Обрані відповіді: ${qa[i + 1]["chosenAnswers"]}`;
+        corrAnswers[i].innerText = `Правильні відповіді: ${qa[i + 1]["correctAnswers"]}`;
+        correctAnswersAmount += Object.keys(qa[i + 1]["correctAnswers"]).length;
+        totalPoints += pointsPerQuestion(qa[i + 1]["chosenAnswers"], qa[i + 1]["correctAnswers"]);
     }
-    const correct_perc = (corr_answ_amount / questionsTitles.length) * 100;
+    const correct_perc = (totalPoints / correctAnswersAmount) * 100;
     const incorrect_perc = 100 - correct_perc;
     return initDiagrams(correct_perc, incorrect_perc);
 }
@@ -129,10 +145,11 @@ Array.compare = (obj1, obj2) => {
     return true;
 }
 
-function addDataToWebStorage(isTestFailed) {
-    for (var i = 0; i < userAnswers.length; i++) {
-        localStorage[`question${i}`] = questions[i][0];
-        localStorage[`answer${i}`] = userAnswers[i];
+function pointsPerQuestion(arrUser, arrCorrect) {
+    let points = 0
+    for (let el of arrCorrect) {
+        if (arrUser.includes(el)) points++;
     }
-    localStorage["isTestFailed"] = isTestFailed;
+    return points;
 }
+

@@ -1,0 +1,7 @@
+{% for field in form %}
+    <div class="inner-box" id="field_{{ field.auto_id }}">
+        {{ field.errors }}
+        <label class="details" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+    </div>
+{% endfor %}

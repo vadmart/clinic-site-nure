@@ -64,6 +64,12 @@ function makeRequest(event, url) {
         alert("Неможливо створити екземпляр класу XMLHTTP");
         return false;
     }
+    clearFields(formElems.timeBlock, formElems.dateBlock, formElems.familyDoctor);
+    plainText.innerText = "завантаження...";
+    plainText.className = "unknown-block";
+    formElems.familyDoctor.appendChild(plainText.cloneNode(true));
+    formElems.dateBlock.appendChild(plainText.cloneNode(true));
+    formElems.timeBlock.appendChild(plainText.cloneNode(true));
     httpRequest.open("POST", url);
     httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     httpRequest.send(
@@ -95,6 +101,12 @@ function getInfo(event, httpRequest) {
         }
     } catch
         (e) {
+        clearFields(formElems.timeBlock, formElems.dateBlock, formElems.familyDoctor);
+        plainText.innerText = "не визначено";
+        plainText.className = "unknown-block";
+        formElems.familyDoctor.appendChild(plainText.cloneNode(true));
+        formElems.dateBlock.appendChild(plainText.cloneNode(true));
+        formElems.timeBlock.appendChild(plainText.cloneNode(true));
         alert("Було призведено виняток " + e.description);
     }
 }
@@ -112,7 +124,7 @@ function showDoctor(e, doctorData) {
     } else {
         plainText.innerText = "не визначено";
         plainText.className = "unknown-block";
-        formElems.familyDoctor.appendChild(plainText);
+        formElems.familyDoctor.appendChild(plainText.cloneNode(true));
         formElems.dateBlock.appendChild(plainText.cloneNode(true));
         formElems.timeBlock.appendChild(plainText.cloneNode(true));
     }
@@ -192,6 +204,23 @@ function showDateTime(doctorInfo) {
 
 function submitForm(e) {
     e.preventDefault();
+    const formAJAX = new XMLHttpRequest();
+    formAJAX.open("POST", "record");
+    formAJAX.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    formAJAX.onreadystatechange = function () {
+        if (formAJAX.readyState == 4) {
+            if (formAJAX.status == 200) {
+                console.log(formAJAX.response);
+            } else {
+                console.log(formAJAX.response);
+            }
+        }
+    }
+    formAJAX.send(`person_id=${formElems.form.dataset.personId}&` +
+            `doctor_id=${formElems.form.dataset.doctorId}&` +
+            `dt_tm=${window["calendar"].value} ${window["active-time"].value}&` +
+            `complaint=${formElems.complaint.value}&` +
+            `csrfmiddlewaretoken=${document.querySelector("input[name=csrfmiddlewaretoken]").value}`);
     if (formElems.form.checkValidity() && document.getElementById("active-time")) {
         const formAJAX = new XMLHttpRequest();
         formAJAX.open("POST", "record");

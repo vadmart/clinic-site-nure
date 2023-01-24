@@ -10,71 +10,39 @@
 </head>
 <body>
 <div class="wrapper">
-    <header class="clinic-head">
-        <div class="site-name">Тестова робота (клініка)</div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a href="/" class="logo">
-                    <img src="{% static 'img/clinic_logo.png' %}" alt="">
-                </a>
-            </li>
-            <li class="menu-item dropdown">
-                <a class="btn dropbtn">Лікарня</a>
-                <ul class="dropdown-content">
-                    <li>
-                        <a class="inner-btn" href="">Галерея</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="contacts">Контакти</a>
-                    </li>
-                    <li>
-                        <a class="inner-btn" href="vacancy">Вакансії</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="staff">Наші лікарі</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="making-an-appointment">Запис на прийом</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="schedule">Графік роботи</a>
-            </li>
-            <li class="menu-item">
-                <a class="btn" href="quiz">Опитування</a>
-            </li>
-        </ul>
-        <div class="mobile-menu">
-            <div class="mobile-menu-btn-wrapper">
-                <button>
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <ul class="mobile-menu-content">
-                <li class="dropdown-mobile"></li>
+    {% block header %}
+        <header class="clinic-head">
+            <div class="site-name">Тестова робота (клініка)</div>
+            <ul class="menu">
                 <li class="menu-item">
-                    <a class="btn" href="/">Додому</a>
+                    <a href="/" class="logo">
+                        <img src="{% static 'img/clinic_logo.png' %}" alt="">
+                    </a>
                 </li>
-                <li class="menu-item dropdown-content">
+                <li class="menu-item dropdown">
                     <a class="btn dropbtn">Лікарня</a>
-                    <ul>
+                    <ul class="dropdown-content">
                         <li>
-                            <a class="btn" href="#">Галерея</a>
+                            <a class="inner-btn" href="">Галерея</a>
                         </li>
                         <li>
-                            <a class="btn" href="contacts">Контакти</a>
+                            <a class="inner-btn" href="contacts">Контакти</a>
                         </li>
                         <li>
-                            <a class="btn" href="vacancy">Вакансії</a>
+                            <a class="inner-btn" href="vacancy">Вакансії</a>
                         </li>
                     </ul>
                 </li>
                 <li class="menu-item">
                     <a class="btn" href="staff">Наші лікарі</a>
                 </li>
-                <li class="menu-item">
-                    <a class="btn" href="making-an-appointment">Запис на прийом</a>
+                <li class="menu-item dropdown">
+                    <a class="btn dropbtn" href="making-an-appointment">Запис на прийом</a>
+                    <ul class="dropdown-content">
+                        <li>
+                            <a class="inner-btn" href="making-a-contract">Заключити контракт</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="menu-item">
                     <a class="btn" href="schedule">Графік роботи</a>
@@ -83,8 +51,52 @@
                     <a class="btn" href="quiz">Опитування</a>
                 </li>
             </ul>
-        </div>
-    </header>
+            <div class="mobile-menu">
+                <div class="mobile-menu-btn-wrapper">
+                    <button>
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <ul class="mobile-menu-content">
+                    <li class="dropdown-mobile"></li>
+                    <li class="menu-item">
+                        <a class="btn" href="/">Додому</a>
+                    </li>
+                    <li class="menu-item dropdown-content">
+                        <a class="btn dropbtn">Лікарня</a>
+                        <ul>
+                            <li>
+                                <a class="btn" href="#">Галерея</a>
+                            </li>
+                            <li>
+                                <a class="btn" href="contacts">Контакти</a>
+                            </li>
+                            <li>
+                                <a class="btn" href="vacancy">Вакансії</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a class="btn" href="staff">Наші лікарі</a>
+                    </li>
+                    <li class="menu-item dropdown-content">
+                        <a class="btn dropbtn" href="making-an-appointment">Запис на прийом</a>
+                        <ul>
+                            <li>
+                                <a class="btn" href="making-a-contract">Заключити контракт</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a class="btn" href="schedule">Графік роботи</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="btn" href="quiz">Опитування</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    {% endblock %}
     <main>
         {% block content %}{% endblock %}
     </main>

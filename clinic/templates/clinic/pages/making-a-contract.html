@@ -1,0 +1,29 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Заключення контракту</title>
+    <link rel="stylesheet" href="{% static 'css/making-a-contract.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <div class="form-container">
+            <div class="title-block">Заключення контракту</div>
+            <form method="POST" action="making-a-contract" id="contract-form">
+                {% csrf_token %}
+                <div class="user-details">
+                    {{ form }}
+                </div>
+                <div id="buttons">
+                    <input class="button" id="record" type="submit" value="Записатися">
+                    <input class="button" type="reset" value="Очистити все" id="clear">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/contract.js' %}"></script>
+{% endblock %}

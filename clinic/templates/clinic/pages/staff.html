@@ -27,16 +27,16 @@
                 <div class="full-description">
                     <h5 class="description-header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h5>
                     <div class="description-block">
-                        <p class="description">{{ doctor.category_id.name }} кваліфікаційна категорія<br>
+                        <p class="description">{{ doctor.category.name }} кваліфікаційна категорія<br>
                             Номер кабінету: №
                             {% for dc in doc_cabs %}
-                                {% if doctor.id == dc.doctor_id.id %}
-                                    {{ dc.cabinet_id.no }}
+                                {% if doctor.id == dc.doctor.id %}
+                                    {{ dc.cabinet.no }}
                                 {% endif %}
                             {% endfor %}<br>
                             Номер телефону:
                             {% for phone in phones %}
-                                {% if doctor.id == phone.doctor_id.id %}
+                                {% if doctor.id == phone.doctor.id %}
                                     {{ phone.value }}
                                 {% endif %}
                             {% endfor %}

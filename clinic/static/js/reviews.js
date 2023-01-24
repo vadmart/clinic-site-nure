@@ -1,3 +1,6 @@
+import {ReviewForm} from "./reviewForm.js";
+
+
 const reviewOptions = {
     backgroundColor: window["background"],
     fontSize: window["font-size"],
@@ -9,10 +12,13 @@ const accounts = document.getElementsByClassName("account");
 const comments = document.getElementsByClassName("comment");
 const reviews = document.getElementsByClassName("review");
 const defaultButton = window["default-button"];
+const reviewsMenu = document.querySelector(".reviews .reviews__menu");
+if (!reviews.length) {
+    reviewsMenu.style.display = "none";
+}
+
 const addReviewButton = document.querySelector(".feedback_btn");
-
 addReviewButton.addEventListener("click", showModal);
-
 
 setSettings();
 
@@ -22,7 +28,6 @@ defaultButton.addEventListener("click", () => {
     setFontSize("");
     localStorage.clear();
 })
-
 
 reviewOptions.backgroundColor.addEventListener("change", (e) => {
     setBackgroundColor(e.target.value);
@@ -99,4 +104,42 @@ function showModal(e) {
         e.preventDefault();
     })
     e.preventDefault();
+}
+
+ReviewForm.addHandlerForAll(sendPersonData);
+function sendPersonData() {
+    let personData = false
+    if (!ReviewForm.areNecessaryFieldsFull()) return;
+    if (window.XMLHttpRequest) {
+        personData = new XMLHttpRequest();
+        if (window.overrideMimeType) {
+            personData.overrideMimeType("text/xml");
+        }
+    } else if (window.ActiveXObject) {
+        personData = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if (!personData) {
+        alert("Неможливо створити екземпляр класу XMLHttp");
+        return false;
+    }
+    personData.open("POST", "check-person");
+    personData.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    personData.send(`lastname=${ReviewForm.lastnameField.value}&` +
+        `name=${ReviewForm.nameField.value}&` +
+        `contract_num=${ReviewForm.contractNumField.value}&` +
+        `doctor_id=${document.querySelector(".review-blank form").dataset.doctorId}`);
+    personData.onreadystatechange = function () {
+        if (personData.readyState == 4) {
+            if (personData.status == 200) {
+                const receivedData = JSON.parse(personData.responseText);
+                if (receivedData.status == "canLeaveReview") {
+                    ReviewForm.unlockReviewArea();
+                } else if (receivedData.status == "didntVisitADoctor") {
+                    ReviewForm.patientWithoutVisits();
+                } else {
+                    ReviewForm.patientIsNotInDB();
+                }
+            }
+        }
+    }
 }

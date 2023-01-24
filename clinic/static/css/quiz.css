@@ -4,14 +4,17 @@
     font-family: "Roboto", sans-serif;
 }
 
-.form-wrapper__form {;
-    border: solid 1px #000;
+.form-wrapper__form {
+    color: white;
+    background-color: rgb(50, 80, 150);
+    border: solid 1px white;
     border-radius: 10px;
     position: relative;
     width: 50%;
 }
 
 #form__content {
+    background-color: rgba(50, 150, 220, 0.7);
     border-radius: 0 0 10px 10px;
     margin: 0;
 }
@@ -156,4 +159,22 @@ a.home:hover {
 
 .hidden {
     display: none !important;
+}
+
+#loader {
+    border: 12px solid #f3f3f3;
+    border-top: 12px solid rgba(80, 170, 170, 1);
+    border-radius: 50%;
+    width: 80px;
+    aspect-ratio: 1;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

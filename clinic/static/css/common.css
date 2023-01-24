@@ -187,7 +187,8 @@ main {
     left: 0;
     position: absolute;
     z-index: 1;
-    background-color: rgba(80, 150, 150, 1);
+    background-color: rgba(80, 130, 130, 1);
+    border-radius: 10px;
 }
 
 .menu .dropdown-content .inner-btn {
