@@ -134,12 +134,9 @@ function sendPersonData() {
                 const receivedData = JSON.parse(personData.responseText);
                 if (receivedData.status == "canLeaveReview") {
                     ReviewForm.unlockReviewArea();
-                } else if (receivedData.status == "didntVisitADoctor") {
-                    ReviewForm.patientWithoutVisits();
-                } else {
-                    ReviewForm.patientIsNotInDB();
+                } else
+                    ReviewForm.patientWithoutContract();
                 }
             }
         }
     }
-}

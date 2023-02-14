@@ -1,6 +1,10 @@
 from django.db import models
 import textwrap
 from django.utils import timezone
+from django.db.models import Q, Value as V
+from django.db.models.functions import Concat
+from django.db.models.query import QuerySet
+from bot.models import ContractInfo
 
 
 # Create your models here.
@@ -22,6 +26,13 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"{self.lastname} {self.name} {self.patronymic}"
+
+    @staticmethod
+    def get_doctors_by_input(input_value) -> QuerySet | list:
+        return Doctor.objects.annotate(fullname=Concat("lastname", V(" "), "name", V(" "), "patronymic")). \
+            filter(Q(fullname__icontains=input_value)).values_list("lastname", "name",
+                                                                   "patronymic") \
+            if input_value != "" else []
 
 
 class Cabinet(models.Model):
@@ -45,7 +56,7 @@ class Person(models.Model):
     name = models.CharField(max_length=15)
     lastname = models.CharField(max_length=30)
     contract_num = models.CharField(max_length=10)
-    phone_number = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=15)
     street_type = models.CharField(max_length=10)
     street_name = models.CharField(max_length=40)
     house_number = models.CharField(max_length=4)
@@ -54,6 +65,21 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.lastname} {self.name}"
+
+    def add_info(self, contract: ContractInfo):
+        self.doctor = Doctor.objects.get(lastname=contract.doctor_chat.lastname,
+                                         name=contract.doctor_chat.name,
+                                         patronymic=contract.doctor_chat.patronymic)
+        self.name = contract.person_firstname
+        self.lastname = contract.person_lastname
+        self.contract_num = contract.contract_num
+        self.phone_number = contract.person_number
+        self.street_type = contract.street_type
+        self.street_name = contract.street_name
+        self.house_number = contract.house_number
+        self.flat_number = contract.flat_number
+        self.post_index = contract.post_index
+        self.save(force_insert=True)
 
 
 class Review(models.Model):
@@ -92,4 +118,3 @@ class PhoneNumber(models.Model):
 
     def __str__(self):
         return self.doctor.name
-

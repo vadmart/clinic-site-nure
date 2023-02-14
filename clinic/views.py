@@ -1,18 +1,16 @@
 import datetime
-import telebot
-from telebot import formatting
 
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.db.models import Q
+from django.utils.translation import gettext as _
 
+from clinic import clinic_bot, verification
+from clinic.clinic_bot import is_num_in_contracts_info
 from clinic.models import Doctor, DoctorCabinet, PhoneNumber, Person, Schedule, Recording, Review
+from bot.models import ContractInfo
 from datetime import date
 from .forms import ContractForm
-
-API_TOKEN = "5107287131:AAF2wqmilqpXxmF9rf4mBL1oKC3U5Z35-hY"
-bot = telebot.TeleBot(API_TOKEN)
 
 
 # Create your views here.
@@ -92,23 +90,15 @@ def record(request):
     person = Person.objects.get(id=record_data["person_id"])
     doctor = Doctor.objects.get(id=record_data["doctor_id"])
     print(record_data)
-    r = Recording(person=person,
-                  doctor=doctor,
-                  datetime=datetime.datetime.strptime(record_data["dt_tm"], "%Y-%m-%d %H:%M"),
-                  health_complaint=record_data["complaint"])
-    r.save()
-    sch = Schedule.objects.get(doctor=r.doctor, dt_tm=r.datetime)
+    rec = Recording(person=person,
+                    doctor=doctor,
+                    datetime=datetime.datetime.strptime(record_data["dt_tm"], "%Y-%m-%d %H:%M"),
+                    health_complaint=record_data["complaint"])
+    rec.save()
+    sch = Schedule.objects.get(doctor=rec.doctor, dt_tm=rec.datetime)
     sch.is_busy = True
     sch.save()
-    bot.send_message(-1001728749709,
-                     formatting.format_text(f"Особа " + formatting.hitalic(f"{person.lastname} {person.name}") +
-                                            " записана на прийом до лікаря " +
-                                            formatting.hitalic(
-                                                f"{doctor.lastname} {doctor.name} {doctor.patronymic}.\n") +
-                                            f"Дата: {r.datetime.date().strftime('%d.%m.%Y')}, час: {r.datetime.time().strftime('%H:%M')}\n" +
-                                            "Скарга на здоров'я:", formatting.hitalic(
-                         f'"{r.health_complaint}"')), parse_mode="HTML")
-
+    clinic_bot.send_msg_about_recording_to_doctor(person, doctor, rec)
     return HttpResponse("successful")
 
 
@@ -119,13 +109,11 @@ def check_person(request):
         p = Person.objects.get(lastname=person_data["lastname"],
                                name=person_data["name"],
                                contract_num=person_data["contract_num"])
-        attendances = Recording.objects.filter(person_id=p.id, doctor_id=person_data["doctor_id"])
-        for att in attendances:
-            if att.was_patient_present:
-                return JsonResponse({"status": "canLeaveReview"})
-        return JsonResponse({"status": "didntVisitADoctor"})
+        if p.doctor.id == int(person_data["doctor_id"]):
+            return JsonResponse({"status": "canLeaveReview"})
     except Person.DoesNotExist:
-        return JsonResponse({"status": "undefined"})
+        pass
+    return JsonResponse({"status": "undefined"})
 
 
 @csrf_protect
@@ -136,24 +124,46 @@ def add_review(request, doctor_id):
     r = Review(doctor=dctr, person=prsn, text=review_data["review-text"])
     r.save()
     return HttpResponseRedirect(f"/reviews/{doctor_id}")
-
+        
 
 @csrf_protect
 def contract_page(request):
-    if request.method == "POST":
-        form = ContractForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect("/")
     form = ContractForm()
+    print(request.headers["Accept-Language"])
+    if request.method == "POST":
+        form.data = request.POST
+        form.is_bound = True
+        if form.is_valid():
+            if form.data["chosen"] == "telegram" \
+                    and not ContractInfo.objects.filter(person_number=form.data["person_phone_number"]) \
+                    and not is_num_in_contracts_info(form.data["person_phone_number"]):
+                clinic_bot.send_msg_about_contract_to_doctor(form.data.dict())
+                return HttpResponseRedirect("https://t.me/StepFristBot")
+            elif ContractInfo.objects.filter(person_number=form.data["person_phone_number"]):
+                form.add_error("person_phone_number", "Користувач з таким номером телефону вже зареєстрований")
+            elif is_num_in_contracts_info(form.data["person_phone_number"]):
+                form.add_error("person_phone_number",
+                               "Користувач з таким номером телефону вже відправив інформацію для контракту")
     return render(request, "clinic/pages/making-a-contract.html", {"form": form})
 
 
+# @csrf_protect
+# def code_submitting(request):
+#     otp_code, phone_number = request.POST["verification_code"], request.POST["person_phone_number"]
+#     if verification.check_verification_code(phone_number, otp_code):
+#         form_data = json.loads(request.POST["form_data"])
+#         clinic_bot.send_msg_about_contract_to_doctor(form_data)
+#         return HttpResponseRedirect("https://t.me/StepFristBot")
+#     else:
+#         return render(request,
+#                       template_name="clinic/pages/number_submitting.html",
+#                       context={"phone": request.POST["person_phone_number"],
+#                                "form_data": request.POST["form_data"]})
+
+
 @csrf_exempt
-def doctor_fio(request):
+def doctor_lfp(request):
     search_data = request.body.decode(encoding="utf-8")
-    searched_doctors = Doctor.objects.filter(Q(lastname__icontains=search_data) |
-                                             Q(name__icontains=search_data) |
-                                             Q(patronymic__icontains=search_data)).values_list("lastname", "name",
-                                                                                               "patronymic")
+    searched_doctors = Doctor.get_doctors_by_input(search_data)
     searched_doctors = list(map(lambda tup: " ".join(tup), searched_doctors))
     return JsonResponse({"searchedDoctors": searched_doctors})

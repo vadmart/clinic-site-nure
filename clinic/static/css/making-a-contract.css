@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 0.8em;
 }
 
 .form-container {
@@ -18,7 +18,7 @@
 }
 
 .form-container .title-block {
-    font-size: 25px;
+    font-size: 1.5em;
     font-weight: 500;
     position: relative;
 }
@@ -33,153 +33,101 @@
     background: linear-gradient(135deg, #0697D6, #97E7E7);
 }
 
-.form-container form .user-details {
+form .grid-user-info {
+    width: 100%;
     display: grid;
-    grid-row-gap: 10px;
-    grid-template-areas: "doctor doctor doctor doctor doctor doctor doctor doctor doctor doctor"
-                         "lastname lastname lastname lastname . . name name name name"
-                         "phone phone phone phone phone phone phone phone phone phone"
-                         "str_type str_type . str_name str_name str_name str_name . str_no str_no"
-                         "flat_no flat_no flat_no . . . post_index post_index post_index post_index";
-    width: 100%;
+    grid-row-gap: 0.5em;
 }
 
-#field_id_doctor_fio {
-    grid-area: doctor;
+.grid-user-info .inner-grid-item {
+    display: grid;
+    margin-bottom: 0.5em;
+    position: relative;
 }
 
-#field_id_person_lastname {
-    grid-area: lastname;
+.grid-item {
+    display: grid;
+    grid-gap: 1.5rem;
 }
 
-#field_id_person_name {
-    grid-area: name;
+.grid-item:nth-child(1) {
+    grid-template-columns: 1fr;
 }
 
-#field_id_person_phone {
-    grid-area: phone;
+.grid-item:nth-child(2) {
+    grid-template-columns: repeat(2, 1fr);
 }
 
-#field_id_street_type {
-    grid-area: str_type;
+.grid-item:nth-child(3) {
+    grid-template-columns: 1fr;
 }
 
-#field_id_street_name {
-    grid-area: str_name;
+.grid-item:nth-child(4) {
+    grid-template-columns: repeat(2, 1fr);
 }
 
-#field_id_street_no {
-    grid-area: str_no;
+.grid-item:nth-child(5) {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-#field_id_flat_no {
-    grid-area: flat_no;
-}
-
-#field_id_post_index {
-    grid-area: post_index;
-}
-
-form .user-details .inner-box {
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-.user-details .inner-box .unknown-block {
-    font-style: italic;
-    font-size: 22px;
-    color: #888;
-    text-align: center;
-}
-
-.user-details .inner-box .doctor-block {
-    font-style: normal;
-    font-size: 22px;
-    color: #000;
-    text-align: center;
-}
-
-.user-details .inner-box .details {
+.grid-user-info .inner-grid-item .label--detail {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
+    font-size: 1.3em;
 }
 
-.user-details .details {
-    font-size: 1.4rem;
-}
-
-.user-details .inner-box textarea {
-    width: 100%;
-    height: 300px !important;
-    resize: none;
-}
-
-.user-details .inner-box input[type=date] {
-    font-size: 1.2rem;
-    width: 100%;
-}
-
-.user-details .inner-box .textholder {
-    height: 45px;
+.grid-user-info .inner-grid-item .textholder {
+    height: 2.5em;
     width: 100%;
     outline: none;
     border-radius: 5px;
     border: 1px solid #ccc;
     padding-left: 15px;
-    font-size: 16px;
+    font-size: 1em;
     border-bottom-width: 2px;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
-.textholder#id_doctor_fio {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: none;
-}
-
-.searched-info-block {
+form .searched-info-block {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000000;
     display: grid;
     font-family: "Roboto", sans-serif;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    border-top: none;
-    width: 101.8%;
-    z-index: 1000000;
-    position: relative;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    border-color: rgba(68, 120, 242, 1);
+    padding: 0;
 }
 
-.searched-item-button.doctor-fio {
-    width: 100.5%;
-    height: 45px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    border-color: #cccccc;
-    border-style: solid;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top: none;
+button.searched-item-button {
+    height: 2.5em;
+    padding: 0.9em;
+    text-align: center;
+    border: none;
     background-color: #ffffff;
-    font-size: 1rem;
+    font-size: 1em;
 }
 
-.searched-item-button.doctor-fio:not(:last-child) {
-    border-bottom: none;
+.searched-item-button:last-child {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
-.searched-item-button.doctor-fio:hover {
+.searched-item-button:hover {
     background-color: #aaaaaa;
 }
 
 .focused {
-    border-color: rgba(68, 120, 242, 1);
-}
-
-.user-details .inner-box .info-block {
-    display: flex;
-    justify-content: space-around;
-    column-gap: 5px;
+    border-color: rgb(68, 120, 242);
 }
 
 .inner-box .info-block input {
@@ -188,150 +136,110 @@ form .user-details .inner-box {
     font-size: 1.3rem;
 }
 
-.inner-box .info-block input#active-time {
-    background-color: #1975BB;
-    border-color: #0CC5BF;
-    color: #fff;
-}
-
-.info-block #calendar {
-    border-radius: 10px;
-}
-
-.user-details .inner-box .textholder:focus,
-.user-details .inner-box input:valid {
+.grid-user-info .inner-grid-item input.textholder:focus,
+.grid-user-info .inner-grid-item input:valid {
     border-color: rgba(68, 120, 242, 1);
 }
 
-form .button {
+form input.button {
     height: 50px;
 }
 
-form #buttons {
+form div#buttons {
     display: flex;
 }
 
-form .button {
+form input.button {
     width: 50%;
     margin: 0 12px;
     outline: none;
     border: none;
     border-radius: 20px;
-    font-size: 18px;
+    font-size: 1.2em;
     letter-spacing: 1px;
     font-weight: 500;
 }
 
-.button#record {
+input.button#record {
     color: #fff;
-    background: linear-gradient(135deg, #0697D6, #97E7E7);
+    background: linear-gradient(90deg, #2DE4D9, #2B7899);
 }
 
-.button#record:hover {
+input.button#record:hover {
     color: #eee;
-    background: linear-gradient(-135deg, #0697D6, #97E7E7);
+    background: linear-gradient(-90deg, #2DE4D9, #2B7899);
 }
 
-.button#clear:hover {
+input.button#clear:hover {
     color: #eee;
     background-color: #BBBBBB;
 }
 
-.user-details #health-complaint textarea {
-    outline: none;
-}
-
-.user-details #health-complaint textarea:focus {
-    outline: #9b59b6;
-}
-
-span.err-msg {
-    color: red;
-    font-size: 0.95rem;
-}
-
-section#modal-wrapper {
-    font-family: "Roboto", sans-serif;
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
-    display: none;
-    justify-content: center;
-}
-
-div#modal-window {
-    text-align: center;
+.choose-way-to-send-a-contract-info-block {
     display: flex;
-    background-color: #55AA55;
-    padding: 10px;
-    height: 20vh;
+    text-align: center;
+    flex-direction: column;
+    font-size: 1.5em;
+}
+
+.choose-way-to-send-a-contract-info-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.choose-way-to-send-a-contract-info-buttons .choose-way-to-send-a-contract-info-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choose-way-to-send-a-contract-info-buttons .choose-way-radio {
+    position: absolute;
+    border: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+.fa.fa-telegram, .fa.fa-sms {
+    position: relative;
+    font-size: 2em;
+    border: solid 2px rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+}
+
+.err-small {
+    color: #CC4444;
+    font-family: Roboto, sans-serif;
+    font-size: 0.9rem;
+}
+
+.fa.fa-telegram {
+    color: #0AA2FF;
+}
+
+.fa.fa-telegram:hover {
+    color: #0655DD;
+}
+
+.fa.fa-sms {
+    color: #aaaaaa;
+}
+
+.fa.chosen {
+    border: solid 2px black;
     border-radius: 10px;
 }
 
-div#modal-window > * {
-    line-height: 40px;
-}
-
-.disable-block {
-    overflow: hidden;
-    position: relative;
-    height: 100vh;
-}
-
-.popup {
-    position: fixed;
-    z-index: 1500;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    top: 0;
-    left: 0;
-    font-family: "Roboto", sans-serif;
-    line-height: 30px;
+.hidden {
     opacity: 0;
     visibility: hidden;
 }
 
-.popup.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.popup__body {
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 10px;
-}
-
-.popup__content {
-    background-color: #ffffff;
-    max-width: 800px;
-    padding: 30px;
-    position: relative;
-}
-
-.popup__title {
-    font-size: 1.6rem;
-    margin-bottom: 2em;
-}
-
-.popup__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #000;
-    font-size: 1.5rem;
-    margin-bottom: 3rem;
-}
-
 @media screen and (max-width: 768px) {
-    .form-wrapper {
-        padding: 10px;
-    }
 
     .form-container > * {
         font-size: 0.8rem;
@@ -343,73 +251,15 @@ div#modal-window > * {
         font-size: 1.3rem;
     }
 
-    .form-container .inner-box .details {
-        font-size: 1rem;
+    .choose-way-to-send-a-contract-info-buttons .choose-way-radio {
+        font-size: 0.9em;
     }
 
-    .user-details .inner-box .textholder {
-        font-size: 0.8rem;
-        height: 30px;
+    .grid-user-info .textholder {
+        font-size: 0.8em;
     }
 
-    form .button,
-    .user-details .inner-box .info-block,
-    .inner-box .info-block input[type=button] {
-        font-size: 0.8rem;
-        padding: 0;
-    }
-
-    .inner-box .info-block input[type=button] {
-        height: 25px;
-    }
-
-    .user-details .inner-box .unknown-block,
-    .user-details .inner-box .doctor-block {
-        font-size: 1rem;
-    }
-
-    .user-details textarea#complaint {
-        width: 100%;
-    }
-
-    .user-details .textholder {
-        font-size: 0.8rem;
-    }
-
-    .user-details .inner-box input[type=date] {
-        font-size: 0.8rem;
-        width: 100%;
-    }
-
-    .popup__content {
-        padding: 10px;
-    }
-
-    .popup__title {
-        font-size: 1rem;
-    }
-
-    .popup__text {
-        font-size: 0.8rem;
-    }
-
-    span.err-msg {
-        font-size: 0.75rem;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .form-container {
-        padding: 25px 25px;
-    }
-
-    .inner-box .info-block#time {
-        flex-direction: column;
-        row-gap: 5px;
-        align-items: center;
-    }
-
-    .inner-box .info-block input[type=button] {
-        width: 80%;
+    .grid-item {
+        grid-gap: 1rem;
     }
 }

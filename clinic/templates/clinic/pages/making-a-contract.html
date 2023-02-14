@@ -12,7 +12,7 @@
             <div class="title-block">Заключення контракту</div>
             <form method="POST" action="making-a-contract" id="contract-form">
                 {% csrf_token %}
-                <div class="user-details">
+                <div class="grid-user-info">
                     {{ form }}
                 </div>
                 <div id="buttons">

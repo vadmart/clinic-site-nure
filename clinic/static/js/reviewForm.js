@@ -13,14 +13,9 @@ export let ReviewForm = {
     areNecessaryFieldsFull() {
         return this.lastnameField.value != "" && this.nameField.value != "" && this.contractNumField.value != "";
     },
-    patientIsNotInDB() {
+    patientWithoutContract() {
         ReviewForm._setAlertFont();
-        this.textArea.innerText = "Необхідно заключити контракт із цим лікарем та відвідати хоча б 1 раз"
-        this.textArea.disabled = true;
-    },
-    patientWithoutVisits() {
-        ReviewForm._setAlertFont();
-        this.textArea.innerText = "Необхідно відвідати цього лікаря щонайменш 1 раз";
+        this.textArea.innerText = "Для залишення відгуків про цього доктора необхідно заключити з ним контракт";
         this.textArea.disabled = true;
     },
     unlockReviewArea() {

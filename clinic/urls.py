@@ -11,8 +11,9 @@ urlpatterns = [
     path("making-an-appointment", views.make_appointment, name="make_appointment"),
     path("making-a-contract", views.contract_page, name="make_contract"),
     path("doctor-info", views.doctor_info, name="doctor_info"),
-    path("doctor_fio", views.doctor_fio, name="doctor_fio"),
+    path("doctor_lfp", views.doctor_lfp, name="doctor_lfp"),
     path("record", views.record, name="record"),
+    # path("code-submitting", views.code_submitting, name="code-submitting"),
     path("reviews/check-person", views.check_person, name="check_person"),
     path("reviews/<int:doctor_id>/send", views.add_review, name="add_review")
 ]
