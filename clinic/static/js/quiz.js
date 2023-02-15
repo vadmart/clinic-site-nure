@@ -1,6 +1,6 @@
 var qa = null;
 const formWrapper = document.querySelector(".form-wrapper");
-const form = document.querySelector(".form-wrapper__form");
+const form = document.querySelector(".form");
 const fieldset = window["form__content"];
 let formTitle = window["form__title"];
 const formVariants = window["form__variants"];
@@ -78,6 +78,8 @@ function getQuestion(question, correct, incorrect, inputType) {
     let allVariants = correct.concat(incorrect);
     formTitle.innerText = question;
     for (let i = 0; i < allVariants.length; i++) {
+        const div = document.createElement("div");
+        div.classList.add("form__variant__block");
         const btn = document.createElement("input");
         btn.type = inputType;
         btn.name = "variant";
@@ -86,8 +88,9 @@ function getQuestion(question, correct, incorrect, inputType) {
         const label = document.createElement("label");
         label.innerText = allVariants[i];
         label.htmlFor = btn.id;
-        variantsBlock.appendChild(btn);
-        variantsBlock.appendChild(label);
+        div.appendChild(btn);
+        div.appendChild(label);
+        variantsBlock.appendChild(div)
     }
 }
 

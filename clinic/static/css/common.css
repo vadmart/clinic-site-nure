@@ -51,7 +51,7 @@ main {
 .title-box h2 {
     text-transform: uppercase;
     position: absolute;
-    font-size: 25px;
+    font-size: 1.5em;
     margin-top: 0;
     background-color: #fff;
     white-space: normal;
@@ -133,9 +133,13 @@ main {
     list-style: none;
     padding: 10px 0 0 0;
     width: 100%;
-    display: none;
+    display: grid;
     background-color: rgba(100, 200, 200, 0.7);
     left: 0;
+}
+
+.mobile-menu-content.hidden {
+    display: none;
 }
 
 .menu-item {
@@ -275,17 +279,12 @@ footer .socials {
     width: 100vw;
 }
 
-@media screen and (max-width: 1031px) {
-    .menu-item .btn {
-        font-size: 1.3rem;
-    }
+@media screen and (max-width: 1024px) {
 
     .menu-item a img {
         height: 60px;
     }
-}
 
-@media screen and (max-width: 1024px) {
     .clinic-head .site-name {
         font-size: calc(1rem + 0.3 * (100vw / 768));
     }
@@ -295,7 +294,11 @@ footer .socials {
     }
 
     .title-box {
-        margin: 20px 0;
+        margin: 0 0 20px 0;
+    }
+
+    .title-box h2 {
+        font-size: calc(1em + 0.4 * (100vw / 64));
     }
 
     .footer-content {
@@ -303,7 +306,15 @@ footer .socials {
     }
 
     .menu-item .btn {
-        font-size: calc(1rem + 0.1 * (100vw / 768));
+        font-size: calc(0.8em + 0.2 * (100vw / 64));
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: flex;
     }
 }
 
@@ -311,10 +322,6 @@ footer .socials {
 @media screen and (max-width: 932px) {
     .menu-item a img {
         height: 50px;
-    }
-
-    .menu-item .btn {
-        font-size: 1.2rem;
     }
 
 }
@@ -328,9 +335,6 @@ footer .socials {
 @media screen and (max-width: 384px) {
     .footer-content h3 {
         font-size: 1rem;
-    }
-
-    .footer-content h3 {
         line-height: 1.5rem;
     }
 

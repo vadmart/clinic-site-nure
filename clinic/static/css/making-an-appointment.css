@@ -10,7 +10,7 @@
 .form-container {
     max-width: 900px;
     width: 100%;
-    background: rgba(100, 244, 255, 0.5);
+    background-color: rgba(0, 150, 150, 0.5);
     display: grid;
     grid-row-gap: 15px;
     padding: 25px 30px;

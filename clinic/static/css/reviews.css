@@ -65,8 +65,7 @@
 
 .reviews .review {
     padding: 5px 10px 30px 10px;
-    min-width: 60%;
-    max-width: 60%;
+    width: 60%;
     border: solid 1px #000000;
     border-radius: 10px;
 }
@@ -282,7 +281,7 @@
     }
 
     .reviews .review {
-        max-width: 90%;
+        width: 90%;
     }
 
     .doctor-info .doctor-description {
