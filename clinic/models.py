@@ -21,14 +21,14 @@ class Doctor(models.Model):
     patronymic = models.CharField(max_length=20)
     category = models.ForeignKey(DoctorCategory, on_delete=models.SET_NULL, null=True)
     work_start_date = models.DateField()
-    image_name = models.CharField(max_length=100, default="")
+    image_name = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.lastname} {self.name} {self.patronymic}"
 
 
 class Patient(models.Model):
-    doctor = models.ForeignKey(to=Doctor, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(to=Doctor, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=15)
     lastname = models.CharField(max_length=30)
     patronymic = models.CharField(max_length=30)

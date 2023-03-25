@@ -13,7 +13,27 @@
 <body>
 <div class="wrapper">
     <header class="clinic-head">
-        <div class="site-name">{% trans 'Тестова робота (клініка)' %}</div>
+        <div class="clinic-head__top">
+            <div class="site-name">{% trans 'Тестова робота (клініка)' %}</div>
+
+            {% block langs %}
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as AVAILABLE_LANGUAGES %}
+                {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                <section class="language-block">
+                    <div class="language-block__choice">
+                        {% for language in languages %}
+                            <div class="lang {% if language.code == CURRENT_LANGUAGE %}chosen{% endif %}">
+                                <a
+                                        {% if language.code != CURRENT_LANGUAGE %}{% block language_href %}href="/{{ language.code }}/index"
+                                        {% endblock %}
+                                        {% else %}disabled {% endif %}>{{ language.code|upper }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endblock %}
+        </div>
         <ul class="menu">
             <li class="menu-item">
                 {% block header_index %}

@@ -14,40 +14,58 @@
     <a class="btn disabled" href="{% url 'vacancy' %}">{% trans 'Вакансії' %}</a>
 {% endblock %}
 
-{% block content %}
-<div class="title-box">
-    <h2>Вакансії</h2>
-</div>
-<div class="vacancy-wrapper">
-    <section class="vacancy">
-        <img src="{% static 'img/vacancy_photo.jpg' %}" alt="">
-        <div class="vacancy-info">
-            <span>Харківській регіональній клініці №496 потребуються:</span><br>
-            <ul>
-                <li>Сімейний лікар</li>
-                <li>Вбиральник</li>
-                <li>Менеджер</li>
-            </ul>
-            <br>
-            <span>Повна зайнятість.</span><br>
-            <span>Резюме висилати за адресою: <a
-                    href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
-            <span>Запис за тел.:</span>
-            <ul>
-                <li>
-                    <a href="tel:0573119098">057 311 90 98</a>
-                </li>
-                <li>
-                    <a href="tel:0937198888">093 719 88 88</a>
-                </li>
-                <li>
-                    <a href="tel:0977198888">097 719 88 88</a>
-                </li>
-                <li>
-                    <a href="tel:0997198888">099 719 88 88</a>
-                </li>
-            </ul>
+{% block langs %}
+    {% get_current_language as CURRENT_LANGUAGE %}
+    {% get_available_languages as AVAILABLE_LANGUAGES %}
+    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+    <section class="language-block">
+        <div class="language-block__choice">
+            {% for language in languages %}
+                <div class="lang {% if language.code == CURRENT_LANGUAGE %}chosen{% endif %}">
+                    <a
+                            {% if language.code != CURRENT_LANGUAGE %}{% block language_href %}href="/{{ language.code }}/vacancy"
+                            {% endblock %}
+                            {% else %}disabled {% endif %}>{{ language.code|upper }}</a>
+                </div>
+            {% endfor %}
         </div>
     </section>
-</div>
+{% endblock %}
+
+{% block content %}
+    <div class="title-box">
+        <h2>Вакансії</h2>
+    </div>
+    <div class="vacancy-wrapper">
+        <section class="vacancy">
+            <img src="{% static 'img/vacancy_photo.jpg' %}" alt="">
+            <div class="vacancy-info">
+                <span>Харківській регіональній клініці №496 потребуються:</span><br>
+                <ul>
+                    <li>Сімейний лікар</li>
+                    <li>Вбиральник</li>
+                    <li>Менеджер</li>
+                </ul>
+                <br>
+                <span>Повна зайнятість.</span><br>
+                <span>Резюме висилати за адресою: <a
+                        href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
+                <span>Запис за тел.:</span>
+                <ul>
+                    <li>
+                        <a href="tel:0573119098">057 311 90 98</a>
+                    </li>
+                    <li>
+                        <a href="tel:0937198888">093 719 88 88</a>
+                    </li>
+                    <li>
+                        <a href="tel:0977198888">097 719 88 88</a>
+                    </li>
+                    <li>
+                        <a href="tel:0997198888">099 719 88 88</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 {% endblock %}
