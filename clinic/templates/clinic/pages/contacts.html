@@ -1,8 +1,17 @@
 {% extends "clinic/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+{% endblock %}
+
+{% block header_contacts %}
+    <a class="inner-btn disabled" href="{% url 'contacts' %}">{% trans 'Контакти' %}</a>
+{% endblock %}
+
+{% block mobile-menu_contacts %}
+    <a class="btn disabled" href="{% url 'contacts' %}">{% trans 'Контакти' %}</a>
 {% endblock %}
 
 {% block content %}

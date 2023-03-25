@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -8,102 +9,104 @@
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     {% block head %}{% endblock %}
 </head>
+
 <body>
 <div class="wrapper">
-    {% block header %}
-        <header class="clinic-head">
-            <div class="site-name">Тестова робота (клініка)</div>
-            <ul class="menu">
-                <li class="menu-item">
-                    <a href="/" class="logo">
+    <header class="clinic-head">
+        <div class="site-name">{% trans 'Тестова робота (клініка)' %}</div>
+        <ul class="menu">
+            <li class="menu-item">
+                {% block header_index %}
+                    <a href="{% url 'index' %}" class="logo">
                         <img src="{% static 'img/clinic_logo.png' %}" alt="">
                     </a>
-                </li>
-                <li class="menu-item dropdown">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul class="dropdown-content">
-                        <li>
-                            <a class="inner-btn" href="">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="inner-btn" href="contacts">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="inner-btn" href="vacancy">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="staff">Наші лікарі</a>
-                </li>
-                <li class="menu-item dropdown">
-                    <a class="btn dropbtn" href="making-an-appointment">Запис на прийом</a>
-                    <ul class="dropdown-content">
-                        <li>
-                            <a class="inner-btn" href="making-a-contract">Заключити контракт</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="schedule">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="quiz">Опитування</a>
-                </li>
-            </ul>
-            <div class="mobile-menu">
-                <div class="mobile-menu-btn-wrapper">
-                    <button>
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-                <ul class="mobile-menu-content hidden">
-                    <li class="dropdown-mobile"></li>
-                    <li class="menu-item">
-                        <a class="btn" href="/">Додому</a>
+                {% endblock %}
+            </li>
+            <li class="menu-item dropdown">
+                <a class="btn dropbtn">{% trans 'Лікарня' %}</a>
+                <ul class="dropdown-content">
+                    <li>
+                        {% block header_contacts %}
+                            <a class="inner-btn" href="{% url 'contacts' %}">{% trans "Контакти" %}</a>
+                        {% endblock %}
                     </li>
-                    <li class="menu-item dropdown-content">
-                        <a class="btn dropbtn">Лікарня</a>
-                        <ul>
-                            <li>
-                                <a class="btn" href="#">Галерея</a>
-                            </li>
-                            <li>
-                                <a class="btn" href="contacts">Контакти</a>
-                            </li>
-                            <li>
-                                <a class="btn" href="vacancy">Вакансії</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="staff">Наші лікарі</a>
-                    </li>
-                    <li class="menu-item dropdown-content">
-                        <a class="btn dropbtn" href="making-an-appointment">Запис на прийом</a>
-                        <ul>
-                            <li>
-                                <a class="btn" href="making-a-contract">Заключити контракт</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="schedule">Графік роботи</a>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="quiz">Опитування</a>
+                    <li>
+                        {% block header_vacancy %}
+                            <a class="inner-btn" href="{% url 'vacancy' %}">{% trans "Вакансії" %}</a>
+                        {% endblock %}
                     </li>
                 </ul>
+            </li>
+            <li class="menu-item">
+                {% block header_staff %}
+                    <a class="btn" href="{% url 'staff' %}">{% trans 'Наші лікарі' %}</a>
+                {% endblock %}
+            </li>
+            <li class="menu-item">
+                {% block header_appointment %}
+                    <a class="btn"
+                       href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
+                {% endblock %}
+            </li>
+            <li class="menu-item">
+                {% block header_schedule %}
+                    <a class="btn" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
+                {% endblock %}
+            </li>
+        </ul>
+        <div class="mobile-menu">
+            <div class="mobile-menu-btn-wrapper">
+                <button>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
-        </header>
-    {% endblock %}
+            <ul class="mobile-menu-content hidden">
+                <li class="dropdown-mobile"></li>
+                <li class="menu-item">
+                    {% block mobile-menu_index %}
+                        <a class="btn" href="{% url 'index' %}">{% trans 'Додому' %}</a>
+                    {% endblock %}
+                </li>
+                <li class="menu-item dropdown-content">
+                    <a class="btn dropbtn">{% trans 'Лікарня' %}</a>
+                    <ul>
+                        <li>
+                            {% block mobile-menu_contacts %}
+                                <a class="btn" href="{% url 'contacts' %}">{% trans 'Контакти' %}</a>
+                            {% endblock %}
+                        </li>
+                        <li>
+                            {% block mobile-menu_vacancy %}
+                                <a class="btn" href="{% url 'vacancy' %}">{% trans 'Вакансії' %}</a>
+                            {% endblock %}
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    {% block mobile-menu_staff %}
+                        <a class="btn" href="{% url 'staff' %}">{% trans 'Наші лікарі' %}</a>
+                    {% endblock %}
+                </li>
+                <li class="menu-item dropdown-content">
+                    {% block mobile-menu_appointment %}
+                        <a class="btn" href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
+                    {% endblock %}
+                </li>
+                <li class="menu-item">
+                    {% block mobile-menu_schedule %}
+                        <a class="btn" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
+                    {% endblock %}
+                </li>
+            </ul>
+        </div>
+    </header>
     <main>
         {% block content %}{% endblock %}
     </main>
     <footer>
         <div class="footer-content">
-            <h3>Харківська районна клініка</h3>
-            <p>Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради</p>
+            <h3>{% trans 'Харківська районна клініка' %}</h3>
+            <p>{% trans 'Комунальне некомерційне підприємство "Міська поліклініка № 496" Харківської міської ради' %}</p>
             <ul class="socials">
                 <li>
                     <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>

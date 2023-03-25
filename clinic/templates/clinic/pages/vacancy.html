@@ -1,8 +1,17 @@
 {% extends "clinic/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/vacancy.css' %}">
+{% endblock %}
+
+{% block header_vacancy %}
+    <a class="inner-btn disabled" href="{% url 'vacancy' %}">{% trans "Вакансії" %}</a>
+{% endblock %}
+
+{% block mobile-menu_vacancy %}
+    <a class="btn disabled" href="{% url 'vacancy' %}">{% trans 'Вакансії' %}</a>
 {% endblock %}
 
 {% block content %}

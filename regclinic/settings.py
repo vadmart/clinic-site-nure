@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 
 dotenv_path = "regclinic/vars.env"
 load_dotenv(dotenv_path)
@@ -29,8 +30,7 @@ SECRET_KEY = 'django-insecure-v(l07qvqd1q0@1_521)pho5_lzw_ttgjjcvt-fhink_o0*#^ot
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["polyclinic.pp.ua", "0.0.0.0", "192.168.137.110", "192.168.1.230", "google.com", "localhost",
-                 "192.168.1.246", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -42,18 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'clinic',
-    'quiz',
-    'bot'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'regclinic.urls'
@@ -81,14 +80,6 @@ WSGI_APPLICATION = 'regclinic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'regclinic',
-        'USER': 'regclinic',
-        'PASSWORD': os.getenv("REGCLINIC_PASSWORD"),
-        'HOST': '178.150.167.216',
-        'PORT': '5432'
-    },
-    'local': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
@@ -125,7 +116,18 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+LANGUAGES = (
+    ("uk", _("Ukrainian")),
+    ("ru", _("Russian"))
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -136,3 +138,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -6,94 +6,6 @@
     <title>Відгуки</title>
 {% endblock %}
 
-{% block header %}
-<header class="clinic-head">
-            <div class="site-name">Тестова робота (клініка)</div>
-            <ul class="menu">
-                <li class="menu-item">
-                    <a href="/" class="logo">
-                        <img src="{% static 'img/clinic_logo.png' %}" alt="">
-                    </a>
-                </li>
-                <li class="menu-item dropdown">
-                    <a class="btn dropbtn">Лікарня</a>
-                    <ul class="dropdown-content">
-                        <li>
-                            <a class="inner-btn" href="">Галерея</a>
-                        </li>
-                        <li>
-                            <a class="inner-btn" href="../../contacts">Контакти</a>
-                        </li>
-                        <li>
-                            <a class="inner-btn" href="../../vacancy">Вакансії</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="../../staff">Наші лікарі</a>
-                </li>
-                <li class="menu-item dropdown">
-                    <a class="btn dropbtn" href="../../making-an-appointment">Запис на прийом</a>
-                    <ul class="dropdown-content">
-                        <li>
-                            <a class="inner-btn" href="../../making-a-contract">Заключити контракт</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="../../schedule">Графік роботи</a>
-                </li>
-                <li class="menu-item">
-                    <a class="btn" href="../../quiz">Опитування</a>
-                </li>
-            </ul>
-            <div class="mobile-menu">
-                <div class="mobile-menu-btn-wrapper">
-                    <button>
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-                <ul class="mobile-menu-content">
-                    <li class="dropdown-mobile"></li>
-                    <li class="menu-item">
-                        <a class="btn" href="/">Додому</a>
-                    </li>
-                    <li class="menu-item dropdown-content">
-                        <a class="btn dropbtn">Лікарня</a>
-                        <ul>
-                            <li>
-                                <a class="btn" href="#">Галерея</a>
-                            </li>
-                            <li>
-                                <a class="btn" href="../../contacts">Контакти</a>
-                            </li>
-                            <li>
-                                <a class="btn" href="../../vacancy">Вакансії</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="../../staff">Наші лікарі</a>
-                    </li>
-                    <li class="menu-item dropdown-content">
-                        <a class="btn dropbtn" href="../../making-an-appointment">Запис на прийом</a>
-                        <ul>
-                            <li>
-                                <a class="btn" href="../../making-a-contract">Заключити контракт</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="../../schedule">Графік роботи</a>
-                    </li>
-                    <li class="menu-item">
-                        <a class="btn" href="../../quiz">Опитування</a>
-                    </li>
-                </ul>
-            </div>
-        </header>
-{% endblock %}
-
 {% block content %}
     <div class="title-box">
         <h2>Інформація про лікаря</h2>
@@ -101,18 +13,18 @@
     {% load clinic_extras %}
     <div class="doctor-wrapper">
         <div class="doctor-info">
-            <img srcset="{% static 'img/250w/' %}{{ doctor.image_name }} 250w,
-                             {% static 'img/200w/' %}{{ doctor.image_name }} 200w,
-                             {% static 'img/150w/' %}{{ doctor.image_name }} 150w"
+            <img srcset="{% get_static_prefix %}img/250w/alina-radecka.png 250w,
+                             {% get_static_prefix %}img/200w/alina-radecka.png 200w,
+                             {% get_static_prefix %}img/150w/alina-radecka.png 150w"
                  sizes="(max-width: 1024px) 150px,
                         (max-width: 1452px) 200px,
                         250px"
-                 src="{% static 'img/250w/' %}{{ doctor.image_name }}" alt="">
+                 src="{% get_static_prefix %}img/250w/alina-radecka.png" alt="">
             <div class="doctor-description">
-                <h3 class="header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h3>
+                <h3 class="header">Радецька Аліна Миколаївна</h3>
                 <div class="prof-info">
-                    <span class="category-info">{{ doctor.category.name }} кваліфікаційна категорія</span>
-                    <div class="work-experience">Стаж: {{ doctor.work_start_date|years_to_now }} років</div>
+                    <span class="category-info">Вища кваліфікаційна категорія</span>
+                    <div class="work-experience">Стаж: 5 років</div>
                 </div>
                 <a href="" class="feedback_btn">Залишити відгук</a>
             </div>
@@ -160,26 +72,14 @@
                 </div>
             </div>
         </form>
-        {% if not revs %}
-            <p class="no-reviews">Немає жодного відгуку</p>
-        {% else %}
-            {% for rev in revs %}
-                <blockquote class="review">
-                    <div class="account">
-                        <cite>{{ rev.person.name }}</cite>
-                        <time datetime="{{ rev.datetime }}">{% frmt_datetime rev.datetime '%d.%m.%Y %H:%M' %}</time>
-                    </div>
-                    <p class="comment">{{ rev.text }}</p>
-                </blockquote>
-            {% endfor %}
-        {% endif %}
+        <p class="no-reviews">Немає жодного відгуку</p>
     </div>
     <div class="review-blank-wrapper hidden">
         <div class="review-blank">
             <a href="" class="close-button">X</a>
-            <form method="post" action="{{ doctor.id }}/send" class="blank" data-doctor-id="{{ doctor.id }}">
+            <form method="post" action="#" class="blank" data-doctor-id="1">
                 {% csrf_token %}
-                <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+                <input type="hidden" name="doctor_id" value="1">
                 <div class="inner-box" id="lastname-box">
                     <label for="lastname">Прізвище</label>
                     <input class="review-input" id="lastname" type="text" placeholder="Введіть прізвище"
@@ -190,8 +90,11 @@
                     <input class="review-input" id="name" type="text" placeholder="Введіть ім'я" name="name">
                 </div>
                 <div class="inner-box" id="contract-num-box">
-                    <label for="contract-num">Номер контракту</label>
-                    <input class="review-input" id="contract-num" type="text" placeholder="Введіть номер контракту"
+                    <label for="contract-num">Email</label>
+                    <input class="review-input"
+                           id="contract-num"
+                           type="email"
+                           placeholder="Введіть адресу електронної пошти"
                            name="contract-num">
                 </div>
                 <div class="inner-box" id="review-box">

@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-12 22:44+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\clinic\templates\clinic\base.html:21
+msgid "Тестова робота (клініка)"
+msgstr "Тестова робота (клініка)"
+
+#: .\clinic\templates\clinic\base.html:29
+#: .\clinic\templates\clinic\base.html:64
+msgid "Лікарня"
+msgstr "Лікарня"
+
+#: .\clinic\templates\clinic\base.html:32
+#: .\clinic\templates\clinic\base.html:67
+msgid "Галерея"
+msgstr "Галерея"
+
+#: .\clinic\templates\clinic\base.html:35
+#: .\clinic\templates\clinic\base.html:70
+msgid "Контакти"
+msgstr "Контакти"
+
+#: .\clinic\templates\clinic\base.html:38
+#: .\clinic\templates\clinic\base.html:73
+msgid "Вакансії"
+msgstr "Вакансії"
+
+#: .\clinic\templates\clinic\base.html:43
+#: .\clinic\templates\clinic\base.html:78
+msgid "Наші лікарі"
+msgstr "Наші лікарі"
+
+#: .\clinic\templates\clinic\base.html:46
+#: .\clinic\templates\clinic\base.html:81
+#: .\clinic\templates\clinic\index.html:54
+msgid "Запис на прийом"
+msgstr "Запис на прийом"
+
+#: .\clinic\templates\clinic\base.html:49
+#: .\clinic\templates\clinic\base.html:84
+msgid "Графік роботи"
+msgstr "Графік роботи"
+
+#: .\clinic\templates\clinic\base.html:61
+msgid "Додому"
+msgstr "Додому"
+
+#: .\clinic\templates\clinic\base.html:95
+msgid "Харківська районна клініка"
+msgstr "Харківська районна клініка"
+
+#: .\clinic\templates\clinic\base.html:96
+msgid ""
+"Комунальне некомерційне підприємство \"Міська поліклініка № 496\" "
+"Харківської міської ради"
+msgstr ""
+"Комунальне некомерційне підприємство \"Міська поліклініка № 496\" "
+"Харківської міської ради"
+
+#: .\clinic\templates\clinic\index.html:7
+#, fuzzy
+#| msgid "Харківська районна клініка"
+msgid "Харківська районна лікарня №496"
+msgstr "Харківська районна клініка №496"
+
+#: .\clinic\templates\clinic\index.html:58
+msgid ""
+"Ми надаємо <span style=\"color: gold; font: inherit\">високоякісні</span> "
+"консультації"
+msgstr ""
+"Ми надаємо <span style=\"color: gold; font: inherit\">високоякісні</span> "
+"консультації"
+
+#: .\clinic\templates\clinic\index.html:59
+msgid "Найголовніше для нас - це швидкість та ефективність одужання пацієнтів."
+msgstr ""
+"Найголовніше для нас - це швидкість та ефективність одужання пацієнтів."
+
+#: .\clinic\templates\clinic\index.html:59
+msgid "Із нами не страшна жодна хвороба"
+msgstr "Із нами не страшна жодна хвороба"
+
+#: .\clinic\templates\clinic\index.html:61
+msgid "Запис до лікаря"
+msgstr "Запис до лікаря"
+
+#: .\clinic\templates\clinic\index.html:62
+msgid "Дізнатися більше"
+msgstr "Дізнатися більше"
+
+#: .\clinic\templates\clinic\index.html:75
+msgid "Загальна інформація"
+msgstr "Загальна інформація"
+
+#: .\clinic\templates\clinic\index.html:82
+msgid "MainPage Quote"
+msgstr ""
+"Головним скарбом життя є не землі, що ти їх завоював, не багатства, що їх "
+"маєш у скринях... Головним скарбом життя є здоров’я, і, щоб його зберегти, "
+"потрібно багато що знати."
+
+#: .\clinic\templates\clinic\index.html:84
+msgid "-Авіцена"
+msgstr "-Авіцена"
+
+#: .\clinic\templates\clinic\index.html:87
+msgid "MainPage GeneralInfo"
+msgstr ""
+"Недаремно наведена цитата є девізом обслуговування пацієнтів. Завдяки "
+"чималому досвіду наших лікарів клієнти не тільки швидко одужують, але й "
+"отримують консультацію щодо того, як запобігти такого захворювання. "
+"Харківська районна клініка №496 надає медичну допомогу згідно з конституцією "
+"України та законам України, постановам Верховної Ради України, документам, "
+"постановам і розпорядженням Кабінету Міністрів України, актам Президента "
+"України, нормативним та методичним документам Міністерства охорони здоров’я "
+"України, рішенням Харківської міської ради та її виконавчого комітету, "
+"наказам Департаменту охорони здоров’я Харківської міської ради, Статута та "
+"іншим нормативним актам."
+
+#: .\clinic\templates\clinic\index.html:93
+msgid "Що робить нас<br class=\"show-for-mobile\"> особливими"
+msgstr "Що робить нас<br class=\"show-for-mobile\"> особливими"
+
+#: .\clinic\templates\clinic\index.html:98
+msgid "Якісні лабораторії"
+msgstr "Якісні лабораторії"
+
+#: .\clinic\templates\clinic\index.html:99
+msgid "SpecialInfo QualityEquipment"
+msgstr ""
+"Клініка забезпечена сучасним обладнанням. Саме тому результати діагностики "
+"швидкі та точні, а отже, й лікування ефективне."
+
+#: .\clinic\templates\clinic\index.html:103
+msgid "Позитивний персонал"
+msgstr "Позитивний персонал"
+
+#: .\clinic\templates\clinic\index.html:104
+msgid "SpecialInfo PositiveStaff"
+msgstr ""
+"У клініці на вас чекатимуть позитивні, зацікавлені у своїй роботі "
+"спеціалісти. Вони знають, як знайти підхід до будь-якого пацієнта!"
+
+#: .\clinic\templates\clinic\index.html:108
+msgid "Чистота та гарна санітарія"
+msgstr "Чистота та гарна санітарія"
+
+#: .\clinic\templates\clinic\index.html:109
+msgid "SpecialInfo GoodCleanliness"
+msgstr ""
+"Уборка нашої клініки відбувається за допомогою німецьких професійних "
+"порохотягів Kärcher."
+
+#: .\clinic\templates\clinic\index.html:113
+msgid "Методи лікування"
+msgstr "Методи лікування"
+
+#: .\clinic\templates\clinic\index.html:114
+msgid "SpecialInfo TreatmentMethods"
+msgstr ""
+"Наші лікарі навчалися у ліпших ВНЗ України та навіть Німеччини! Завдяки "
+"такому міцному фундаменту та наполегливій практиці клініка пропонує лише "
+"найсучасніші ефективні методи лікування"
+
+#: .\clinic\templates\clinic\index.html:122
+msgid "Увага"
+msgstr "Увага"
+
+#: .\clinic\templates\clinic\index.html:123
+msgid "TestReminderText"
+msgstr ""
+"Тест щодо знання заходів з протидії COVID-19 не було пройдено. Рекомендуємо "
+"вивчити заходи із цього приводу та пройти тест знову"

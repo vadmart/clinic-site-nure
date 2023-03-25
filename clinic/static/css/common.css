@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap');
 
+:root {
+    --accent: rgba(80, 170, 170, 1);
+}
+
 * {
     margin: 0;
 }
@@ -23,13 +27,17 @@ html, body {
     background-repeat: no-repeat;
 }
 
+.disabled,
 .btn.disabled,
 .inner-btn.disabled {
     pointer-events: none;
     cursor: default;
-    color: rgb(100, 100, 100) !important;
 }
 
+.btn.disabled,
+.inner-btn.disabled {
+    color: rgb(100, 100, 100) !important;
+}
 
 main {
     margin: 140px 0;
@@ -56,13 +64,13 @@ main {
     background-color: #fff;
     white-space: normal;
     padding: 0 5px;
-    color: rgba(80, 170, 170, 1);
+    color: var(--accent);
 }
 
 .title-box:before {
     content: '';
     display: block;
-    background-color: rgba(80, 170, 170, 1);
+    background-color: var(--accent);
     height: 4px;
     width: 95%;
     top: 35px;
@@ -70,7 +78,7 @@ main {
 }
 
 .clinic-head {
-    background-color: rgba(80, 170, 170, 1);
+    background-color: var(--accent);
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     position: fixed;
@@ -274,7 +282,7 @@ footer .socials {
     display: flex;
     flex-direction: column;
     padding: 12px 0;
-    background-color: rgba(80, 170, 170, 1);
+    background-color: var(--accent);
     text-align: center;
     width: 100vw;
 }

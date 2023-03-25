@@ -1,9 +1,18 @@
 {% extends "clinic/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/schedule-work.css' %}">
     <title>Графік роботи</title>
+{% endblock %}
+
+{% block header_schedule %}
+    <a class="btn disabled" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
+{% endblock %}
+
+{% block mobile-menu_schedule %}
+    <a class="btn disabled" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
 {% endblock %}
 
 {% block content %}
@@ -170,35 +179,6 @@
                     <div class="schedule-info">—</div>
                 </td>
                 <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name"> Сильвестр Русланович</div>
-                </td>
-                <td>
-                    <div class="schedule-info">49</div>
-                </td>
-                <td>
-                    <div class="schedule-info">2</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:00-15:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">11:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">10:00-14:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td> sdasdasd dasdasd
                     <div class="schedule-info">—</div>
                 </td>
             </tr>

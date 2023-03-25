@@ -1,89 +1,120 @@
 {% extends "clinic/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Харківська районна лікарня №496</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>{% trans 'Харківська районна лікарня №496' %}</title>
+{% endblock %}
+
+{% block header_index %}
+    <a href="{% url 'index' %}" class="logo disabled">
+        <img src="{% static 'img/clinic_logo.png' %}" alt="">
+    </a>
+{% endblock %}
+
+{% block mobile-menu_index %}
+    <a class="btn disabled" href="{% url 'index' %}">{% trans 'Додому' %}</a>
 {% endblock %}
 
 {% block content %}
+    <section class="language-block">
+        {% if lang == 'uk' %}
+            {% if doctor_img_name == "default_photo" %}
+                <div class="language-block__choice">
+                    <a class="chosen" disabled>Українська</a>
+                    <a href="/ru/index">Російська</a>
+                </div>
+            {% else %}
+                <div class="language-block__choice">
+                    <a class="chosen" disabled>Українська</a>
+                    <a href="/ru/index/{{ doctor_img_name }}">Російська</a>
+                </div>
+            {% endif %}
+        {% elif lang == 'ru' %}
+            {% if doctor_img_name == "default_photo" %}
+                <div class="language-block__choice">
+                    <a href="/uk/index">Украинский</a>
+                    <a class="chosen" disabled>Русский</a>
+                </div>
+            {% else %}
+                <div class="language-block__choice">
+                    <a href="/uk/index/{{ doctor_img_name }}">Украинский</a>
+                    <a class="chosen" disabled>Русский</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </section>
     <section class="brief-info-wrapper">
         <div class="title-box">
-            <h2>Запис на прийом</h2>
+            <h2>{% trans 'Запис на прийом' %}</h2>
         </div>
         <div class="brief-info">
             <div class="about-services">
-                <h2>Ми надаємо <span style="color: gold; font: inherit">високоякісні</span> консультації</h2>
-                <span>Найголовніше для нас - це швидкість та ефективність одужання пацієнтів. <br>Із нами не страшна жодна хвороба</span>
+                <h2>{% trans 'Ми надаємо <span style="color: gold; font: inherit">високоякісні</span> консультації' %}</h2>
+                <span>{% trans 'Найголовніше для нас - це швидкість та ефективність одужання пацієнтів.' %} <br>{% trans 'Із нами не страшна жодна хвороба' %}</span>
                 <div class="buttons">
-                    <a href="pages/making-an-appointment.html" id="record-btn">Запис до лікаря</a>
-                    <a href="" id="more-info-btn">Дізнатися більше</a>
+                    <a href="{% url 'making-an-appointment' %}" id="record-btn">{% trans 'Запис до лікаря' %}</a>
+                    <a href="" id="more-info-btn">{% trans 'Дізнатися більше' %}</a>
                 </div>
             </div>
             <picture>
-                <source media="(min-width: 641px) and (max-width: 768px)"
-                        srcset="../../static/img/200w/photo_about.png">
-                <source media="(max-width: 1300px)" srcset="../../static/img/300w/photo_about.png">
-                <img src="../../static/img/400w/photo_about.png" alt="">
+                {% if doctor_img_name == "default_photo" %}
+                    <source media="(min-width: 641px) and (max-width: 768px)"
+                            srcset="{% static 'img/200w/default_photo.png' %}">
+                    <source media="(max-width: 1300px)" srcset="{% static 'img/300w/default_photo.png' %}">
+                    <img src="{% static 'img/400w/default_photo.png' %}" alt="">
+                {% else %}
+                    <source media="(min-width: 641px) and (max-width: 768px)"
+                            srcset="{% static 'img/200w' %}/{{ doctor }}.png">
+                    <source media="(max-width: 1300px)" srcset="{% static 'img/250w' %}/{{ doctor_img_name }}.png">
+                    <img src="{% static 'img/250w' %}/{{ doctor_img_name }}.png" alt="">
+                {% endif %}
             </picture>
         </div>
     </section>
     <section class="about-clinic-wrapper">
         <div class="title-box">
-            <h2>Загальна інформація</h2>
+            <h2>{% trans 'Загальна інформація' %}</h2>
         </div>
         <div class="about-clinic">
             <div class="quote-wrapper">
                 <blockquote
                         cite="http://hptu14.com.ua/news/315-vyslovy-vydatnykh-liudei-pro-zdorov-ia-ta-zdorovyi-sposib-zhyttia.html"
                         class="quote">
-                    Головним скарбом життя є не землі, що ти їх завоював, не багатства, що їх маєш у
-                    скринях... Головним скарбом життя є здоров’я,
-                    і, щоб його зберегти, потрібно багато що знати.
+                    {% trans 'MainPage Quote' %}
                 </blockquote>
-                <div class="quote-author">-Авіцена</div>
+                <div class="quote-author">{% trans '-Авіцена' %}</div>
             </div>
             <div class="description">
-                Недаремно наведена цитата є девізом обслуговування пацієнтів. Завдяки чималому досвіду
-                наших лікарів клієнти не тільки швидко одужують, але й отримують консультацію щодо того,
-                як запобігти такого захворювання.
-                Харківська районна клініка №496 надає медичну допомогу
-                згідно з конституцією України та законам України, постановам Верховної Ради України, документам,
-                постановам і розпорядженням Кабінету Міністрів України, актам Президента України,
-                нормативним та методичним документам Міністерства охорони здоров’я України, рішенням
-                Харківської міської ради та її виконавчого комітету, наказам Департаменту охорони здоров’я
-                Харківської міської ради, Статута та іншим нормативним актам.
+                {% trans 'MainPage GeneralInfo' %}
             </div>
         </div>
     </section>
     <section class="what-makes-us-special-wrapper">
         <div class="title-box">
-            <h2>Що робить нас<br class="show-for-mobile"> особливими</h2>
+            <h2>{% trans 'Що робить нас<br class="show-for-mobile"> особливими' %}</h2>
         </div>
         <div class="what-makes-us-special-grid">
             <article class="what-makes-us-special-article">
                 <img src="{% static 'icons/uzi.png' %}" alt="">
-                <h4>Якісні лабораторії</h4>
-                <p>Клініка забезпечена сучасним обладнанням. Саме тому результати діагностики швидкі та точні, а
-                    отже, й лікування ефективне</p>
+                <h4>{% trans 'Якісні лабораторії' %}</h4>
+                <p>{% trans 'SpecialInfo QualityEquipment' %}</p>
             </article>
             <article class="what-makes-us-special-article">
-                <img src="../../static/icons/staff.png" alt="">
-                <h4>Позитивний персонал</h4>
-                <p>У клініці на вас чекатимуть позитивні, зацікавлені у своїй роботі спеціалісти. Вони знають, як
-                    знайти підхід до будь-якого пацієнта!</p>
+                <img src="{% static 'icons/staff.png' %}" alt="">
+                <h4>{% trans 'Позитивний персонал' %}</h4>
+                <p>{% trans 'SpecialInfo PositiveStaff' %}</p>
             </article>
             <article class="what-makes-us-special-article">
-                <img src="../../static/icons/vacuum-cleaner.png" alt="">
-                <h4>Чистота та гарна санітарія</h4>
-                <p>Уборка нашої клініки відбувається за допомогою німецьких професійних порохотягів Kärcher.</p>
+                <img src="{% static 'icons/vacuum-cleaner.png' %}" alt="">
+                <h4>{% trans 'Чистота та гарна санітарія' %}</h4>
+                <p>{% trans 'SpecialInfo GoodCleanliness' %}</p>
             </article>
             <article class="what-makes-us-special-article">
                 <img src="{% static 'icons/fist-up.png' %}" alt="">
-                <h4>Методи лікування</h4>
-                <p>Наші лікарі навчалися у ліпших ВНЗ України та навіть Німеччини! Завдяки такому міцному фундаменту
-                    та наполегливій практиці клініка пропонує
-                    лише найсучасніші ефективні методи лікування</p>
+                <h4>{% trans 'Методи лікування' %}</h4>
+                <p>{% trans 'SpecialInfo TreatmentMethods' %}</p>
             </article>
         </div>
     </section>
@@ -91,10 +122,8 @@
         <div class="reminder-popup__body">
             <div class="reminder-popup__content">
                 <a href="#" class="reminder-popup__close">x</a>
-                <div class="reminder-popup__title">Увага</div>
-                <div class="reminder-popup__text">Тест щодо знання заходів з протидії COVID-19 не було пройдено.
-                    Рекомендуємо вивчити заходи із цього приводу та пройти тест знову
-                </div>
+                <div class="reminder-popup__title">{% trans 'Увага' %}</div>
+                <div class="reminder-popup__text">{% trans 'TestReminderText' %}</div>
             </div>
         </div>
     </div>
