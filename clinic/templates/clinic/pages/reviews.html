@@ -1,9 +1,15 @@
 {% extends "clinic/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
     <title>Відгуки</title>
+{% endblock %}
+
+
+{% block language_href %}
+    href="/{{ language.code }}/reviews"
 {% endblock %}
 
 {% block content %}

@@ -14,40 +14,45 @@
     <a class="btn disabled" href="{% url 'vacancy' %}">{% trans 'Вакансії' %}</a>
 {% endblock %}
 
+
+{% block language_href %}
+    href="/{{ language.code }}/vacancy"
+{% endblock %}
+
 {% block content %}
-<div class="title-box">
-    <h2>Вакансії</h2>
-</div>
-<div class="vacancy-wrapper">
-    <section class="vacancy">
-        <img src="{% static 'img/vacancy_photo.jpg' %}" alt="">
-        <div class="vacancy-info">
-            <span>Харківській регіональній клініці №496 потребуються:</span><br>
-            <ul>
-                <li>Сімейний лікар</li>
-                <li>Вбиральник</li>
-                <li>Менеджер</li>
-            </ul>
-            <br>
-            <span>Повна зайнятість.</span><br>
-            <span>Резюме висилати за адресою: <a
-                    href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
-            <span>Запис за тел.:</span>
-            <ul>
-                <li>
-                    <a href="tel:0573119098">057 311 90 98</a>
-                </li>
-                <li>
-                    <a href="tel:0937198888">093 719 88 88</a>
-                </li>
-                <li>
-                    <a href="tel:0977198888">097 719 88 88</a>
-                </li>
-                <li>
-                    <a href="tel:0997198888">099 719 88 88</a>
-                </li>
-            </ul>
-        </div>
-    </section>
-</div>
+    <div class="title-box">
+        <h2>Вакансії</h2>
+    </div>
+    <div class="vacancy-wrapper">
+        <section class="vacancy">
+            <img src="{% static 'img/vacancy_photo.jpg' %}" alt="">
+            <div class="vacancy-info">
+                <span>Харківській регіональній клініці №496 потребуються:</span><br>
+                <ul>
+                    <li>Сімейний лікар</li>
+                    <li>Вбиральник</li>
+                    <li>Менеджер</li>
+                </ul>
+                <br>
+                <span>Повна зайнятість.</span><br>
+                <span>Резюме висилати за адресою: <a
+                        href="mailto: kh_clinic_496@gmail.com">kh_clinic_496@gmail.com</a></span><br><br>
+                <span>Запис за тел.:</span>
+                <ul>
+                    <li>
+                        <a href="tel:0573119098">057 311 90 98</a>
+                    </li>
+                    <li>
+                        <a href="tel:0937198888">093 719 88 88</a>
+                    </li>
+                    <li>
+                        <a href="tel:0977198888">097 719 88 88</a>
+                    </li>
+                    <li>
+                        <a href="tel:0997198888">099 719 88 88</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 {% endblock %}

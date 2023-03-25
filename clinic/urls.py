@@ -9,5 +9,7 @@ urlpatterns = [
     path("vacancy", views.get_vacancy, name="vacancy"),
     path("staff", views.get_staff, name="staff"),
     path("reviews", views.get_reviews, name="reviews"),
-    path("making-an-appointment", views.get_appointment_page, name="making-an-appointment")
+    path("making-an-appointment", views.get_appointment_page, name="making-an-appointment"),
+    path("login", views.get_login_form, name="login"),
+    path("registration", views.get_registration_form, name="registration")
 ]

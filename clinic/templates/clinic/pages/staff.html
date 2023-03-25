@@ -15,6 +15,11 @@
     <a class="btn disabled" href="{% url 'staff' %}">{% trans 'Наші лікарі' %}</a>
 {% endblock %}
 
+
+{% block language_href %}
+    href="/{{ language.code }}/staff"
+{% endblock %}
+
 {% block content %}
     <div class="title-box">
         <h2>Наші лікарі</h2>
@@ -22,7 +27,7 @@
     <div class="doctors">
         <div class="block-doctor">
             <div class="photo">
-                <img srcset="{% get_static_prefix %}img/250w/alina-radecka.png %} 250w,
+                <img srcset="{% get_static_prefix %}img/250w/alina-radecka.png 250w,
                                  {% get_static_prefix %}img/200w/alina-radecka.png 200w,
                                  {% get_static_prefix %}img/150w/alina-radecka.png 150w"
                      sizes="(max-width: 768px) 150px,

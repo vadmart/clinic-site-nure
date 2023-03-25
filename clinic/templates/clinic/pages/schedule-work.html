@@ -15,373 +15,377 @@
     <a class="btn disabled" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
 {% endblock %}
 
+{% block language_href %}
+    href="/{{ language.code }}/schedule"
+{% endblock %}
+
 {% block content %}
-<div class="title-box">
-    <h2>Режими роботи</h2>
-</div>
-<div class="table-wrapper">
-    <div class="table-block">
-        <table class="working-table">
-            <caption class="table-title">Лікарі</caption>
-            <thead>
-            <tr>
-                <th><br></th>
-                <th>Номер кабінету</th>
-                <th>Поверх</th>
-                <th>Понеділок</th>
-                <th>Вівторок</th>
-                <th>Середа</th>
-                <th>Четвер</th>
-                <th>П'ятниця</th>
-                <th>Субота</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div class="schedule-name">Радецька Аліна Миколаївна</div>
-                </td>
-                <td>
-                    <div class="schedule-info">4</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">12:00-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Тезер Аліна Олександрівна</div>
-                </td>
-                <td>
-                    <div class="schedule-info">14</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">09:00-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">10:00-15:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Лозовий Павло Викторович</div>
-                </td>
-                <td>
-                    <div class="schedule-info">73-А</div>
-                </td>
-                <td>
-                    <div class="schedule-info">3</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">08:00-15:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Гриденко Альона Олегівна</div>
-                </td>
-                <td>
-                    <div class="schedule-info">10</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">08:30-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">09:00-17:40</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">10:00-15:00</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Чіков Сильвестр Русланович</div>
-                </td>
-                <td>
-                    <div class="schedule-info">49</div>
-                </td>
-                <td>
-                    <div class="schedule-info">2</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:00-15:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">11:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">10:00-14:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Тримова Яна Генадіївна</div>
-                </td>
-                <td>
-                    <div class="schedule-info">15</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">12:00-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Весела Ганна Романівна</div>
-                </td>
-                <td>
-                    <div class="schedule-info">35</div>
-                </td>
-                <td>
-                    <div class="schedule-info">2</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">12:00-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="title-box">
+        <h2>Режими роботи</h2>
     </div>
-    <div class="table-block">
-        <table class="working-table">
-            <caption class="table-title">Лабораторії та фізіотерапевтичні кабінети</caption>
-            <thead>
-            <tr>
-                <th><br></th>
-                <th>Номер кабінету</th>
-                <th>Поверх</th>
-                <th>Понеділок</th>
-                <th>Вівторок</th>
-                <th>Середа</th>
-                <th>Четвер</th>
-                <th>П'ятниця</th>
-                <th>Субота</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div class="schedule-name">Рентген кабінет
-                    </div>
-                </td>
-                <td>
-                    <div class="schedule-info">4</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-17:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-17:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-17:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-17:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-17:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Лабораторія
-                    </div>
-                </td>
-                <td>
-                    <div class="schedule-info">116</div>
-                </td>
-                <td>
-                    <div class="schedule-info">5</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">07:00-16:00</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Мамологія
-                    </div>
-                </td>
-                <td>
-                    <div class="schedule-info">4</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">12:00-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="schedule-name">Кабінет томографії
-                    </div>
-                </td>
-                <td>
-                    <div class="schedule-info">4</div>
-                </td>
-                <td>
-                    <div class="schedule-info">1</div>
-                </td>
-                <td>
-                    <div class="schedule-info">9:30-16:30</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">12:00-18:00</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-                <td>
-                    <div class="schedule-info">—</div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="table-wrapper">
+        <div class="table-block">
+            <table class="working-table">
+                <caption class="table-title">Лікарі</caption>
+                <thead>
+                <tr>
+                    <th><br></th>
+                    <th>Номер кабінету</th>
+                    <th>Поверх</th>
+                    <th>Понеділок</th>
+                    <th>Вівторок</th>
+                    <th>Середа</th>
+                    <th>Четвер</th>
+                    <th>П'ятниця</th>
+                    <th>Субота</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Радецька Аліна Миколаївна</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">4</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">12:00-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Тезер Аліна Олександрівна</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">14</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">09:00-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">10:00-15:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Лозовий Павло Викторович</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">73-А</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">3</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">08:00-15:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Гриденко Альона Олегівна</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">10</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">08:30-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">09:00-17:40</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">10:00-15:00</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Чіков Сильвестр Русланович</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">49</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">2</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:00-15:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">11:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">10:00-14:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Тримова Яна Генадіївна</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">15</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">12:00-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Весела Ганна Романівна</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">35</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">2</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">12:00-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-block">
+            <table class="working-table">
+                <caption class="table-title">Лабораторії та фізіотерапевтичні кабінети</caption>
+                <thead>
+                <tr>
+                    <th><br></th>
+                    <th>Номер кабінету</th>
+                    <th>Поверх</th>
+                    <th>Понеділок</th>
+                    <th>Вівторок</th>
+                    <th>Середа</th>
+                    <th>Четвер</th>
+                    <th>П'ятниця</th>
+                    <th>Субота</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Рентген кабінет
+                        </div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">4</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-17:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-17:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-17:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-17:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-17:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Лабораторія
+                        </div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">116</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">5</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">07:00-16:00</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Мамологія
+                        </div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">4</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">12:00-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="schedule-name">Кабінет томографії
+                        </div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">4</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">1</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">9:30-16:30</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">12:00-18:00</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                    <td>
+                        <div class="schedule-info">—</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 {% endblock %}

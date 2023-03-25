@@ -16,6 +16,10 @@
                        href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
 {% endblock %}
 
+{% block language_href %}
+    href="/{{ language.code }}/making-an-appointment"
+{% endblock %}
+
 {% block content %}
 <div class="form-wrapper">
     <div class="form-container">

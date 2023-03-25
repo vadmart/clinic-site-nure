@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap');
 
 :root {
-    --accent: rgba(80, 170, 170, 1);
+    --accent-color: rgba(80, 170, 170, 1);
+    --top-bar-color: rgba(100, 244, 255, 0.5);
 }
 
 * {
@@ -64,32 +65,77 @@ main {
     background-color: #fff;
     white-space: normal;
     padding: 0 5px;
-    color: var(--accent);
+    color: var(--accent-color);
 }
 
 .title-box:before {
     content: '';
     display: block;
-    background-color: var(--accent);
+    background-color: var(--accent-color);
     height: 4px;
     width: 95%;
     top: 35px;
     position: absolute;
 }
 
+.clinic-head__top {
+    display: grid;
+    grid-template-columns: 15fr 1fr;
+    background-color: var(--top-bar-color);
+}
+
+section.language-block {
+    display: flex;
+    column-gap: 0.5em;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.language-block__choice {
+    height: 100%;
+    width: 100%;
+    font-family: Inter, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.language-block__choice .lang {
+    padding: 0.2em 0.4em;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.language-block__choice a {
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.language-block__choice div.chosen {
+    color: #ffffff;
+    cursor: default;
+    background-color: #1975BB;
+    box-sizing: border-box;
+}
+
 .clinic-head {
-    background-color: var(--accent);
+    background-color: var(--accent-color);
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     position: fixed;
     z-index: 1000;
-    width: 100vw;
+    width: calc(100vw - 16px);
     top: 0;
     left: 0;
 }
 
 .clinic-head .site-name {
-    background-color: rgba(100, 244, 255, 0.5);
+    background-color: var(--top-bar-color);
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
@@ -282,7 +328,7 @@ footer .socials {
     display: flex;
     flex-direction: column;
     padding: 12px 0;
-    background-color: var(--accent);
+    background-color: var(--accent-color);
     text-align: center;
     width: 100vw;
 }

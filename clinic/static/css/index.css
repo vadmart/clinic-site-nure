@@ -1,28 +1,3 @@
-section.language-block {
-    margin: 0.1em 1em 0 0;
-    display: flex;
-    justify-content: right;
-    column-gap: 0.5em;
-    height: 1.5em;
-}
-
-.language-block__choice {
-    height: 100%;
-    font-family: Inter, sans-serif;
-}
-
-.language-block__choice a {
-    text-decoration: none;
-    color: rgba(80, 170, 170, 1);
-}
-
-.language-block__choice a.chosen {
-    background-color: rgba(0, 150, 150, 1);
-    padding: 0.2em 0.4em;
-    color: #ffffff;
-    border-radius: 10px;
-}
-
 .brief-info {
     display: flex;
     justify-content: space-between;
