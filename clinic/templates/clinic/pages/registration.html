@@ -1,1 +1,100 @@
 {% extends "clinic/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    <title>{% trans 'Харківська районна лікарня №496' %}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="registration-form-wrapper">
+        <div class="registration-form">
+            <div class="registration-form-title">
+                <h3>Реєстрація</h3>
+            </div>
+            <form class="form-data" method="post" action="make_registration">
+                {% csrf_token %}
+                <div class="user-info">
+                    <div class="user-info__first">
+                        <div class="field-block">
+                            <label for="registration-lastname">Прізвище</label>
+                            <input type="text" id="registration-lastname" name="lastname" required>
+                        </div>
+                        <div class="field-block">
+                            <label for="registration-name">Ім'я</label>
+                            <input type="text" id="registration-name" name="name" required>
+                        </div>
+                        <div class="field-block">
+                            <label for="registration-patronymic">По батькові</label>
+                            <input type="text" id="registration-patronymic" name="patronymic" required>
+                        </div>
+                    </div>
+                    <div class="user-info__second">
+                        <div class="field-block">
+                            <label for="registration-phone-num">Номер телефону</label>
+                            <input type="text" id="registration-phone-num" name="phone_number" required>
+                        </div>
+                    </div>
+                    <div class="user-info__third">
+                        <div class="field-block">
+                            <label for="registration-street-type">Тип вулиці</label>
+                            <select name="street_type" id="registration-street-type" required>
+                                <option value="">Оберіть тип</option>
+                                <option value="street">Вулиця</option>
+                                <option value="avenue">Проспект</option>
+                                <option value="boulevard">Бульвар</option>
+                            </select>
+                        </div>
+                        <div class="field-block">
+                            <label for="registration-street_name">Назва вулиці</label>
+                            <input type="text" id="registration-street_name" name="street_name" required>
+                        </div>
+                        <div class="field-block">
+                            <label for="registration-house-number">Номер будинку</label>
+                            <input type="text" id="registration-house-number" name="house_number" required>
+                        </div>
+                        <div class="field-block">
+                            <label for="registration-flat-number">Номер квартири</label>
+                            <input type="text" id="registration-flat-number" name="flat_number" required>
+                        </div>
+                    </div>
+                    <div class="user-info__fourth">
+                        <div class="field-block">
+                            <label for="registration-doctor-choice">Із яким доктором узгоджуєте контракт?</label>
+                            <select name="doctor_choice" id="registration-doctor-choice">
+                                <option value="">Оберіть лікаря</option>
+                                <option value="1">Радецька Аліна Миколаївна, перша кваліфікаційна категорія</option>
+                                <option value="2">Тезер Аліна Олександрівна, друга кваліфікаційна категорія</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="user-info__fifth">
+                        <h4>Нижче наведений перелік цифр буде Вашим номером контракту. Будь-ласка, запишіть його та
+                            зберігайте у надійному місці!</h4>
+                        <input type="hidden" name="contract_num" value="0154976325">
+                        <h1>0154976325</h1>
+                    </div>
+                    <div class="user-info__sixth">
+                        <div class="checkbox-block">
+                            <input type="checkbox" name="has_checked_contract" id="registration-contract-checkbox" required>
+                            <label for="registration-contract-checkbox">Я записав(-ла) номер контракту та готовий(-а)
+                                завершити реєстрацію</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="button-block">
+                        <input type="submit" value="Зареєструватися">
+                    </div>
+                    <div class="button-block">
+                        <input type="reset" value="Очистити все">
+                    </div>
+                </div>
+            </form>
+            <div class="no-register">
+                <span class="no-register__text">Вже є акаунт? <a href="/login">Увійдіть</a></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

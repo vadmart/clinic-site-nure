@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<div class="wrapper">
+<li class="wrapper">
     {% get_current_language as CURRENT_LANGUAGE %}
     {% get_available_languages as AVAILABLE_LANGUAGES %}
     {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
@@ -70,17 +70,15 @@
                     <a class="btn" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
                 {% endblock %}
             </li>
-            <li class="menu-item auth-block">
-                <div class="auth-block__login">
-                    {% block header_login %}
-                        <a class="btn" href="{% url 'login' %}">{% trans 'Вхід' %}</a>
-                    {% endblock %}
-                </div>
-                <div class="auth-block__registration">
-                    {% block header_registration %}
-                        <a class="btn" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
-                    {% endblock %}
-                </div>
+            <li class="menu-item auth-block login">
+                {% block header_login %}
+                    <a class="btn" href="{% url 'login' %}">{% trans 'Вхід' %}</a>
+                {% endblock %}
+            </li>
+            <li class="menu-item auth-block registration">
+                {% block header_registration %}
+                    <a class="btn" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
+                {% endblock %}
             </li>
         </ul>
         <div class="mobile-menu">

@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'regclinic.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': 'nure_db',
+        'USER': 'nure',
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
         'HOST': 'localhost',
         'PORT': '5432'
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'uk'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 

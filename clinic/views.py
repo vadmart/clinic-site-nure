@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from clinic.models import Doctor
 
 
 # Create your views here.
@@ -23,11 +24,13 @@ def quiz(request):
 
 
 def get_staff(request):
-    return render(request, template_name="clinic/pages/staff.html")
+    doctors = Doctor.objects.all()
+    return render(request, template_name="clinic/pages/staff.html", context={"doctors": doctors})
 
 
-def get_reviews(request):
-    return render(request, template_name="clinic/pages/reviews.html")
+def get_reviews(request, doctor_ln):
+    doctor = Doctor.objects.get(image_name=doctor_ln)
+    return render(request, template_name="clinic/pages/reviews.html", context={"doctor": doctor})
 
 
 def get_appointment_page(request):
@@ -39,4 +42,9 @@ def get_login_form(request):
 
 
 def get_registration_form(request):
+    return render(request, template_name="clinic/pages/registration.html")
+
+
+def make_registration(request):
+    print(request.POST)
     return render(request, template_name="clinic/pages/registration.html")

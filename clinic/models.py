@@ -1,18 +1,18 @@
 # Create your models here.
 from django.db import models
 import textwrap
-from django.db.models import Q, Value as V
-from django.db.models.functions import Concat
-from django.db.models.query import QuerySet
+from django.contrib.auth.models import User
 
-
-# Create your models here.
 
 class DoctorCategory(models.Model):
     name = models.CharField(max_length=25)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Категорія доктора"
+        verbose_name_plural = "Категорії докторів"
 
 
 class Doctor(models.Model):
@@ -25,6 +25,22 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"{self.lastname} {self.name} {self.patronymic}"
+
+    class Meta:
+        verbose_name = "Доктор"
+        verbose_name_plural = "Доктори"
+
+
+class DoctorPhoneNumber(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    phone_number_value = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, phone: {self.phone_number_value}"
+
+    class Meta:
+        verbose_name = "Телефонний номер доктора"
+        verbose_name_plural = "Телефонні номери докторів"
 
 
 class Patient(models.Model):
@@ -43,6 +59,10 @@ class Patient(models.Model):
     def __str__(self):
         return f"{self.lastname} {self.name}"
 
+    class Meta:
+        verbose_name = "Пацієнт"
+        verbose_name_plural = "Пацієнти"
+
 
 class Review(models.Model):
     doctor = models.ForeignKey(to=Doctor, on_delete=models.CASCADE)
@@ -55,6 +75,10 @@ class Review(models.Model):
     def __str__(self):
         return textwrap.shorten(self.text, 30)
 
+    class Meta:
+        verbose_name = "Відгук"
+        verbose_name_plural = "Відгуки"
+
 
 class Recording(models.Model):
     person = models.ForeignKey(Patient, on_delete=models.CASCADE)
@@ -66,20 +90,34 @@ class Recording(models.Model):
     def __str__(self):
         return f"From: {self.person.name}, To: {self.doctor.name}"
 
+    class Meta:
+        verbose_name = "Запис на прийом"
+        verbose_name_plural = "Записи на прийом"
 
-class WorkingTime(models.Model):
+
+class Cabinet(models.Model):
+    cabinet_no = models.IntegerField(primary_key=True)
+    cabinet_name = models.CharField(max_length=128)
+    cabinet_description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Cabinet name: {self.cabinet_name}"
+
+    class Meta:
+        verbose_name = "Кабінет"
+        verbose_name_plural = "Кабінети"
+
+
+class Schedule(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    dt_tm = models.DateTimeField("date_time")
-    is_busy = models.BooleanField(default=False)
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField()
+    cabinet = models.ForeignKey(Cabinet, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, datetime: {self.dt_tm}"
+        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}"
 
-
-class Doctor_PhoneNumber(models.Model):
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    value = models.CharField(max_length=12)
-
-    def __str__(self):
-        return self.doctor.name
+    class Meta:
+        verbose_name = "Графік роботи"
+        verbose_name_plural = "Графіки роботи"

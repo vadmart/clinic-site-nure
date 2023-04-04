@@ -19,18 +19,18 @@
     {% load clinic_extras %}
     <div class="doctor-wrapper">
         <div class="doctor-info">
-            <img srcset="{% get_static_prefix %}img/250w/alina-radecka.png 250w,
-                             {% get_static_prefix %}img/200w/alina-radecka.png 200w,
-                             {% get_static_prefix %}img/150w/alina-radecka.png 150w"
+            <img srcset="{% get_static_prefix %}img/250w/{{ doctor.image_name }}.png 250w,
+                             {% get_static_prefix %}img/200w/{{ doctor.image_name }}.png 200w,
+                             {% get_static_prefix %}img/150w/{{ doctor.image_name }}.png 150w"
                  sizes="(max-width: 1024px) 150px,
                         (max-width: 1452px) 200px,
                         250px"
-                 src="{% get_static_prefix %}img/250w/alina-radecka.png" alt="">
+                 src="{% get_static_prefix %}img/250w/{{ doctor.image_name }}.png" alt="">
             <div class="doctor-description">
-                <h3 class="header">Радецька Аліна Миколаївна</h3>
+                <h3 class="header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h3>
                 <div class="prof-info">
-                    <span class="category-info">Вища кваліфікаційна категорія</span>
-                    <div class="work-experience">Стаж: 5 років</div>
+                    <span class="category-info">{{ doctor.category.name }} кваліфікаційна категорія</span>
+                    <div class="work-experience">Стаж: {{ doctor.work_start_date|years_to_now }} років</div>
                 </div>
                 <a href="" class="feedback_btn">Залишити відгук</a>
             </div>
@@ -78,7 +78,19 @@
                 </div>
             </div>
         </form>
-        <p class="no-reviews">Немає жодного відгуку</p>
+        {% if not doctor.review_set.all %}
+            <p class="no-reviews">Немає жодного відгуку</p>
+        {% else %}
+            {% for review in doctor.review_set.all %}
+                <div class="review">
+                    <blockquote class="account">
+                        <cite>{{ review.commentator_lastname }} {{ review.commentator_name }}</cite>
+                        <time datetime="{{ review.created_at }}">{% frmt_datetime review.created_at "%d.%m.%Y %H:%M" %}</time>
+                    </blockquote>
+                    <p class="comment">{{ review.text }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="review-blank-wrapper hidden">
         <div class="review-blank">

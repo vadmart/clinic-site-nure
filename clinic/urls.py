@@ -8,8 +8,9 @@ urlpatterns = [
     path("contacts", views.get_contacts, name="contacts"),
     path("vacancy", views.get_vacancy, name="vacancy"),
     path("staff", views.get_staff, name="staff"),
-    path("reviews", views.get_reviews, name="reviews"),
+    path("reviews/<str:doctor_ln>", views.get_reviews, name="reviews"),
     path("making-an-appointment", views.get_appointment_page, name="making-an-appointment"),
     path("login", views.get_login_form, name="login"),
-    path("registration", views.get_registration_form, name="registration")
+    path("registration", views.get_registration_form, name="registration"),
+    path("make_registration", views.make_registration, name="make_registration")
 ]
