@@ -35,6 +35,15 @@
                             <label for="registration-phone-num">Номер телефону</label>
                             <input type="text" id="registration-phone-num" name="phone_number" required>
                         </div>
+                        <div class="field-block">
+                            <label for="registration-doctor-choice">Із яким доктором узгоджуєте контракт?</label>
+                            <select name="doctor_choice" id="registration-doctor-choice">
+                                <option value="">Оберіть лікаря</option>
+                                <option value="1">Радецька Аліна Миколаївна, перша кваліфікаційна категорія</option>
+                                <option value="2">Тезер Аліна Олександрівна, друга кваліфікаційна категорія</option>
+
+                            </select>
+                        </div>
                     </div>
                     <div class="user-info__third">
                         <div class="field-block">
@@ -51,35 +60,12 @@
                             <input type="text" id="registration-street_name" name="street_name" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-house-number">Номер будинку</label>
+                            <label for="registration-house-number">Будинок</label>
                             <input type="text" id="registration-house-number" name="house_number" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-flat-number">Номер квартири</label>
+                            <label for="registration-flat-number">Квартира</label>
                             <input type="text" id="registration-flat-number" name="flat_number" required>
-                        </div>
-                    </div>
-                    <div class="user-info__fourth">
-                        <div class="field-block">
-                            <label for="registration-doctor-choice">Із яким доктором узгоджуєте контракт?</label>
-                            <select name="doctor_choice" id="registration-doctor-choice">
-                                <option value="">Оберіть лікаря</option>
-                                <option value="1">Радецька Аліна Миколаївна, перша кваліфікаційна категорія</option>
-                                <option value="2">Тезер Аліна Олександрівна, друга кваліфікаційна категорія</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="user-info__fifth">
-                        <h4>Нижче наведений перелік цифр буде Вашим номером контракту. Будь-ласка, запишіть його та
-                            зберігайте у надійному місці!</h4>
-                        <input type="hidden" name="contract_num" value="0154976325">
-                        <h1>0154976325</h1>
-                    </div>
-                    <div class="user-info__sixth">
-                        <div class="checkbox-block">
-                            <input type="checkbox" name="has_checked_contract" id="registration-contract-checkbox" required>
-                            <label for="registration-contract-checkbox">Я записав(-ла) номер контракту та готовий(-а)
-                                завершити реєстрацію</label>
                         </div>
                     </div>
                 </div>
