@@ -13,7 +13,7 @@
             <div class="registration-form-title">
                 <h3>Реєстрація</h3>
             </div>
-            <form class="form-data" method="post" action="make_registration">
+            <form class="form-data" method="post" action="{% url 'validate_registration' %}">
                 {% csrf_token %}
                 <div class="user-info">
                     <div class="user-info__first">
@@ -37,11 +37,13 @@
                         </div>
                         <div class="field-block">
                             <label for="registration-doctor-choice">Із яким доктором узгоджуєте контракт?</label>
-                            <select name="doctor_choice" id="registration-doctor-choice">
+                            <select name="doctor_choice" id="registration-doctor-choice" required>
                                 <option value="">Оберіть лікаря</option>
-                                <option value="1">Радецька Аліна Миколаївна, перша кваліфікаційна категорія</option>
-                                <option value="2">Тезер Аліна Олександрівна, друга кваліфікаційна категорія</option>
-
+                                {% for doctor in doctors %}
+                                    <option value="{{ doctor.pk }}">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}, {{ doctor.category.name|lower }}
+                                        кваліфікаційна категорія
+                                    </option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -68,6 +70,22 @@
                             <input type="text" id="registration-flat-number" name="flat_number" required>
                         </div>
                     </div>
+                    <div class="user-info__fourth">
+                        <div class="field-block">
+                            <label for="registration-contract-num">
+                                <i>Після натискання кнопки "Відправити номер контракту" на вказаний вище номер буде
+                                    надіслано СМС із номером. Введіть його у поле нижче</i>
+                            </label>
+                            <div class="registration-contract-num-block-wrapper">
+                                <div class="registration-contract-num-block">
+                                    <input type="text" id="registration-contract-num" name="contract_num" required>
+                                    <button id="registration-contract-num-button">
+                                        <i>Відправити номер контракту</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-actions">
                     <div class="button-block">
@@ -83,4 +101,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/registration.js' %}" type="text/javascript"></script>
 {% endblock %}

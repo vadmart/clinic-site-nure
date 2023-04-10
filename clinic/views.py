@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from clinic.models import Doctor
+from django.http import HttpResponse, HttpResponseRedirect
+from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
+import json
 
 
 # Create your views here.
@@ -43,9 +46,21 @@ def get_login_form(request):
 
 
 def get_registration_form(request):
-    return render(request, template_name="clinic/pages/registration.html")
+    doctors = Doctor.objects.all()
+    return render(request, template_name="clinic/pages/registration.html", context={"doctors": doctors})
 
 
-def make_registration(request):
-    print(request.POST)
-    return render(request, template_name="clinic/pages/registration.html")
+def send_contract_num(request):
+    contract_num = get_rand_contract_num()
+    print(contract_num)
+    ts_message = TurboSMSMessage(contract_num=contract_num, recipients=[json.loads(request.body)["phone_number"]])
+    # ts_message.send()
+    return HttpResponse(contract_num)
+
+
+def validate_registration(request):
+    # user = User.objects.create_user(username=request.POST["name"],
+    #                                 first_name=request.POST["name"],
+    #                                 last_name=request.POST["lastname"],
+    #                                 password=request.POST["contract_num"])
+    return HttpResponseRedirect(redirect_to="/index")

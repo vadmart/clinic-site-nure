@@ -1,7 +1,10 @@
 # Create your models here.
 from django.db import models
 import textwrap
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+# from django.contrib.auth.models import User
 
 
 class DoctorCategory(models.Model):

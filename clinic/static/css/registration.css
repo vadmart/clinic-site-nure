@@ -15,6 +15,7 @@
     padding: 1em;
     border-radius: 10px;
     max-width: 960px;
+    box-shadow: 5px 10px 15px rgba(75, 150, 120, 0.5);
 }
 
 .registration-form-title {
@@ -57,6 +58,11 @@ div.user-info {
     width: 100%;
 }
 
+.user-info__fourth {
+    display: grid;
+    margin-top: 1em;
+}
+
 .field-block {
     display: grid;
     grid-row-gap: 0.5em;
@@ -72,12 +78,13 @@ div.user-info {
     padding: 0.25em;
     border: 0.1em solid black;
     border-radius: 10px;
-    -webkit-transition: 0.5s;
+    -webkit-transition: 0.3s;
     transition: all 0.3s ease;
     outline: none;
 }
 
-.field-block input:focus {
+.field-block input:focus,
+.field-block select:focus {
     border: 0.1em solid #6499e9;
     box-shadow: 0 0 2px 1px #6499e9;
 }
@@ -114,7 +121,57 @@ form input[type=reset]:hover {
     background-color: rgb(150, 150, 150);
 }
 
-div.no-register {
+.no-register {
     display: flex;
     justify-content: center;
+}
+
+.registration-contract-num-block-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.registration-contract-num-block {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+input#registration-contract-num:focus + button#registration-contract-num-button {
+    box-shadow: 2px 0 2px 1px #6499e9;
+    border: 0.1em solid #6499e9;
+    border-left: none;
+}
+
+button#registration-contract-num-button {
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-width: 1px;
+    border-left: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+}
+
+button#registration-contract-num-button:hover {
+    text-shadow: -1px 1px 2px #000000;
+    cursor: pointer;
+}
+
+button#registration-contract-num-button:disabled {
+
+    border-color: #000000;
+}
+
+input#registration-contract-num {
+    font-size: 1.2rem;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: none;
+}
+
+input#registration-contract-num:focus {
+    box-shadow: -1px 0 2px 1px #6499e9;
 }

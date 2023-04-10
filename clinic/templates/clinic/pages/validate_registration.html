@@ -1,0 +1,22 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Підтвердження реєстрації</title>
+    <link rel="stylesheet" href="{% static 'css/validate_registration.css'%}">
+{% endblock %}
+
+{% block content %}
+    <div class="validate-form-wrapper">
+        <form action="{% url 'complete_registration' %}" class="validate-form">
+            <input type="hidden" name="patient_data" value="{{ patient_data }}">
+            <header class="validate-form__header">
+                <h3>На номер телефону {{ phone_number }} було надіслано номер контракту. Будь-ласка, введіть його нижче та зберігайте цей номер у надійному місці!</h3>
+            </header>
+            <div class="validate-form__body">
+                <input type="text" id="contract-num-validation-field">
+                <input type="submit" value="Відправити">
+            </div>
+        </form>
+    </div>
+{% endblock %}
