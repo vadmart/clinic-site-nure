@@ -1,0 +1,100 @@
+* {
+    font-family: Inter, sans-serif;
+}
+
+.registration-form-wrapper {
+    display: grid;
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.registration-form {
+    display: grid;
+    grid-row-gap: 1em;
+    background-color: rgba(155, 222, 209, 1);
+    padding: 1em;
+    border-radius: 10px;
+    max-width: 960px;
+    box-shadow: 5px 10px 15px rgba(75, 150, 120, 0.5);
+}
+
+.registration-form-title {
+    border-bottom: solid 2px #000000;
+}
+
+.registration-form-title h3 {
+    font-size: 1.5em;
+}
+
+form {
+    display: grid;
+    row-gap: 1em;
+    width: inherit;
+}
+
+div.user-info {
+    display: grid;
+    grid-row-gap: 1em;
+}
+
+.field-block {
+    display: grid;
+    grid-row-gap: 0.5em;
+    box-sizing: border-box;
+}
+
+.field-block > * {
+    font-size: 1.2em;
+}
+
+.field-block input,
+.field-block select {
+    padding: 0.2em;
+    border: 0.1em solid black;
+    border-radius: 10px;
+    -webkit-transition: 0.3s;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.field-block input:focus,
+.field-block select:focus {
+    border: 0.1em solid #6499e9;
+    box-shadow: 0 0 2px 1px #6499e9;
+}
+
+.form-actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+}
+
+form div.form-actions input {
+    font-size: 1em;
+    border: none;
+    padding: 0.5em 1.5em;
+    border-radius: 20px;
+    width: 100%;
+}
+
+form input {
+    transition: all 0.5s ease;
+}
+
+form input[type=submit] {
+    background-color: rgba(100, 149, 237, 1);
+}
+
+form input[type=submit]:hover {
+    background-color: rgba(0, 149, 237, 1);
+}
+
+form input[type=reset]:hover {
+    background-color: rgb(150, 150, 150);
+}
+
+.no-account {
+    display: flex;
+    justify-content: center;
+}

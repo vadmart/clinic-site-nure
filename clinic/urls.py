@@ -13,5 +13,6 @@ urlpatterns = [
     path("login", views.get_login_form, name="login"),
     path("registration", views.get_registration_form, name="registration"),
     path("validate_registration", views.validate_registration, name="validate_registration"),
+    path("validate_login", views.validate_login, name="validate_login"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num")
 ]

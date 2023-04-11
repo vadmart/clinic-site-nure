@@ -1,0 +1,46 @@
+{% extends "clinic/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>{% trans 'Харківська районна лікарня №496' %}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="registration-form-wrapper">
+        <div class="registration-form">
+            <div class="registration-form-title">
+                <h3>Авторизація</h3>
+            </div>
+            <form class="form-data" method="post" action="{% url 'validate_login' %}">
+                {% csrf_token %}
+                <div class="user-info">
+                    <div class="user-info__first">
+                        <div class="field-block">
+                            <label for="login-name">Ім'я користувача</label>
+                            <input type="text" id="login-name" name="lastname" required>
+                        </div>
+                    </div>
+                    <div class="user-info__second">
+                        <div class="field-block">
+                            <label for="login-contract-num">Номер контракту</label>
+                            <input type="text" id="login-contract-num" name="name" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="button-block">
+                            <input type="submit" value="Увійти">
+                        </div>
+                        <div class="button-block">
+                            <input type="reset" value="Очистити все">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="no-account">
+                <span class="no-account__text">Ще немає акаунту? <a href="/registration">Створіть його</a></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

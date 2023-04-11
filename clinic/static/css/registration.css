@@ -28,7 +28,8 @@
 
 form {
     display: grid;
-    grid-row-gap: 1em;
+    row-gap: 1em;
+    width: inherit;
 }
 
 div.user-info {
@@ -52,10 +53,11 @@ div.user-info {
 
 .user-info__third {
     display: grid;
-    grid-template-columns: 2fr 6fr 1fr 1fr;
-    grid-column-gap: 1em;
-    grid-auto-columns: 1fr;
-    width: 100%;
+    grid-template-columns: 1fr 5fr 1fr 1fr 1fr
+}
+
+.user-info__third > * {
+    width: fit-content;
 }
 
 .user-info__fourth {
@@ -160,7 +162,6 @@ button#registration-contract-num-button:hover {
 }
 
 button#registration-contract-num-button:disabled {
-
     border-color: #000000;
 }
 

@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from clinic.models import Doctor
+from clinic.models import Doctor, Patient
 from django.http import HttpResponse, HttpResponseRedirect
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 import json
 
 
@@ -47,7 +49,7 @@ def get_login_form(request):
 
 def get_registration_form(request):
     doctors = Doctor.objects.all()
-    return render(request, template_name="clinic/pages/registration.html", context={"doctors": doctors})
+    return render(request, template_name="registration/registration.html", context={"doctors": doctors})
 
 
 def send_contract_num(request):
@@ -59,8 +61,13 @@ def send_contract_num(request):
 
 
 def validate_registration(request):
-    # user = User.objects.create_user(username=request.POST["name"],
-    #                                 first_name=request.POST["name"],
-    #                                 last_name=request.POST["lastname"],
-    #                                 password=request.POST["contract_num"])
+    user = User.objects.create_user(username=request.POST["name"],
+                                    last_name=request.POST["lastname"],
+                                    password=request.POST["contract_num"])
+    user.save()
+    Patient().create_patient_from_dict(user, request.POST)
     return HttpResponseRedirect(redirect_to="/index")
+
+
+def validate_login(request):
+    return render(request, template_name="clinic/index.html")

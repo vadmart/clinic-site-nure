@@ -1,10 +1,8 @@
 # Create your models here.
 from django.db import models
 import textwrap
-from django.contrib.auth.models import AbstractUser
-
-
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+from django.http import QueryDict
 
 
 class DoctorCategory(models.Model):
@@ -47,6 +45,7 @@ class DoctorPhoneNumber(models.Model):
 
 
 class Patient(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     doctor = models.ForeignKey(to=Doctor, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=15)
     lastname = models.CharField(max_length=30)
@@ -65,6 +64,21 @@ class Patient(models.Model):
     class Meta:
         verbose_name = "Пацієнт"
         verbose_name_plural = "Пацієнти"
+
+    def create_patient_from_dict(self, user: User, dct: QueryDict):
+        self.user = user
+        self.doctor = Doctor.objects.get(pk=int(dct["doctor_choice"]))
+        self.name = dct["name"]
+        self.lastname = dct["lastname"]
+        self.patronymic = dct["patronymic"]
+        self.contract_num = dct["contract_num"]
+        self.phone_number = dct["phone_number"]
+        self.street_type = dct["street_type"]
+        self.street_name = dct["street_name"]
+        self.house_number = dct["house_number"]
+        self.flat_number = dct["flat_number"]
+        self.post_index = dct["post_index"]
+        self.save(force_insert=True)
 
 
 class Review(models.Model):
