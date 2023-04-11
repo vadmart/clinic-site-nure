@@ -13,7 +13,7 @@
             <div class="registration-form-title">
                 <h3>Реєстрація</h3>
             </div>
-            <form class="form-data" method="post" action="{% url 'validate_registration' %}">
+            <form class="form-data" method="post" action="{% url 'register' %}">
                 {% csrf_token %}
                 <div class="user-info">
                     <div class="user-info__first">

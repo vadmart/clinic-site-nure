@@ -10,9 +10,7 @@ urlpatterns = [
     path("staff", views.get_staff, name="staff"),
     path("reviews/<str:doctor_ln>", views.get_reviews, name="reviews"),
     path("making-an-appointment", views.get_appointment_page, name="making-an-appointment"),
-    path("login", views.get_login_form, name="login"),
     path("registration", views.get_registration_form, name="registration"),
-    path("validate_registration", views.validate_registration, name="validate_registration"),
-    path("validate_login", views.validate_login, name="validate_login"),
+    path("register", views.validate_registration, name="register"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num")
 ]

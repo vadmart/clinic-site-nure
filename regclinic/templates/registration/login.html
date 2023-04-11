@@ -13,19 +13,19 @@
             <div class="registration-form-title">
                 <h3>Авторизація</h3>
             </div>
-            <form class="form-data" method="post" action="{% url 'validate_login' %}">
+            <form class="form-data" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="user-info">
                     <div class="user-info__first">
                         <div class="field-block">
                             <label for="login-name">Ім'я користувача</label>
-                            <input type="text" id="login-name" name="lastname" required>
+                            {{ form.username }}
                         </div>
                     </div>
                     <div class="user-info__second">
                         <div class="field-block">
                             <label for="login-contract-num">Номер контракту</label>
-                            <input type="text" id="login-contract-num" name="name" required>
+                            {{ form.password }}
                         </div>
                     </div>
                     <div class="form-actions">

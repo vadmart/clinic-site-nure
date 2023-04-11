@@ -43,10 +43,6 @@ def get_appointment_page(request):
     return render(request, template_name="clinic/pages/making-an-appointment.html")
 
 
-def get_login_form(request):
-    return render(request, template_name="clinic/pages/login.html")
-
-
 def get_registration_form(request):
     doctors = Doctor.objects.all()
     return render(request, template_name="registration/registration.html", context={"doctors": doctors})
@@ -70,4 +66,6 @@ def validate_registration(request):
 
 
 def validate_login(request):
+    auth_user = authenticate(request)
     return render(request, template_name="clinic/index.html")
+
