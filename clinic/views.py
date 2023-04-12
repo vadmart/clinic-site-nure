@@ -5,7 +5,8 @@ from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LogoutView, LoginView
+from django.utils.translation import get_language
 import json
 
 
@@ -74,5 +75,13 @@ def send_review(request):
     return HttpResponseRedirect(redirect_to=f"/reviews/{request.POST['doctor_lastname_name']}")
 
 
+class ClinicLogin(LoginView):
+    def get_success_url(self):
+        return "index"
+
+
 class ClinicLogout(LogoutView):
     template_name = "clinic/index.html"
+
+    def get_success_url(self):
+        return "index"

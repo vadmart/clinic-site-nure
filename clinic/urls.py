@@ -13,6 +13,7 @@ urlpatterns = [
     path("registration", views.get_registration_form, name="registration"),
     path("register", views.validate_registration, name="register"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num"),
-    path("logout", views.LogoutView.as_view(), name="logout"),
+    path("login", views.ClinicLogin.as_view(), name="login"),
+    path("logout", views.ClinicLogout.as_view(), name="logout"),
     path("sendReview", views.send_review, name="send_review")
 ]
