@@ -123,13 +123,6 @@ section.language-block {
     box-sizing: border-box;
 }
 
-div#user {
-    display: block;
-    font-size: 1.4rem;
-    cursor: default;
-    padding-bottom: 15px;
-}
-
 .clinic-head {
     background-color: var(--accent-color);
     font-family: 'Roboto', sans-serif;
@@ -203,13 +196,13 @@ div#user {
     display: none;
 }
 
-.menu-item {
+li.menu-item {
     list-style: none;
     padding: 0 10px;
     position: relative;
 }
 
-.menu-item .btn {
+li.menu-item .btn {
     position: relative;
     display: block;
     font-size: 1.4rem;
@@ -222,15 +215,15 @@ div#user {
     transition: color 100ms;
 }
 
-.menu-item .btn:hover {
+li.menu-item .btn:hover {
     color: rgb(255, 255, 255, 1);
 }
 
-.menu-item a img {
+li.menu-item a img {
     height: 80px;
 }
 
-.menu-item .btn:after {
+li.menu-item .btn:after {
     content: '';
     position: absolute;
     height: 2px;
@@ -241,11 +234,36 @@ div#user {
     transition: width .35s;
 }
 
-.menu-item .btn:hover:after {
+li.menu-item .btn:hover:after {
     width: 100%;
 }
 
-.menu .menu-item .dropdown-content {
+li.menu-item div.account-block {
+    display: flex;
+    background-color: rgb(100, 200, 200);
+    border-radius: 10px;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+li.menu-item div.account-block div#user {
+    display: block;
+    font-size: 1.4rem;
+    cursor: default;
+    padding-right: 1em;
+}
+
+li.menu-item .account-block .exit-block {
+    display: flex;
+    align-items: center;
+}
+
+li.menu-item .account-block .exit-block a {
+    text-decoration: none;
+}
+
+.menu li.menu-item .dropdown-content {
     display: none;
     list-style: none;
     padding: 0;
