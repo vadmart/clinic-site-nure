@@ -83,9 +83,7 @@ class Patient(models.Model):
 
 class Review(models.Model):
     doctor = models.ForeignKey(to=Doctor, on_delete=models.CASCADE)
-    commentator_lastname = models.CharField(max_length=20)
-    commentator_name = models.CharField(max_length=20)
-    commentator_email = models.EmailField()
+    patient = models.ForeignKey(to=Patient, on_delete=models.CASCADE, null=True)
     text = models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
 

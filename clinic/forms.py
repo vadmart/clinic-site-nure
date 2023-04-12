@@ -1,4 +1,5 @@
-from django.db import models
-from django import forms
+from django.contrib.auth.views import LogoutView
 
 
+class ClinicLogout(LogoutView):
+    template_name = "clinic/index.html"

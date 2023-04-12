@@ -84,7 +84,7 @@
             {% for review in doctor.review_set.all %}
                 <div class="review">
                     <blockquote class="account">
-                        <cite>{{ review.commentator_lastname }} {{ review.commentator_name }}</cite>
+                        <cite>{{ review.patient.lastname }} {{ review.patient.name }}</cite>
                         <time datetime="{{ review.created_at }}">{% frmt_datetime review.created_at "%d.%m.%Y %H:%M" %}</time>
                     </blockquote>
                     <p class="comment">{{ review.text }}</p>
@@ -95,29 +95,12 @@
     <div class="review-blank-wrapper hidden">
         <div class="review-blank">
             <a href="" class="close-button">X</a>
-            <form method="post" action="#" class="blank" data-doctor-id="1">
+            <form method="post" action="{% url 'send_review' %}" class="blank" data-doctor-lastname-name="{{ doctor.image_name }}">
                 {% csrf_token %}
-                <input type="hidden" name="doctor_id" value="1">
-                <div class="inner-box" id="lastname-box">
-                    <label for="lastname">Прізвище</label>
-                    <input class="review-input" id="lastname" type="text" placeholder="Введіть прізвище"
-                           name="lastname">
-                </div>
-                <div class="inner-box" id="name-box">
-                    <label for="name">Ім'я</label>
-                    <input class="review-input" id="name" type="text" placeholder="Введіть ім'я" name="name">
-                </div>
-                <div class="inner-box" id="contract-num-box">
-                    <label for="contract-num">Email</label>
-                    <input class="review-input"
-                           id="contract-num"
-                           type="email"
-                           placeholder="Введіть адресу електронної пошти"
-                           name="contract-num">
-                </div>
+                <input type="hidden" name="doctor_lastname_name" value="{{ doctor.image_name }}">
                 <div class="inner-box" id="review-box">
                     <label for="review-text">Текст відгуку</label>
-                    <textarea class="review-textarea" id="review-text" name="review-text" disabled></textarea>
+                    <textarea class="review-textarea" id="review-text" name="review_text"></textarea>
                 </div>
                 <div class="inner-box" id="submit-button-wrapper">
                     <input type="submit" class="submit-review-button" value="Відправити">
@@ -128,5 +111,4 @@
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/reviews.js' %}" type="module"></script>
-    <script src="{% static 'js/reviewForm.js' %}" type="module"></script>
 {% endblock %}

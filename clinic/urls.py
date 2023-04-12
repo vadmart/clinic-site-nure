@@ -12,5 +12,7 @@ urlpatterns = [
     path("making-an-appointment", views.get_appointment_page, name="making-an-appointment"),
     path("registration", views.get_registration_form, name="registration"),
     path("register", views.validate_registration, name="register"),
-    path("send_contract_num", views.send_contract_num, name="send_contract_num")
+    path("send_contract_num", views.send_contract_num, name="send_contract_num"),
+    path("logout", views.LogoutView.as_view(), name="logout"),
+    path("sendReview", views.send_review, name="send_review")
 ]

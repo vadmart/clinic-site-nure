@@ -98,3 +98,18 @@ form input[type=reset]:hover {
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width: 540px) {
+    .registration-form-title h3 {
+        font-size: calc(1em + 0.4 * (100vw / 34));
+        grid-row-gap: 0.5em;
+    }
+
+    .field-block > * {
+        font-size: calc(1em + 0.2 * (100vw / 34))
+    }
+
+    .registration-form {
+        max-width: 90%;
+    }
+}

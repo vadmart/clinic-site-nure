@@ -1,11 +1,7 @@
-import {ReviewForm} from "./reviewForm.js";
-
-
 const reviewOptions = {
     backgroundColor: window["background"],
     fontSize: window["font-size"],
     fontType: window["font-type"],
-
 };
 
 const accounts = document.getElementsByClassName("account");
@@ -105,38 +101,3 @@ function showModal(e) {
     })
     e.preventDefault();
 }
-
-ReviewForm.addHandlerForAll(sendPersonData);
-function sendPersonData() {
-    let personData = false
-    if (!ReviewForm.areNecessaryFieldsFull()) return;
-    if (window.XMLHttpRequest) {
-        personData = new XMLHttpRequest();
-        if (window.overrideMimeType) {
-            personData.overrideMimeType("text/xml");
-        }
-    } else if (window.ActiveXObject) {
-        personData = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    if (!personData) {
-        alert("Неможливо створити екземпляр класу XMLHttp");
-        return false;
-    }
-    personData.open("POST", "check-person");
-    personData.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    personData.send(`lastname=${ReviewForm.lastnameField.value}&` +
-        `name=${ReviewForm.nameField.value}&` +
-        `contract_num=${ReviewForm.contractNumField.value}&` +
-        `doctor_id=${document.querySelector(".review-blank form").dataset.doctorId}`);
-    personData.onreadystatechange = function () {
-        if (personData.readyState == 4) {
-            if (personData.status == 200) {
-                const receivedData = JSON.parse(personData.responseText);
-                if (receivedData.status == "canLeaveReview") {
-                    ReviewForm.unlockReviewArea();
-                } else
-                    ReviewForm.patientWithoutContract();
-                }
-            }
-        }
-    }

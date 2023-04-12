@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from clinic.models import Doctor, Patient
+from clinic.models import Doctor, Patient, Review
 from django.http import HttpResponse, HttpResponseRedirect
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LogoutView
 import json
 
 
@@ -52,7 +53,7 @@ def send_contract_num(request):
     contract_num = get_rand_contract_num()
     print(contract_num)
     ts_message = TurboSMSMessage(contract_num=contract_num, recipients=[json.loads(request.body)["phone_number"]])
-    # ts_message.send()
+    ts_message.send()
     return HttpResponse(contract_num)
 
 
@@ -65,7 +66,13 @@ def validate_registration(request):
     return HttpResponseRedirect(redirect_to="/index")
 
 
-def validate_login(request):
-    auth_user = authenticate(request)
-    return render(request, template_name="clinic/index.html")
+def send_review(request):
+    doctor = Doctor.objects.get(image_name=request.POST['doctor_lastname_name'])
+    Review.objects.create(doctor=doctor,
+                          patient=request.user.patient,
+                          text=request.POST["review_text"])
+    return HttpResponseRedirect(redirect_to=f"/reviews/{request.POST['doctor_lastname_name']}")
 
+
+class ClinicLogout(LogoutView):
+    template_name = "clinic/index.html"
