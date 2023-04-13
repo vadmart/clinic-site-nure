@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+:root {
+    --main-font-family: "Inter", sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
 .form-wrapper {
     display: flex;
     justify-content: center;
@@ -8,19 +16,20 @@
 }
 
 .form-container {
-    max-width: 900px;
+    max-width: 576px;
     width: 100%;
-    background-color: rgba(0, 150, 150, 0.5);
+    background-color: rgba(155, 222, 209, 1);
     display: grid;
     grid-row-gap: 15px;
     padding: 25px 30px;
     border-radius: 10px;
+    box-shadow: 5px 10px 15px rgba(75, 150, 120, 0.5);
 }
 
 .form-container .title-block {
-    font-size: 25px;
-    font-weight: 500;
+    font-family: var(--main-font-family);
     position: relative;
+    padding-bottom: 0.25em;
 }
 
 .form-container .title-block:before {
@@ -28,9 +37,9 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 3px;
+    height: 2px;
     width: 100%;
-    background: linear-gradient(135deg, #0697D6, #97E7E7);
+    background: #000000;
 }
 
 
@@ -81,10 +90,16 @@ form .user-details .inner-box {
     width: 100%;
 }
 
-.user-details .inner-box .unknown-block {
+.user-details .inner-box span.info {
     font-style: italic;
-    font-size: 22px;
-    color: #888;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.user-details .inner-box span.unknown-block {
+    font-style: italic;
+    font-size: 1.2em;
+    color: #777777;
     text-align: center;
 }
 
@@ -129,10 +144,22 @@ form .user-details .inner-box {
 }
 
 .user-details .inner-box .info-block {
-    display: flex;
-    justify-content: space-around;
-    column-gap: 5px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(115px, 0.5fr));
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
 }
+
+.user-details .inner-box .appointment-date {
+    display: flex;
+}
+
+.user-details .inner-box .appointment-time {
+    display: none;
+    grid-template-columns: 1fr 3fr;
+}
+
 
 .inner-box .info-block input {
     width: 100%;
@@ -156,32 +183,33 @@ form .user-details .inner-box {
 }
 
 form .button {
-    height: 50px;
+    height: 2.25em;
 }
 
 form #buttons {
     display: flex;
 }
 
-form .button {
+form input.button {
     width: 50%;
     margin: 0 12px;
     outline: none;
     border: none;
     border-radius: 20px;
-    font-size: 18px;
+    font-size: 1.2em;
     letter-spacing: 1px;
     font-weight: 500;
+    transition: all 0.5s ease;
 }
 
-.button#record {
+input.button#record {
     color: #fff;
-    background: linear-gradient(135deg, #0697D6, #97E7E7);
+    background-color: rgba(100, 149, 237, 1);
 }
 
-.button#record:hover {
+input.button#record:hover {
     color: #eee;
-    background: linear-gradient(-135deg, #0697D6, #97E7E7);
+    background-color: rgba(0, 149, 237, 1);
 }
 
 .button#clear:hover {
@@ -203,7 +231,7 @@ span.err-msg {
 }
 
 section#modal-wrapper {
-    font-family: "Roboto", sans-serif;
+    font-family: "Inter", sans-serif;
     position: absolute;
     z-index: 1000;
     width: 100%;

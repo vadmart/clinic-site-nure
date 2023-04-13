@@ -46,18 +46,15 @@ div.user-info {
 
 .user-info__second {
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 1fr 2fr;
     justify-content: space-between;
     column-gap: 1em;
 }
 
 .user-info__third {
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr 1fr 1fr
-}
-
-.user-info__third > * {
-    width: fit-content;
+    grid-template-columns: 1fr 7fr 1fr 1fr 1fr;
+    grid-column-gap: 0.5em;
 }
 
 .user-info__fourth {
@@ -72,7 +69,8 @@ div.user-info {
 }
 
 .field-block > * {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    max-width: 100%;
 }
 
 .field-block input,
@@ -83,6 +81,7 @@ div.user-info {
     -webkit-transition: 0.3s;
     transition: all 0.3s ease;
     outline: none;
+    max-width: 100%;
 }
 
 .field-block input:focus,
@@ -166,7 +165,7 @@ button#registration-contract-num-button:disabled {
 }
 
 input#registration-contract-num {
-    font-size: 1.2rem;
+    font-size: 1.1em;
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

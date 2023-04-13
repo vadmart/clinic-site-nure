@@ -13,7 +13,7 @@
 
 {% block header_appointment %}
     <a class="btn disabled"
-                       href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
+       href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
 {% endblock %}
 
 {% block language_href %}
@@ -21,70 +21,79 @@
 {% endblock %}
 
 {% block content %}
-<div class="form-wrapper">
-    <div class="form-container">
-        <div class="title-block">Запис на прийом</div>
-        <form method="POST" action="record" id="record-form">
-            {% csrf_token %}
-            <div class="user-details">
-                <div class="inner-box" id="patient-lastname">
-                    <label for="lastname" class="details">Прізвище</label>
-                    <input class="textholder" id="lastname" type="text" placeholder="Введіть прізвище"
-                           required>
-                </div>
-                <div class="inner-box" id="patient-firstname">
-                    <label for="firstname" class="details">Ім'я</label>
-                    <input class="textholder" id="firstname" type="text" placeholder="Введіть ім'я"
-                           required>
-                </div>
-                <div class="inner-box" id="patient-contract">
-                    <label for="contract" class="details">Номер контракту із сімейним лікарем</label>
-                    <input class="textholder" id="contract" type="text"
-                           placeholder="Введіть номер контракту, що заключено із сімейним лікарем"
-                           required>
-                </div>
-                <div class="inner-box" id="family-doctor-block">
-                    <label for="family-doctor" class="details">Сімейний лікар</label><br>
-                    <div class="info-block" id="family-doctor">
-                        <span class="unknown-block">не визначено</span>
+    <div class="form-wrapper">
+        <div class="form-container">
+            <h2 class="title-block">Запис на прийом</h2>
+            <form method="POST" action="record" id="record-form">
+                {% csrf_token %}
+                <div class="user-details">
+                    <div class="inner-box" id="family-doctor-block">
+                        <label for="family-doctor" class="details">Сімейний лікар</label><br>
+                        <div class="info-block" id="family-doctor">
+                            <input type="hidden" name="appointment_doctor_pk" value="{{ doctor.pk }}">
+                            <span class="info">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}, {{ doctor.category.name|lower }} кваліфікаційна категорія</span>
+                        </div>
+                    </div>
+                    <div class="inner-box" id="record-date-block">
+                        <label class="details">Дата</label><br>
+                        <div class="info-block" id="date">
+                            {% if appointments %}
+                                {% for app_date in app_dates %}
+                                    <div class="appointment-date">
+                                        <input type="radio" class="info date" id="appointment-date-{{ app_date }}" name="appointment_date"
+                                               value="{{ app_date }}" required>
+                                        <label for="appointment-date-{{ app_date }}"
+                                               style="font-size: 1.2em;">{{ app_date }}</label>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <span class="unknown-block">немає зазначених прийомів</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="inner-box" id="record-time-block">
+                        <label class="details">Час</label><br>
+                        <div class="info-block" id="time">
+                            {% if appointments %}
+                                    {% for app in appointments %}
+                                        <div class="appointment-time {{ app.start_datetime.date|date:'d.m.Y' }}">
+                                            <input type="radio" class="info time" id="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}"
+                                                   name="appointment_time"
+                                                   value="{{ app.start_datetime.time }}" required>
+                                            <label for="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}"
+                                                   style="font-size: 1.2em;">{{ app.start_datetime.time }}-{{ app.end_datetime.time }}</label>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="unknown-block">немає зазначених прийомів</span>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="inner-box" id="health-complaint">
+                        <label for="complaint" class="details">Скарги на здоров'я <small
+                                style="color: rgb(50, 200, 100)">(необов'язково)</small></label>
+                        <textarea class="textholder" id="complaint"
+                                  placeholder="Опишіть недоліки Вашого здоров'я..." name="appointment_complaint"></textarea>
                     </div>
                 </div>
-                <div class="inner-box" id="record-date-block">
-                    <label class="details">Дата </label><br>
-                    <div class="info-block" id="date">
-                        <span class="unknown-block">не визначено</span>
-                    </div>
+                <div id="buttons">
+                    <input class="button" id="record" type="submit" value="Записатися">
+                    <input class="button" type="reset" value="Очистити все" id="clear">
                 </div>
-                <div class="inner-box" id="record-time-block">
-                    <label class="details">Час</label><br>
-                    <div class="info-block" id="time">
-                        <span class="unknown-block">не визначено</span>
-                    </div>
-                </div>
-                <div class="inner-box" id="health-complaint">
-                    <label for="complaint" class="details">Скарги на здоров'я <small
-                            style="color: rgb(50, 200, 100)">(необов'язково)</small></label>
-                    <textarea class="textholder" id="complaint"
-                              placeholder="Опишіть недоліки Вашого здоров'я..."></textarea>
-                </div>
-            </div>
-            <div id="buttons">
-                <input class="button" id="record" type="submit" value="Записатися">
-                <input class="button" type="reset" value="Очистити все" id="clear">
-            </div>
-        </form>
-    </div>
-</div>
-<div id="popup" class="popup">
-    <div class="popup__body">
-        <div class="popup__content">
-            <a href="/" class="popup__close">x</a>
-            <div class="popup__title"></div>
-            <div class="popup__text"></div>
+            </form>
         </div>
     </div>
-</div>
+    <div id="popup" class="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="/" class="popup__close">x</a>
+                <div class="popup__title"></div>
+                <div class="popup__text"></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
 {% block scripts %}
     <script src="{% static 'js/form.js' %}"></script>
 {% endblock %}

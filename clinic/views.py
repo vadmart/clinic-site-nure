@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from clinic.models import Doctor, Patient, Review
+from clinic.models import Doctor, Patient, Review, Recording
 from django.http import HttpResponse, HttpResponseRedirect
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
@@ -42,7 +42,23 @@ def get_reviews(request, doctor_ln):
 
 
 def get_appointment_page(request):
-    return render(request, template_name="clinic/pages/making-an-appointment.html")
+    doctor = Patient.objects.get(user=request.user).doctor
+    appointments = doctor.schedule_set.all()
+    app_dates = []
+    for app in appointments:
+        app_date = app.start_datetime.strftime("%d.%m.%Y")
+        if app_date not in app_dates:
+            app_dates.append(app_date)
+    print(appointments)
+    return render(request, template_name="clinic/pages/making-an-appointment.html", context={"doctor": doctor,
+                                                                                             "appointments": appointments,
+                                                                                             "app_dates": app_dates})
+
+
+def make_record(request):
+    print(request.POST)
+    Recording
+    return HttpResponseRedirect(redirect_to="index")
 
 
 def get_registration_form(request):

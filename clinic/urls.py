@@ -15,5 +15,6 @@ urlpatterns = [
     path("send_contract_num", views.send_contract_num, name="send_contract_num"),
     path("login", views.ClinicLogin.as_view(), name="login"),
     path("logout", views.ClinicLogout.as_view(), name="logout"),
-    path("sendReview", views.send_review, name="send_review")
+    path("sendReview", views.send_review, name="send_review"),
+    path("record", views.make_record, name="record")
 ]

@@ -127,8 +127,8 @@ class Schedule(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
-    cabinet = models.ForeignKey(Cabinet, null=True, on_delete=models.SET_NULL)
-    patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
+    cabinet = models.ForeignKey(Cabinet, null=True, blank=True, on_delete=models.SET_NULL)
+    patient = models.ForeignKey(Patient, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}"

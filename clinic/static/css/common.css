@@ -274,6 +274,11 @@ li.menu-item .account-block .exit-block a {
     border-radius: 10px;
 }
 
+li.menu-item a.dropbtn:hover + .dropdown-content,
+li.menu-item .dropdown-content:hover {
+    display: block;
+}
+
 .menu .dropdown-content .inner-btn {
     float: none;
     display: block;
