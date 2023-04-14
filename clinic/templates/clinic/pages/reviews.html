@@ -93,20 +93,43 @@
         {% endif %}
     </div>
     <div class="review-blank-wrapper hidden">
-        <div class="review-blank">
-            <a href="" class="close-button">X</a>
-            <form method="post" action="{% url 'send_review' %}" class="blank" data-doctor-lastname-name="{{ doctor.image_name }}">
-                {% csrf_token %}
-                <input type="hidden" name="doctor_lastname_name" value="{{ doctor.image_name }}">
-                <div class="inner-box" id="review-box">
-                    <label for="review-text">Текст відгуку</label>
-                    <textarea class="review-textarea" id="review-text" name="review_text"></textarea>
+        {% if user.is_authenticated %}
+            {% if user.patient.doctor == doctor %}
+                <div class="review-blank">
+                    <div class="close-block">
+                        <a href="" class="close-button">X</a>
+                    </div>
+                    <form method="post" action="{% url 'send_review' %}" class="blank"
+                          data-doctor-lastname-name="{{ doctor.image_name }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="doctor_lastname_name" value="{{ doctor.image_name }}">
+                        <div class="inner-box" id="review-box">
+                            <label for="review-text">Текст відгуку</label>
+                            <textarea class="review-textarea" id="review-text" name="review_text"></textarea>
+                        </div>
+                        <div class="inner-box" id="submit-button-wrapper">
+                            <input type="submit" class="submit-review-button" value="Відправити">
+                        </div>
+                    </form>
                 </div>
-                <div class="inner-box" id="submit-button-wrapper">
-                    <input type="submit" class="submit-review-button" value="Відправити">
+            {% else %}
+                <div class="err-blank">
+                    <div class="close-block">
+                        <a href="" class="close-button">X</a>
+                    </div>
+                    <h2>Для того, щоб залишати відгуки для цього лікаря, необхідно укласти із ним контракт</h2>
                 </div>
-            </form>
-        </div>
+            {% endif %}
+        {% else %}
+            <div class="err-blank">
+                <div class="close-block">
+                    <a href="" class="close-button">X</a>
+                </div>
+                <h2>Залишати відгуки можуть тільки авторизовані користувачі. <a href="{% url 'login' %}"
+                                                                                style="text-decoration: none">Увійти</a>
+                </h2>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block scripts %}

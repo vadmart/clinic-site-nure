@@ -152,7 +152,8 @@ form .user-details .inner-box {
 }
 
 .user-details .inner-box .appointment-date {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }
 
 .user-details .inner-box .appointment-time {

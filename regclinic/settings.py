@@ -122,7 +122,7 @@ USE_TZ = True
 
 LANGUAGES = (
     ("uk", _("Ukrainian")),
-    ("ru", _("Russian"))
+    ("en", _("English"))
 )
 
 LOCALE_PATHS = [

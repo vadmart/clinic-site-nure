@@ -136,17 +136,33 @@
 .review-blank {
     top: 20%;
     background-color: rgba(105, 223, 223, 1);
-    padding: 10px;
+    padding: 1em;
     position: fixed;
     border-radius: 10px;
-    max-height: 550px;
+    display: grid;
+    grid-template-rows: 1fr 20fr;
 }
 
-.close-button {
+.err-blank {
+    top: 20%;
+    background-color: rgba(105, 223, 223, 1);
+    padding: 0.5em;
+    position: fixed;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    border-radius: 10px;
+    grid-row-gap: 1em;
+}
+
+.err-blank .close-block,
+.review-blank .close-block {
+    display: flex;
+    justify-content: right;
+}
+
+a.close-button {
     text-decoration: none;
     color: #ffffff;
-    position: absolute;
-    right: 10px;
     font-size: 1.3rem;
     font-family: "Inter", sans-serif;
 }
@@ -155,7 +171,6 @@
     display: grid;
     grid-row-gap: 1em;
     margin: 30px 0 0 0;
-    height: 100%;
 }
 
 form.blank div.inner-box {

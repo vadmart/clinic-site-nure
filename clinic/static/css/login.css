@@ -2,27 +2,32 @@
     font-family: Inter, sans-serif;
 }
 
-.registration-form-wrapper {
+ul.errorlist {
+    list-style-type: none;
+    color: rgb(200, 50, 50)
+}
+
+.login-form-wrapper {
     display: grid;
     justify-content: center;
     padding-top: 2em;
 }
 
-.registration-form {
+.login-form {
     display: grid;
     grid-row-gap: 1em;
     background-color: rgba(155, 222, 209, 1);
     padding: 1em;
     border-radius: 10px;
-    max-width: 960px;
+    max-width: 350px;
     box-shadow: 5px 10px 15px rgba(75, 150, 120, 0.5);
 }
 
-.registration-form-title {
+.login-form-title {
     border-bottom: solid 2px #000000;
 }
 
-.registration-form-title h3 {
+.login-form-title h3 {
     font-size: 1.5em;
 }
 
@@ -100,7 +105,7 @@ form input[type=reset]:hover {
 }
 
 @media screen and (max-width: 540px) {
-    .registration-form-title h3 {
+    .login-form-title h3 {
         font-size: calc(1em + 0.4 * (100vw / 34));
         grid-row-gap: 0.5em;
     }
@@ -109,7 +114,7 @@ form input[type=reset]:hover {
         font-size: calc(1em + 0.2 * (100vw / 34))
     }
 
-    .registration-form {
+    .login-form {
         max-width: 90%;
     }
 }

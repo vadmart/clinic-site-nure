@@ -42,6 +42,8 @@ def get_reviews(request, doctor_ln):
 
 
 def get_appointment_page(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(redirect_to="login")
     doctor = Patient.objects.get(user=request.user).doctor
     appointments = doctor.schedule_set.all()
     app_dates = []
@@ -57,7 +59,6 @@ def get_appointment_page(request):
 
 def make_record(request):
     print(request.POST)
-    Recording
     return HttpResponseRedirect(redirect_to="index")
 
 

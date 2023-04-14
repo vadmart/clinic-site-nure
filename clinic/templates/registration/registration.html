@@ -7,36 +7,42 @@
     <title>{% trans 'Харківська районна лікарня №496' %}</title>
 {% endblock %}
 
+{% block header_registration %}
+    <li class="menu-item auth-block registration">
+        <a class="btn disabled" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="registration-form-wrapper">
         <div class="registration-form">
             <div class="registration-form-title">
-                <h3>Реєстрація</h3>
+                <h3>{% trans 'Реєстрація' %}</h3>
             </div>
             <form class="form-data" method="post" action="{% url 'register' %}">
                 {% csrf_token %}
                 <div class="user-info">
                     <div class="user-info__first">
                         <div class="field-block">
-                            <label for="registration-lastname">Прізвище</label>
+                            <label for="registration-lastname">{% trans 'Прізвище' %}</label>
                             <input type="text" id="registration-lastname" name="lastname" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-name">Ім'я</label>
+                            <label for="registration-name">{% trans "Ім'я" %}</label>
                             <input type="text" id="registration-name" name="name" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-patronymic">По батькові</label>
+                            <label for="registration-patronymic">{% trans 'По батькові' %}</label>
                             <input type="text" id="registration-patronymic" name="patronymic" required>
                         </div>
                     </div>
                     <div class="user-info__second">
                         <div class="field-block">
-                            <label for="registration-phone-num">Номер телефону</label>
+                            <label for="registration-phone-num">{% trans 'Номер телефону' %}</label>
                             <input type="text" id="registration-phone-num" name="phone_number" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-doctor-choice">Із яким доктором узгоджуєте контракт?</label>
+                            <label for="registration-doctor-choice">{% trans 'Із яким доктором узгоджуєте контракт?' %}</label>
                             <select name="doctor_choice" id="registration-doctor-choice" required>
                                 <option value="">Оберіть лікаря</option>
                                 {% for doctor in doctors %}
@@ -63,15 +69,18 @@
                         </div>
                         <div class="field-block">
                             <label for="registration-house-number">Будинок</label>
-                            <input type="text" id="registration-house-number" name="house_number" style="width: 160px;" required>
+                            <input type="text" id="registration-house-number" name="house_number" style="width: 160px;"
+                                   required>
                         </div>
                         <div class="field-block">
                             <label for="registration-flat-number">Квартира</label>
-                            <input type="text" id="registration-flat-number" name="flat_number " style="width: 160px;" required>
+                            <input type="text" id="registration-flat-number" name="flat_number" style="width: 160px;"
+                                   required>
                         </div>
                         <div class="field-block">
                             <label for="registration-post-index">Індекс пошти</label>
-                            <input type="text" id="registration-post-index" name="post_index" style="width: 160px;" required>
+                            <input type="text" id="registration-post-index" name="post_index" style="width: 160px;"
+                                   required>
                         </div>
                     </div>
                     <div class="user-info__fourth">

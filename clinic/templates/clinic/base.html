@@ -79,7 +79,7 @@
                                 <span>{{ user.username }} {{ user.last_name }}</span>
                             </div>
                             <div class="exit-block">
-                                <a href="{% url 'logout' %}">Вихід</a>
+                                <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
                             </div>
                         </div>
                     {% endblock %}
@@ -143,9 +143,14 @@
                 <li class="menu-item">
                     {% if user.is_authenticated %}
                         {% block mobile-menu_auth_user %}
-                            <div id="user">
-                                <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
-                                <span>{{ user.username }} {{ user.last_name }}</span>
+                            <div class="account-block">
+                                <div id="user">
+                                    <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
+                                    <span>{{ user.username }} {{ user.last_name }}</span>
+                                </div>
+                                <div class="exit-block">
+                                    <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
+                                </div>
                             </div>
                         {% endblock %}
                     {% else %}
@@ -155,11 +160,7 @@
                     {% endif %}
                 </li>
                 <li class="menu-item">
-                    {% if user.is_authenticated %}
-                        {% block mobile-menu_logout %}
-                            <a class="btn" href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
-                        {% endblock %}
-                    {% else %}
+                    {% if not user.is_authenticated %}
                         {% block mobile-menu_register %}
                             <a class="btn" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
                         {% endblock %}
