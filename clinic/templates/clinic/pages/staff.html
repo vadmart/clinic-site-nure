@@ -5,7 +5,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/staff.css' %}">
-    <title>Наші лікарі</title>
+    <title>{% trans 'Наші лікарі' %}</title>
 {% endblock %}
 
 {% block header_staff %}
@@ -23,7 +23,7 @@
 
 {% block content %}
     <div class="title-box">
-        <h2>Наші лікарі</h2>
+        <h2>{% trans 'Наші лікарі' %}</h2>
     </div>
     <div class="doctors">
         {% for doctor in doctors %}
@@ -40,12 +40,27 @@
                 <div class="full-description">
                     <h5 class="description-header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h5>
                     <div class="description-block">
-                        <p class="description">{{ doctor.category.name }} кваліфікаційна категорія<br>
-                            Номер кабінету № 4<br>
-                            Номер телефону: 548-69-213, 0664586771<br>
+                        <p class="description">{{ doctor.category.name }} {% trans 'кваліфікаційна категорія' %}<br>
+                            {% trans 'Номер кабінету №' %} 4<br>
+                            {% trans 'Номери телефону' %}:
+                            {% for phone_obj in doctor.doctorphonenumber_set.values %}
+                                {{ phone_obj.phone_number_value }}{% if not forloop.last %},{% endif %}
+                            {% endfor %}<br>
                         </p>
-                        <p class="experience-description">Стаж роботи: {{ doctor.work_start_date|years_to_now }} років</p>
-                        <a class="doctor-btn" href="{% url 'reviews' doctor_ln=doctor.image_name %}">Докладніше...</a>
+                        <p class="experience-description">{% trans 'Стаж роботи' %}: {{ doctor.work_start_date|years_to_now }}
+                            {% get_current_language as CURRENT_LANGUAGE %}
+                            {% if CURRENT_LANGUAGE == "uk" %}
+                                {% uk_pluralize doctor.work_start_date|years_to_now "рік,роки,років" %}
+                            {% else %}
+                                {% blocktrans count years=doctor.work_start_date|years_to_now %}
+                                    year
+                                {% plural %}
+                                    years
+                                {% endblocktrans %}
+                            {% endif %}
+                        </p>
+                        <a class="doctor-btn"
+                           href="{% url 'reviews' doctor_slug=doctor.slug %}">{% trans 'Докладніше...' %}</a>
                     </div>
                 </div>
             </div>

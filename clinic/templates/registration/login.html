@@ -11,11 +11,15 @@
     <a class="btn disabled" href="{% url 'login' %}">{% trans 'Вхід' %}</a>
 {% endblock %}
 
+{% block language_href %}
+    href="/{{ language.code }}/login"
+{% endblock %}
+
 {% block content %}
     <div class="login-form-wrapper">
         <div class="login-form">
             <div class="login-form-title">
-                <h3>{% trans 'Авторизація' %}</h3>
+                <h3>{% trans 'Аутентифікація' %}</h3>
             </div>
             <form class="form-data" method="post" action="{% url 'login' %}">
                 {% csrf_token %}

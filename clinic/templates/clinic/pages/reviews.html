@@ -4,17 +4,17 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
-    <title>Відгуки</title>
+    <title>{% trans 'Відгуки' %}</title>
 {% endblock %}
 
 
 {% block language_href %}
-    href="/{{ language.code }}/reviews"
+    href="/{{ language.code }}/reviews/{{ doctor.slug }}"
 {% endblock %}
 
 {% block content %}
     <div class="title-box">
-        <h2>Інформація про лікаря</h2>
+        <h2>{% trans 'Інформація про лікаря' %}</h2>
     </div>
     {% load clinic_extras %}
     <div class="doctor-wrapper">
@@ -29,34 +29,45 @@
             <div class="doctor-description">
                 <h3 class="header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h3>
                 <div class="prof-info">
-                    <span class="category-info">{{ doctor.category.name }} кваліфікаційна категорія</span>
-                    <div class="work-experience">Стаж: {{ doctor.work_start_date|years_to_now }} років</div>
+                    <span class="category-info">{{ doctor.category.name }} {% trans 'кваліфікаційна категорія' %}</span>
+                    <div class="work-experience">{% trans 'Стаж' %}: {{ doctor.work_start_date|years_to_now }}
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                            {% if CURRENT_LANGUAGE == "uk" %}
+                                {% uk_pluralize doctor.work_start_date|years_to_now "рік,роки,років" %}
+                            {% else %}
+                                {% blocktrans count years=doctor.work_start_date|years_to_now %}
+                                    year
+                                {% plural %}
+                                    years
+                                {% endblocktrans %}
+                            {% endif %}
+                    </div>
                 </div>
-                <a href="" class="feedback_btn">Залишити відгук</a>
+                <a href="" class="feedback_btn">{% trans 'Залишити відгук' %}</a>
             </div>
         </div>
     </div>
     <div class="title-box">
-        <h2>Відгуки</h2>
+        <h2>{% trans 'Відгуки' %}</h2>
     </div>
     <div class="reviews">
         <form class="reviews__menu">
-            <div class="reviews__menu__title">Налаштування відгуків</div>
+            <div class="reviews__menu__title">{% trans 'Налаштування відгуків' %}</div>
             <div class="reviews__menu__elems">
                 <div class="menu__elem">
-                    <label for="background" class="menu__option__title">Фон</label>
+                    <label for="background" class="menu__option__title">{% trans 'Фон' %}</label>
                     <select name="options" id="background">
-                        <option value="">--Оберіть колір фону--</option>
-                        <option value="red">Червоний</option>
-                        <option value="blue">Синій</option>
-                        <option value="green">Зелений</option>
-                        <option value="yellow">Жовтий</option>
+                        <option value="">--{% trans 'Оберіть колір фону' %}--</option>
+                        <option value="red">{% trans 'Червоний' %}</option>
+                        <option value="blue">{% trans 'Синій' %}</option>
+                        <option value="green">{% trans 'Зелений' %}</option>
+                        <option value="yellow">{% trans 'Жовтий' %}</option>
                     </select>
                 </div>
                 <div class="menu__elem">
-                    <label for="font-size" class="menu__option__title">Розмір шрифта</label>
+                    <label for="font-size" class="menu__option__title">{% trans 'Розмір шрифта' %}</label>
                     <select name="options" id="font-size">
-                        <option value="">--Оберіть розмір шрифта--</option>
+                        <option value="">--{% trans 'Оберіть розмір шрифта' %}--</option>
                         <option value="0.4em">0.4em</option>
                         <option value="0.6em">0.6em</option>
                         <option value="0.8em">0.8em</option>
@@ -66,20 +77,20 @@
                     </select>
                 </div>
                 <div class="menu__elem">
-                    <label for="font-type" class="menu__option__title">Тип шрифта</label>
+                    <label for="font-type" class="menu__option__title">{% trans 'Тип шрифта' %}</label>
                     <select name="options" id="font-type">
-                        <option value="">--Оберіть тип шрифту--</option>
+                        <option value="">--{% trans 'Оберіть тип шрифту' %}--</option>
                         <option value="serif">Serif</option>
                         <option value="sans-serif">Sans-serif</option>
                     </select>
                 </div>
                 <div class="menu__elem">
-                    <input type="reset" id="default-button" value="За замовченням">
+                    <input type="reset" id="default-button" value="{% trans 'За замовченням' %}">
                 </div>
             </div>
         </form>
         {% if not doctor.review_set.all %}
-            <p class="no-reviews">Немає жодного відгуку</p>
+            <p class="no-reviews">{% trans 'Немає жодного відгуку' %}</p>
         {% else %}
             {% for review in doctor.review_set.all %}
                 <div class="review">
@@ -99,16 +110,15 @@
                     <div class="close-block">
                         <a href="" class="close-button">X</a>
                     </div>
-                    <form method="post" action="{% url 'send_review' %}" class="blank"
-                          data-doctor-lastname-name="{{ doctor.image_name }}">
+                    <form method="post" action="{% url 'send_review' %}" class="blank">
                         {% csrf_token %}
-                        <input type="hidden" name="doctor_lastname_name" value="{{ doctor.image_name }}">
+                        <input type="hidden" name="doctor_url" value="{{ doctor.slug }}">
                         <div class="inner-box" id="review-box">
-                            <label for="review-text">Текст відгуку</label>
+                            <label for="review-text">{% trans 'Текст відгуку' %}</label>
                             <textarea class="review-textarea" id="review-text" name="review_text"></textarea>
                         </div>
                         <div class="inner-box" id="submit-button-wrapper">
-                            <input type="submit" class="submit-review-button" value="Відправити">
+                            <input type="submit" class="submit-review-button" value="{% trans 'Відправити' %}">
                         </div>
                     </form>
                 </div>
@@ -117,7 +127,7 @@
                     <div class="close-block">
                         <a href="" class="close-button">X</a>
                     </div>
-                    <h2>Для того, щоб залишати відгуки для цього лікаря, необхідно укласти із ним контракт</h2>
+                    <h2>{% trans 'Для того, щоб залишати відгуки для цього лікаря, необхідно укласти із ним контракт' %}</h2>
                 </div>
             {% endif %}
         {% else %}
@@ -125,8 +135,8 @@
                 <div class="close-block">
                     <a href="" class="close-button">X</a>
                 </div>
-                <h2>Залишати відгуки можуть тільки авторизовані користувачі. <a href="{% url 'login' %}"
-                                                                                style="text-decoration: none">Увійти</a>
+                <h2>{% trans 'Залишати відгуки можуть тільки аутентифіковані користувачі' %} <a href="{% url 'login' %}"
+                                                                                style="text-decoration: none">{% trans 'Увійти' %}</a>
                 </h2>
             </div>
         {% endif %}

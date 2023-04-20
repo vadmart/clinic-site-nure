@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-12 22:44+0200\n"
+"POT-Creation-Date: 2023-04-15 16:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,55 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\clinic\templates\clinic\base.html:21
+#: .\templates\clinic\base.html:20
 msgid "Тестова робота (клініка)"
 msgstr "Тестова робота (клініка)"
 
-#: .\clinic\templates\clinic\base.html:29
-#: .\clinic\templates\clinic\base.html:64
+#: .\templates\clinic\base.html:43 .\templates\clinic\base.html:114
 msgid "Лікарня"
 msgstr "Лікарня"
 
-#: .\clinic\templates\clinic\base.html:32
-#: .\clinic\templates\clinic\base.html:67
-msgid "Галерея"
-msgstr "Галерея"
-
-#: .\clinic\templates\clinic\base.html:35
-#: .\clinic\templates\clinic\base.html:70
+#: .\templates\clinic\base.html:47 .\templates\clinic\base.html:118
+#: .\templates\clinic\pages\contacts.html:10
+#: .\templates\clinic\pages\contacts.html:14
+#: .\templates\clinic\pages\contacts.html:23
 msgid "Контакти"
 msgstr "Контакти"
 
-#: .\clinic\templates\clinic\base.html:38
-#: .\clinic\templates\clinic\base.html:73
+#: .\templates\clinic\base.html:52 .\templates\clinic\base.html:123
+#: .\templates\clinic\pages\vacancy.html:10
+#: .\templates\clinic\pages\vacancy.html:14
 msgid "Вакансії"
 msgstr "Вакансії"
 
-#: .\clinic\templates\clinic\base.html:43
-#: .\clinic\templates\clinic\base.html:78
+#: .\templates\clinic\base.html:59 .\templates\clinic\base.html:130
+#: .\templates\clinic\pages\staff.html:12
+#: .\templates\clinic\pages\staff.html:16
 msgid "Наші лікарі"
 msgstr "Наші лікарі"
 
-#: .\clinic\templates\clinic\base.html:46
-#: .\clinic\templates\clinic\base.html:81
-#: .\clinic\templates\clinic\index.html:54
+#: .\templates\clinic\base.html:65 .\templates\clinic\base.html:135
+#: .\templates\clinic\index.html:23
+#: .\templates\clinic\pages\making-an-appointment.html:11
+#: .\templates\clinic\pages\making-an-appointment.html:16
 msgid "Запис на прийом"
 msgstr "Запис на прийом"
 
-#: .\clinic\templates\clinic\base.html:49
-#: .\clinic\templates\clinic\base.html:84
+#: .\templates\clinic\base.html:70 .\templates\clinic\base.html:140
+#: .\templates\clinic\pages\schedule-work.html:11
+#: .\templates\clinic\pages\schedule-work.html:15
 msgid "Графік роботи"
 msgstr "Графік роботи"
 
-#: .\clinic\templates\clinic\base.html:61
+#: .\templates\clinic\base.html:82 .\templates\clinic\base.html:152
+msgid "Вихід"
+msgstr ""
+
+#: .\templates\clinic\base.html:88 .\templates\clinic\base.html:158
+msgid "Вхід"
+msgstr ""
+
+#: .\templates\clinic\base.html:95 .\templates\clinic\base.html:165
+#: .\templates\registration\registration.html:12
+#: .\templates\registration\registration.html:20
+msgid "Реєстрація"
+msgstr ""
+
+#: .\templates\clinic\base.html:110 .\templates\clinic\index.html:17
 msgid "Додому"
 msgstr "Додому"
 
-#: .\clinic\templates\clinic\base.html:95
+#: .\templates\clinic\base.html:177
 msgid "Харківська районна клініка"
 msgstr "Харківська районна клініка"
 
-#: .\clinic\templates\clinic\base.html:96
+#: .\templates\clinic\base.html:178
 msgid ""
 "Комунальне некомерційне підприємство \"Міська поліклініка № 496\" "
 "Харківської міської ради"
@@ -73,13 +87,13 @@ msgstr ""
 "Комунальне некомерційне підприємство \"Міська поліклініка № 496\" "
 "Харківської міської ради"
 
-#: .\clinic\templates\clinic\index.html:7
+#: .\templates\clinic\index.html:7 .\templates\registration\registration.html:7
 #, fuzzy
 #| msgid "Харківська районна клініка"
 msgid "Харківська районна лікарня №496"
 msgstr "Харківська районна клініка №496"
 
-#: .\clinic\templates\clinic\index.html:58
+#: .\templates\clinic\index.html:27
 msgid ""
 "Ми надаємо <span style=\"color: gold; font: inherit\">високоякісні</span> "
 "консультації"
@@ -87,39 +101,39 @@ msgstr ""
 "Ми надаємо <span style=\"color: gold; font: inherit\">високоякісні</span> "
 "консультації"
 
-#: .\clinic\templates\clinic\index.html:59
+#: .\templates\clinic\index.html:28
 msgid "Найголовніше для нас - це швидкість та ефективність одужання пацієнтів."
 msgstr ""
 "Найголовніше для нас - це швидкість та ефективність одужання пацієнтів."
 
-#: .\clinic\templates\clinic\index.html:59
+#: .\templates\clinic\index.html:28
 msgid "Із нами не страшна жодна хвороба"
 msgstr "Із нами не страшна жодна хвороба"
 
-#: .\clinic\templates\clinic\index.html:61
+#: .\templates\clinic\index.html:30
 msgid "Запис до лікаря"
 msgstr "Запис до лікаря"
 
-#: .\clinic\templates\clinic\index.html:62
+#: .\templates\clinic\index.html:31
 msgid "Дізнатися більше"
 msgstr "Дізнатися більше"
 
-#: .\clinic\templates\clinic\index.html:75
+#: .\templates\clinic\index.html:51
 msgid "Загальна інформація"
 msgstr "Загальна інформація"
 
-#: .\clinic\templates\clinic\index.html:82
+#: .\templates\clinic\index.html:58
 msgid "MainPage Quote"
 msgstr ""
 "Головним скарбом життя є не землі, що ти їх завоював, не багатства, що їх "
 "маєш у скринях... Головним скарбом життя є здоров’я, і, щоб його зберегти, "
 "потрібно багато що знати."
 
-#: .\clinic\templates\clinic\index.html:84
+#: .\templates\clinic\index.html:60
 msgid "-Авіцена"
 msgstr "-Авіцена"
 
-#: .\clinic\templates\clinic\index.html:87
+#: .\templates\clinic\index.html:63
 msgid "MainPage GeneralInfo"
 msgstr ""
 "Недаремно наведена цитата є девізом обслуговування пацієнтів. Завдяки "
@@ -133,57 +147,166 @@ msgstr ""
 "наказам Департаменту охорони здоров’я Харківської міської ради, Статута та "
 "іншим нормативним актам."
 
-#: .\clinic\templates\clinic\index.html:93
+#: .\templates\clinic\index.html:69
 msgid "Що робить нас<br class=\"show-for-mobile\"> особливими"
 msgstr "Що робить нас<br class=\"show-for-mobile\"> особливими"
 
-#: .\clinic\templates\clinic\index.html:98
+#: .\templates\clinic\index.html:74
 msgid "Якісні лабораторії"
 msgstr "Якісні лабораторії"
 
-#: .\clinic\templates\clinic\index.html:99
+#: .\templates\clinic\index.html:75
 msgid "SpecialInfo QualityEquipment"
 msgstr ""
 "Клініка забезпечена сучасним обладнанням. Саме тому результати діагностики "
 "швидкі та точні, а отже, й лікування ефективне."
 
-#: .\clinic\templates\clinic\index.html:103
+#: .\templates\clinic\index.html:79
 msgid "Позитивний персонал"
 msgstr "Позитивний персонал"
 
-#: .\clinic\templates\clinic\index.html:104
+#: .\templates\clinic\index.html:80
 msgid "SpecialInfo PositiveStaff"
 msgstr ""
 "У клініці на вас чекатимуть позитивні, зацікавлені у своїй роботі "
 "спеціалісти. Вони знають, як знайти підхід до будь-якого пацієнта!"
 
-#: .\clinic\templates\clinic\index.html:108
+#: .\templates\clinic\index.html:84
 msgid "Чистота та гарна санітарія"
 msgstr "Чистота та гарна санітарія"
 
-#: .\clinic\templates\clinic\index.html:109
+#: .\templates\clinic\index.html:85
 msgid "SpecialInfo GoodCleanliness"
 msgstr ""
 "Уборка нашої клініки відбувається за допомогою німецьких професійних "
 "порохотягів Kärcher."
 
-#: .\clinic\templates\clinic\index.html:113
+#: .\templates\clinic\index.html:89
 msgid "Методи лікування"
 msgstr "Методи лікування"
 
-#: .\clinic\templates\clinic\index.html:114
+#: .\templates\clinic\index.html:90
 msgid "SpecialInfo TreatmentMethods"
 msgstr ""
 "Наші лікарі навчалися у ліпших ВНЗ України та навіть Німеччини! Завдяки "
 "такому міцному фундаменту та наполегливій практиці клініка пропонує лише "
 "найсучасніші ефективні методи лікування"
 
-#: .\clinic\templates\clinic\index.html:122
+#: .\templates\clinic\index.html:98
 msgid "Увага"
-msgstr "Увага"
+msgstr ""
 
-#: .\clinic\templates\clinic\index.html:123
+#: .\templates\clinic\index.html:99
 msgid "TestReminderText"
 msgstr ""
 "Тест щодо знання заходів з протидії COVID-19 не було пройдено. Рекомендуємо "
 "вивчити заходи із цього приводу та пройти тест знову"
+
+#: .\templates\clinic\pages\contacts.html:28
+msgid "Телефони:"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:33
+msgid "Адреса:"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:34
+msgid "вул. Тюрінська, 96"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:38
+msgid "Головний лікар Мєтіла Євген Дмитрович:"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:41
+msgid "Відділ по роботі з персоналом:"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:44
+msgid "Відділ реклами:"
+msgstr ""
+
+#: .\templates\clinic\pages\contacts.html:47
+msgid "Загальні питання:"
+msgstr ""
+
+#: .\templates\registration\registration.html:27
+msgid "Прізвище"
+msgstr ""
+
+#: .\templates\registration\registration.html:31
+msgid "Ім'я"
+msgstr ""
+
+#: .\templates\registration\registration.html:35
+msgid "По батькові"
+msgstr ""
+
+#: .\templates\registration\registration.html:41
+msgid "Номер телефону"
+msgstr ""
+
+#: .\templates\registration\registration.html:45
+msgid "Із яким доктором узгоджуєте контракт?"
+msgstr ""
+
+#: .\templates\registration\registration.html:58
+msgid "Тип вулиці"
+msgstr ""
+
+#: .\templates\registration\registration.html:60
+msgid "Оберіть тип"
+msgstr ""
+
+#: .\templates\registration\registration.html:61
+msgid "Вулиця"
+msgstr ""
+
+#: .\templates\registration\registration.html:62
+msgid "Проспект"
+msgstr ""
+
+#: .\templates\registration\registration.html:63
+msgid "Бульвар"
+msgstr ""
+
+#: .\templates\registration\registration.html:67
+msgid "Назва вулиці"
+msgstr ""
+
+#: .\templates\registration\registration.html:71
+msgid "Будинок"
+msgstr ""
+
+#: .\templates\registration\registration.html:76
+msgid "Квартира"
+msgstr ""
+
+#: .\templates\registration\registration.html:81
+msgid "Індекс пошти"
+msgstr ""
+
+#: .\templates\registration\registration.html:89
+msgid ""
+"Після натискання кнопки \"Відправити номер контракту\" на вказаний вище "
+"номер буде надіслано СМС із номером. Введіть його у поле нижче"
+msgstr ""
+
+#: .\templates\registration\registration.html:95
+msgid "Відправити номер контракту"
+msgstr ""
+
+#: .\templates\registration\registration.html:104
+msgid "Зареєструватися"
+msgstr ""
+
+#: .\templates\registration\registration.html:107
+msgid "Очистити все"
+msgstr ""
+
+#: .\templates\registration\registration.html:112
+msgid "Вже є акаунт? <a href=\"/login\">Увійдіть</a>"
+msgstr ""
+
+#~ msgid "Галерея"
+#~ msgstr "Галерея"

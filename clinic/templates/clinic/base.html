@@ -66,11 +66,6 @@
                 {% endblock %}
             </li>
             <li class="menu-item">
-                {% block header_schedule %}
-                    <a class="btn" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
-                {% endblock %}
-            </li>
-            <li class="menu-item">
                 {% if user.is_authenticated %}
                     {% block header_auth_user %}
                         <div class="account-block">
@@ -133,11 +128,6 @@
                 <li class="menu-item dropdown-content">
                     {% block mobile-menu_appointment %}
                         <a class="btn" href="{% url 'making-an-appointment' %}">{% trans 'Запис на прийом' %}</a>
-                    {% endblock %}
-                </li>
-                <li class="menu-item">
-                    {% block mobile-menu_schedule %}
-                        <a class="btn" href="{% url 'schedule' %}">{% trans 'Графік роботи' %}</a>
                     {% endblock %}
                 </li>
                 <li class="menu-item">

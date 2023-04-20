@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from clinic.models import Doctor, Patient, Review, Recording
+import datetime
+
+from django.shortcuts import render, get_object_or_404
+from clinic.models import Doctor, Patient, Review, Recording, Schedule
 from django.http import HttpResponse, HttpResponseRedirect
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
@@ -36,8 +38,8 @@ def get_staff(request):
     return render(request, template_name="clinic/pages/staff.html", context={"doctors": doctors})
 
 
-def get_reviews(request, doctor_ln):
-    doctor = Doctor.objects.get(image_name=doctor_ln)
+def get_reviews(request, doctor_slug):
+    doctor = get_object_or_404(Doctor, slug=doctor_slug)
     return render(request, template_name="clinic/pages/reviews.html", context={"doctor": doctor})
 
 
@@ -45,20 +47,33 @@ def get_appointment_page(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(redirect_to="login")
     doctor = Patient.objects.get(user=request.user).doctor
-    appointments = doctor.schedule_set.all()
+    appointments = doctor.schedule_set.filter(patient=None)
     app_dates = []
     for app in appointments:
-        app_date = app.start_datetime.strftime("%d.%m.%Y")
-        if app_date not in app_dates:
+        app_date = app.start_datetime
+        if app_date.date() not in map(lambda dt_tm: dt_tm.date(), app_dates):
             app_dates.append(app_date)
-    print(appointments)
+    app_dates.sort()
+    app_dates = list(map(lambda dt_tm: dt_tm.strftime("%d.%m.%Y"), app_dates))
     return render(request, template_name="clinic/pages/making-an-appointment.html", context={"doctor": doctor,
                                                                                              "appointments": appointments,
                                                                                              "app_dates": app_dates})
 
 
 def make_record(request):
-    print(request.POST)
+    doctor = Doctor.objects.get(pk=request.POST["appointment_doctor_pk"])
+    recording = Recording(person=request.user.patient,
+                          doctor=Doctor.objects.get(pk=request.POST["appointment_doctor_pk"]),
+                          health_complaint=request.POST["appointment_complaint"]
+                          )
+    recording.save()
+    time = get_full_time(request.POST["appointment_time"]) if request.LANGUAGE_CODE.lower() == "en" else request.POST["appointment_time"]
+    dt_tm = datetime.datetime.strptime(request.POST["appointment_date"] + "T" + time, "%d.%m.%YT%H:%M")
+    schedule = Schedule.objects.get(doctor=doctor,
+                                    start_datetime=dt_tm)
+    patient = request.user.patient
+    schedule.patient = patient
+    schedule.save()
     return HttpResponseRedirect(redirect_to="index")
 
 
@@ -85,11 +100,11 @@ def validate_registration(request):
 
 
 def send_review(request):
-    doctor = Doctor.objects.get(image_name=request.POST['doctor_lastname_name'])
+    doctor = Doctor.objects.get(slug=request.POST['doctor_url'])
     Review.objects.create(doctor=doctor,
                           patient=request.user.patient,
                           text=request.POST["review_text"])
-    return HttpResponseRedirect(redirect_to=f"/reviews/{request.POST['doctor_lastname_name']}")
+    return HttpResponseRedirect(redirect_to=f"/reviews/{doctor.slug}")
 
 
 class ClinicLogin(LoginView):
@@ -98,7 +113,19 @@ class ClinicLogin(LoginView):
 
 
 class ClinicLogout(LogoutView):
-    template_name = "clinic/index.html"
-
     def get_success_url(self):
         return "index"
+
+
+def get_full_time(tm):
+    time_lst = tm.split()
+    time = time_lst[0].split(":")
+    if time_lst[1] == "a.m." and time[0] == "12":
+        return "00:" + time[1]
+    elif time_lst[1] == "a.m.":
+        return time_lst[0]
+    elif time_lst[1] == "p.m." and time[0] == "12":
+        return "12:" + time[1]
+    return str(int(time_lst[0]) + 12)
+
+

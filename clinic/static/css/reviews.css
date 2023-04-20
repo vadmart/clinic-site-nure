@@ -179,7 +179,7 @@ form.blank div.inner-box {
 }
 
 form.blank .inner-box textarea.review-textarea {
-    width: calc(240px + 500 * (100vw / 1200));
+    width: calc(240px + 300 * (100vw / 1200));
     height: 50vh;
     font-size: 1em;
     font-family: Inter, sans-serif;

@@ -23,19 +23,19 @@
 {% block content %}
     <div class="form-wrapper">
         <div class="form-container">
-            <h2 class="title-block">Запис на прийом</h2>
+            <h2 class="title-block">{% trans 'Запис на прийом' %}</h2>
             <form method="POST" action="record" id="record-form">
                 {% csrf_token %}
                 <div class="user-details">
                     <div class="inner-box" id="family-doctor-block">
-                        <label for="family-doctor" class="details">Сімейний лікар</label><br>
+                        <label for="family-doctor" class="details">{% trans 'Сімейний лікар' %}</label><br>
                         <div class="info-block" id="family-doctor">
                             <input type="hidden" name="appointment_doctor_pk" value="{{ doctor.pk }}">
-                            <span class="info">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}, {{ doctor.category.name|lower }} кваліфікаційна категорія</span>
+                            <span class="info">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}, {{ doctor.category.name|lower }} {% trans 'кваліфікаційна категорія' %}</span>
                         </div>
                     </div>
                     <div class="inner-box" id="record-date-block">
-                        <label class="details">Дата</label><br>
+                        <label class="details">{% trans 'Дата' %}</label><br>
                         <div class="info-block" id="date">
                             {% if appointments %}
                                 {% for app_date in app_dates %}
@@ -47,38 +47,38 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <span class="unknown-block">немає зазначених прийомів</span>
+                                <span class="unknown-block">{% trans 'немає зазначених прийомів' %}</span>
                             {% endif %}
                         </div>
                     </div>
                     <div class="inner-box" id="record-time-block">
-                        <label class="details">Час</label><br>
+                        <label class="details">{% trans 'Час' %}</label><br>
                         <div class="info-block" id="time">
                             {% if appointments %}
                                     {% for app in appointments %}
                                         <div class="appointment-time {{ app.start_datetime.date|date:'d.m.Y' }}">
-                                            <input type="radio" class="info time" id="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}"
+                                            <input type="radio" class="info time" id="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}-{{ app.start_datetime.time|time:'H:i' }}"
                                                    name="appointment_time"
                                                    value="{{ app.start_datetime.time }}" required>
-                                            <label for="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}"
+                                            <label for="appointment-time-{{ app.start_datetime.date|date:'d.m.Y' }}-{{ app.start_datetime.time|time:'H:i' }}"
                                                    style="font-size: 1.2em;">{{ app.start_datetime.time }}-{{ app.end_datetime.time }}</label>
                                         </div>
                                     {% endfor %}
                                 {% else %}
-                                    <span class="unknown-block">немає зазначених прийомів</span>
+                                    <span class="unknown-block">{% trans 'немає зазначених прийомів' %}</span>
                                 {% endif %}
                         </div>
                     </div>
                     <div class="inner-box" id="health-complaint">
-                        <label for="complaint" class="details">Скарги на здоров'я <small
-                                style="color: rgb(50, 200, 100)">(необов'язково)</small></label>
+                        <label for="complaint" class="details">{% trans "Скарги на здоров'я" %} <small
+                                style="color: rgb(50, 200, 100)">{% trans "(необов'язково)" %}</small></label>
                         <textarea class="textholder" id="complaint"
-                                  placeholder="Опишіть недоліки Вашого здоров'я..." name="appointment_complaint"></textarea>
+                                  placeholder="{% trans "Опишіть недоліки Вашого здоров'я..." %}" name="appointment_complaint"></textarea>
                     </div>
                 </div>
                 <div id="buttons">
-                    <input class="button" id="record" type="submit" value="Записатися">
-                    <input class="button" type="reset" value="Очистити все" id="clear">
+                    <input class="button" id="record" type="submit" value="{% trans 'Записатися' %}">
+                    <input class="button" type="reset" value="{% trans 'Очистити все' %}" id="clear">
                 </div>
             </form>
         </div>

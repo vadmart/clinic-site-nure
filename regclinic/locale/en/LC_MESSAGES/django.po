@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-12 22:44+0200\n"
+"POT-Creation-Date: 2023-04-17 19:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,10 +20,10 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\regclinic\settings.py:118
+#: .\regclinic\settings.py:125
 msgid "Ukrainian"
-msgstr "Украинский"
+msgstr ""
 
-#: .\regclinic\settings.py:119
-msgid "Russian"
-msgstr "Русский"
+#: .\regclinic\settings.py:126
+msgid "English"
+msgstr ""

@@ -86,7 +86,7 @@ div.user-info {
 
 .field-block input:focus,
 .field-block select:focus {
-    border: 0.1em solid #6499e9;
+    border: 0.1rem solid #6499e9;
     box-shadow: 0 0 2px 1px #6499e9;
 }
 
@@ -139,14 +139,14 @@ form input[type=reset]:hover {
 
 input#registration-contract-num:focus + button#registration-contract-num-button {
     box-shadow: 2px 0 2px 1px #6499e9;
-    border: 0.1em solid #6499e9;
+    border: 0.1rem solid #6499e9;
     border-left: none;
 }
 
 button#registration-contract-num-button {
     font-size: 1rem;
     padding: 0.25rem;
-    border-width: 1px;
+    border-width: 0.1rem;
     border-left: none;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -170,6 +170,7 @@ input#registration-contract-num {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     box-shadow: none;
+    border-width: 0.1rem;
 }
 
 input#registration-contract-num:focus {

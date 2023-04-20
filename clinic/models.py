@@ -3,6 +3,7 @@ from django.db import models
 import textwrap
 from django.contrib.auth.models import User
 from django.http import QueryDict
+from django.urls import reverse
 
 
 class DoctorCategory(models.Model):
@@ -23,6 +24,7 @@ class Doctor(models.Model):
     category = models.ForeignKey(DoctorCategory, on_delete=models.SET_NULL, null=True)
     work_start_date = models.DateField()
     image_name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, blank=True, null=True, verbose_name="url")
 
     def __str__(self):
         return f"{self.lastname} {self.name} {self.patronymic}"
@@ -30,6 +32,9 @@ class Doctor(models.Model):
     class Meta:
         verbose_name = "Доктор"
         verbose_name_plural = "Доктори"
+
+    def get_absolute_url(self):
+        return reverse("reviews", kwargs={"doctor_slug": self.slug})
 
 
 class DoctorPhoneNumber(models.Model):
@@ -100,7 +105,6 @@ class Recording(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     health_complaint = models.CharField(max_length=255)
-    was_patient_present = models.BooleanField(default=False)
 
     def __str__(self):
         return f"From: {self.person.name}, To: {self.doctor.name}"

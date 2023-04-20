@@ -13,6 +13,10 @@
     </li>
 {% endblock %}
 
+{% block language_href %}
+    href="/{{ language.code }}/registration"
+{% endblock %}
+
 {% block content %}
     <div class="registration-form-wrapper">
         <div class="registration-form">
@@ -55,30 +59,30 @@
                     </div>
                     <div class="user-info__third">
                         <div class="field-block">
-                            <label for="registration-street-type">Тип вулиці</label>
+                            <label for="registration-street-type">{% trans 'Тип вулиці' %}</label>
                             <select name="street_type" id="registration-street-type" required>
-                                <option value="">Оберіть тип</option>
-                                <option value="street">Вулиця</option>
-                                <option value="avenue">Проспект</option>
-                                <option value="boulevard">Бульвар</option>
+                                <option value="">{% trans 'Оберіть тип' %}</option>
+                                <option value="street">{% trans 'Вулиця' %}</option>
+                                <option value="avenue">{% trans 'Проспект' %}</option>
+                                <option value="boulevard">{% trans 'Бульвар' %}</option>
                             </select>
                         </div>
                         <div class="field-block">
-                            <label for="registration-street_name">Назва вулиці</label>
+                            <label for="registration-street_name">{% trans 'Назва вулиці' %}</label>
                             <input type="text" id="registration-street_name" name="street_name" required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-house-number">Будинок</label>
+                            <label for="registration-house-number">{% trans 'Будинок' %}</label>
                             <input type="text" id="registration-house-number" name="house_number" style="width: 160px;"
                                    required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-flat-number">Квартира</label>
+                            <label for="registration-flat-number">{% trans 'Квартира' %}</label>
                             <input type="text" id="registration-flat-number" name="flat_number" style="width: 160px;"
                                    required>
                         </div>
                         <div class="field-block">
-                            <label for="registration-post-index">Індекс пошти</label>
+                            <label for="registration-post-index">{% trans 'Індекс пошти' %}</label>
                             <input type="text" id="registration-post-index" name="post_index" style="width: 160px;"
                                    required>
                         </div>
@@ -86,14 +90,13 @@
                     <div class="user-info__fourth">
                         <div class="field-block">
                             <label for="registration-contract-num">
-                                <i>Після натискання кнопки "Відправити номер контракту" на вказаний вище номер буде
-                                    надіслано СМС із номером. Введіть його у поле нижче</i>
+                                <i>{% trans 'Після натискання кнопки "Відправити номер контракту" на вказаний вище номер буде надіслано СМС із номером. Введіть його у поле нижче' %}</i>
                             </label>
                             <div class="registration-contract-num-block-wrapper">
                                 <div class="registration-contract-num-block">
-                                    <input type="text" id="registration-contract-num" name="contract_num" required>
+                                    <input type="password" id="registration-contract-num" name="contract_num" required>
                                     <button id="registration-contract-num-button">
-                                        <i>Відправити номер контракту</i>
+                                        <i>{% trans 'Відправити номер контракту' %}</i>
                                     </button>
                                 </div>
                             </div>
@@ -102,15 +105,15 @@
                 </div>
                 <div class="form-actions">
                     <div class="button-block">
-                        <input type="submit" value="Зареєструватися">
+                        <input type="submit" value="{% trans 'Зареєструватися' %}">
                     </div>
                     <div class="button-block">
-                        <input type="reset" value="Очистити все">
+                        <input type="reset" value="{% trans 'Очистити все' %}">
                     </div>
                 </div>
             </form>
             <div class="no-register">
-                <span class="no-register__text">Вже є акаунт? <a href="/login">Увійдіть</a></span>
+                <span class="no-register__text">{% trans 'Вже є акаунт? <a href="/login">Увійдіть</a>' %}</span>
             </div>
         </div>
     </div>

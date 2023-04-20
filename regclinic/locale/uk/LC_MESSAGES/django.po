@@ -22,5 +22,5 @@ msgid "Ukrainian"
 msgstr "Українська"
 
 #: .\regclinic\settings.py:119
-msgid "Russian"
-msgstr "Російська"
+msgid "English"
+msgstr "Англійська"
