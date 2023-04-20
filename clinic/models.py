@@ -1,5 +1,6 @@
 # Create your models here.
 from django.db import models
+from django.core.exceptions import ValidationError
 import textwrap
 from django.contrib.auth.models import User
 from django.http import QueryDict
@@ -135,8 +136,14 @@ class Schedule(models.Model):
     patient = models.ForeignKey(Patient, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}"
+        if not self.patient:
+            return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}"
+        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}, patient: {self.patient}"
 
     class Meta:
         verbose_name = "Графік роботи"
         verbose_name_plural = "Графіки роботи"
+
+    def clean(self):
+        if self.patient:
+            raise ValidationError("Цей запис вже зайнято. Оберіть інший час!")

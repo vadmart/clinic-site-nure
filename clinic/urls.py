@@ -10,11 +10,11 @@ urlpatterns = [
     path("staff", views.get_staff, name="staff"),
     path("reviews/<slug:doctor_slug>", views.get_reviews, name="reviews"),
     path("making-an-appointment", views.get_appointment_page, name="making-an-appointment"),
+    path("record", views.get_appointment_page, name="record"),
     path("registration", views.get_registration_form, name="registration"),
     path("register", views.validate_registration, name="register"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num"),
     path("login", views.ClinicLogin.as_view(), name="login"),
     path("logout", views.ClinicLogout.as_view(), name="logout"),
-    path("sendReview", views.send_review, name="send_review"),
-    path("record", views.make_record, name="record")
+    path("sendReview", views.send_review, name="send_review")
 ]
