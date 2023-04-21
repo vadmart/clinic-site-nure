@@ -242,9 +242,13 @@ li.menu-item div.account-block {
     display: flex;
     background-color: rgb(100, 200, 200);
     border-radius: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 10px;
     padding: 5px;
+}
+
+li.menu-item div.account-block > * {
+    padding: 0.125em;
 }
 
 li.menu-item div.account-block div#user {
@@ -254,13 +258,19 @@ li.menu-item div.account-block div#user {
     padding-right: 1em;
 }
 
-li.menu-item .account-block .exit-block {
+li.menu-item .account-block .exit-block,
+li.menu-item .account-block .user-cabinet-block{
     display: flex;
     align-items: center;
 }
 
-li.menu-item .account-block .exit-block a {
+li.menu-item .account-block .exit-block a,
+li.menu-item .account-block .user-cabinet-block a{
     text-decoration: none;
+}
+
+li.menu-item .account-block .user-cabinet-block a {
+    padding-right: 0.5em;
 }
 
 .menu li.menu-item .dropdown-content {

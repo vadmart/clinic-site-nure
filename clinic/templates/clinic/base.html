@@ -73,6 +73,9 @@
                                 <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
                                 <span>{{ user.username }} {{ user.last_name }}</span>
                             </div>
+                            <div class="user-cabinet-block">
+                                <a href="">{% trans 'Кабінет користувача' %}</a>
+                            </div>
                             <div class="exit-block">
                                 <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
                             </div>
@@ -137,6 +140,9 @@
                                 <div id="user">
                                     <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
                                     <span>{{ user.username }} {{ user.last_name }}</span>
+                                </div>
+                                <div class="user-cabinet-block">
+                                    <a href="">{% trans 'Кабінет користувача' %}</a>
                                 </div>
                                 <div class="exit-block">
                                     <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
