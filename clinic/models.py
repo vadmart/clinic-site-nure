@@ -147,3 +147,6 @@ class Schedule(models.Model):
     def clean(self):
         if self.patient:
             raise ValidationError("Цей запис вже зайнято. Оберіть інший час!")
+
+    def __lt__(self, other):
+        return self.start_datetime < other.start_datetime

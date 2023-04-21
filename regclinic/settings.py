@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-v(l07qvqd1q0@1_521)pho5_lzw_ttgjjcvt-fhink_o0*#^ot
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1"]
+ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1", "8e9b-178-150-167-216.ngrok-free.app"]
 
 # Application definition
 
@@ -143,3 +143,4 @@ AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 LOGIN_REDIRECT_URL = "/index"
 
+CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]

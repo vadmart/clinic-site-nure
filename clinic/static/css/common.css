@@ -3,7 +3,7 @@
 
 :root {
     --accent-color: rgba(80, 170, 170, 1);
-    --top-bar-color: rgba(100, 244, 255, 0.5);
+    --top-bar-color: rgba(90, 230, 240, 1);
 }
 
 * {
@@ -209,14 +209,14 @@ li.menu-item .btn {
     padding-bottom: 15px;
     letter-spacing: 2px;
     text-decoration: none;
-    color: rgb(255, 255, 255, .7);
+    color: rgb(255, 255, 255);
     border-radius: 5px;
     cursor: pointer;
     transition: color 100ms;
 }
 
 li.menu-item .btn:hover {
-    color: rgb(255, 255, 255, 1);
+    color: rgb(200, 200, 200, 1);
 }
 
 li.menu-item a img {
@@ -227,7 +227,7 @@ li.menu-item .btn:after {
     content: '';
     position: absolute;
     height: 2px;
-    background-color: #fff;
+    background-color: rgb(200, 200, 200, 1);
     left: 0;
     bottom: 5px;
     width: 0;

@@ -9,7 +9,7 @@
 
 {% block header_registration %}
     <li class="menu-item auth-block registration">
-        <a class="btn disabled" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
+        <a class="btn disabled" href="{% url 'registration' %}">{% trans 'Укладення контракту' %}</a>
     </li>
 {% endblock %}
 
@@ -21,7 +21,7 @@
     <div class="registration-form-wrapper">
         <div class="registration-form">
             <div class="registration-form-title">
-                <h3>{% trans 'Реєстрація' %}</h3>
+                <h3>{% trans 'Укладення контракту' %}</h3>
             </div>
             <form class="form-data" method="post" action="{% url 'register' %}">
                 {% csrf_token %}
@@ -48,10 +48,10 @@
                         <div class="field-block">
                             <label for="registration-doctor-choice">{% trans 'Із яким доктором узгоджуєте контракт?' %}</label>
                             <select name="doctor_choice" id="registration-doctor-choice" required>
-                                <option value="">Оберіть лікаря</option>
+                                <option value="">{% trans 'Оберіть лікаря' %}</option>
                                 {% for doctor in doctors %}
                                     <option value="{{ doctor.pk }}">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}, {{ doctor.category.name|lower }}
-                                        кваліфікаційна категорія
+                                        {% trans 'кваліфікаційна категорія' %}
                                     </option>
                                 {% endfor %}
                             </select>
@@ -90,13 +90,13 @@
                     <div class="user-info__fourth">
                         <div class="field-block">
                             <label for="registration-contract-num">
-                                <i>{% trans 'Після натискання кнопки "Відправити номер контракту" на вказаний вище номер буде надіслано СМС із номером. Введіть його у поле нижче' %}</i>
+                                <i>{% trans 'Після натискання кнопки "Отримати номер контракту" на вказаний вище номер буде надіслано СМС із номером. Введіть його у поле нижче' %}</i>
                             </label>
                             <div class="registration-contract-num-block-wrapper">
                                 <div class="registration-contract-num-block">
                                     <input type="password" id="registration-contract-num" name="contract_num" required>
                                     <button id="registration-contract-num-button">
-                                        <i>{% trans 'Відправити номер контракту' %}</i>
+                                        <i>{% trans 'Отримати номер контракту' %}</i>
                                     </button>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="form-actions">
                     <div class="button-block">
-                        <input type="submit" value="{% trans 'Зареєструватися' %}">
+                        <input type="submit" value="{% trans 'Відправити' %}">
                     </div>
                     <div class="button-block">
                         <input type="reset" value="{% trans 'Очистити все' %}">

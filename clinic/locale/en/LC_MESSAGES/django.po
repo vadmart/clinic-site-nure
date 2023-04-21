@@ -19,8 +19,8 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: .\clinic\templates\clinic\base.html:20
-msgid "Тестова робота (клініка)"
-msgstr "Test work (clinic)"
+msgid "Районна поліклініка"
+msgstr "Regional polyclinic"
 
 #: .\clinic\templates\clinic\base.html:43
 #: .\clinic\templates\clinic\base.html:114
@@ -82,8 +82,8 @@ msgstr "Login"
 #: .\clinic\templates\clinic\base.html:165
 #: .\clinic\templates\registration\registration.html:12
 #: .\clinic\templates\registration\registration.html:24
-msgid "Реєстрація"
-msgstr "Registration"
+msgid "Укладення контракту"
+msgstr "Concluding a contract"
 
 #: .\clinic\templates\clinic\base.html:110
 #: .\clinic\templates\clinic\index.html:17
@@ -481,15 +481,15 @@ msgstr "Post index"
 
 #: .\clinic\templates\registration\registration.html:93
 msgid ""
-"Після натискання кнопки \"Відправити номер контракту\" на вказаний вище "
+"Після натискання кнопки \"Отримати номер контракту\" на вказаний вище "
 "номер буде надіслано СМС із номером. Введіть його у поле нижче"
 msgstr ""
-"After clicking the button \"Send a contract number\" an SMS with a number "
+"After clicking the button \"Get a contract number\" an SMS with a number "
 "will be sent on specified above number. Enter it in the field below."
 
 #: .\clinic\templates\registration\registration.html:99
-msgid "Відправити номер контракту"
-msgstr "Send a contract number"
+msgid "Отримати номер контракту"
+msgstr "Get a contract number"
 
 #: .\clinic\templates\registration\registration.html:108
 msgid "Зареєструватися"
@@ -501,3 +501,12 @@ msgstr "Have an account already? <a href=\"/login\">Log in</a>"
 
 msgid "Сімейний лікар"
 msgstr "Family doctor"
+
+msgid "Запис на прийом успішно виконано! За необхідно можете записатися ще"
+msgstr "Making an appointment was completed successfully! You can make a new recordings else"
+
+msgid "Помилка: не знайдено лікаря, із яким узгоджено контракт. Перевірте свій акаунт або перезавантажте сторінку!"
+msgstr "Error: the doctor, with whom the contract had been agreed, wasn't found. Check your account or refresh a page!"
+
+msgid "Оберіть лікаря"
+msgstr "Choose a doctor"

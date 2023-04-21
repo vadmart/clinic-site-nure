@@ -17,7 +17,7 @@
     {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
     <header class="clinic-head">
         <div class="clinic-head__top">
-            <div class="site-name">{% trans 'Тестова робота (клініка)' %}</div>
+            <div class="site-name">{% trans 'Районна поліклініка' %}</div>
             <section class="language-block">
                 <div class="language-block__choice">
                     {% for language in languages %}
@@ -87,7 +87,7 @@
             {% if not user.is_authenticated %}
                 {% block header_registration %}
                     <li class="menu-item auth-block registration">
-                        <a class="btn" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
+                        <a class="btn" href="{% url 'registration' %}">{% trans 'Укладення контракту' %}</a>
                     </li>
                 {% endblock %}
             {% endif %}
@@ -152,7 +152,7 @@
                 <li class="menu-item">
                     {% if not user.is_authenticated %}
                         {% block mobile-menu_register %}
-                            <a class="btn" href="{% url 'registration' %}">{% trans 'Реєстрація' %}</a>
+                            <a class="btn" href="{% url 'registration' %}">{% trans 'Укладення контракту' %}</a>
                         {% endblock %}
                     {% endif %}
                 </li>

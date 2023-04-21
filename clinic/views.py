@@ -7,9 +7,8 @@ from django.core.exceptions import ValidationError
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LogoutView, LoginView
-from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
 import json
 
 
@@ -50,20 +49,20 @@ def get_appointment_page(request):
     if request.method == "GET":
         try:
             doctor = Patient.objects.get(user=request.user).doctor
-            appointments = doctor.schedule_set.filter(patient=None)
+            appointments = sorted(doctor.schedule_set.filter(patient=None))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor": doctor,
                                    "appointments": appointments,
                                    "app_dates": get_appointments_dates(appointments)})
         except Patient.DoesNotExist:
-            doctor_err = "Помилка: не знайдено лікаря, із яким узгоджено контракт. Перевірте свій акаунт або перезавантажте сторінку!"
+            doctor_err = _(
+                "Помилка: не знайдено лікаря, із яким узгоджено контракт. Перевірте свій акаунт або перезавантажте сторінку!")
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor_err": doctor_err})
     elif request.method == "POST":
         doctor = Doctor.objects.get(pk=request.POST["appointment_doctor_pk"])
-        appointments = doctor.schedule_set.filter(patient=None)
         recording = Recording(person=request.user.patient,
                               doctor=Doctor.objects.get(pk=request.POST["appointment_doctor_pk"]),
                               health_complaint=request.POST["appointment_complaint"]
@@ -76,23 +75,26 @@ def get_appointment_page(request):
             schedule = Schedule.objects.get(doctor=doctor,
                                             start_datetime=dt_tm,
                                             patient=None)
+            patient = request.user.patient
+            schedule.patient = patient
+            schedule.save()
+            appointments = sorted(doctor.schedule_set.filter(patient=None))
+            return render(request,
+                          template_name="clinic/pages/making-an-appointment.html",
+                          context={"doctor": doctor,
+                                   "appointments": appointments,
+                                   "app_dates": get_appointments_dates(appointments),
+                                   "success_message": _(
+                                       "Запис на прийом успішно виконано! За необхідно можете записатися ще")})
         except ValidationError:
             err = "Помилка: цей час вже зайнято, перезавантажте сторінку та оберіть інший"
+            appointments = sorted(doctor.schedule_set.filter(patient=None))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor": doctor,
                                    "appointments": appointments,
                                    "app_dates": get_appointments_dates(appointments),
                                    "err": err})
-        patient = request.user.patient
-        schedule.patient = patient
-        schedule.save()
-        return render(request,
-                      template_name="clinic/pages/making-an-appointment.html",
-                      context={"doctor": doctor,
-                               "appointments": appointments,
-                               "app_dates": get_appointments_dates(appointments),
-                               "success_message": "Запис на прийом успішно виконано! За необхідно можете записатися ще"})
 
 
 def get_registration_form(request):
@@ -153,5 +155,4 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
         app_date = app.start_datetime
         if app_date.date() not in map(lambda dt_tm: dt_tm.date(), app_dates):
             app_dates.append(app_date)
-    app_dates.sort()
     return list(map(lambda dt_tm: dt_tm.strftime("%d.%m.%Y"), app_dates))
