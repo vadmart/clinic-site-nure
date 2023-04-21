@@ -33,10 +33,6 @@ html, body {
 .inner-btn.disabled {
     pointer-events: none;
     cursor: default;
-}
-
-.btn.disabled,
-.inner-btn.disabled {
     color: rgb(100, 100, 100) !important;
 }
 

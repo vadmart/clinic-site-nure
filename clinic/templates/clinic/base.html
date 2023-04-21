@@ -74,7 +74,9 @@
                                 <span>{{ user.username }} {{ user.last_name }}</span>
                             </div>
                             <div class="user-cabinet-block">
-                                <a href="">{% trans 'Кабінет користувача' %}</a>
+                                {% block user_cabinet %}
+                                    <a href="{% url 'user-cabinet' %}">{% trans 'Кабінет користувача' %}</a>
+                                {% endblock %}
                             </div>
                             <div class="exit-block">
                                 <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
@@ -142,7 +144,7 @@
                                     <span>{{ user.username }} {{ user.last_name }}</span>
                                 </div>
                                 <div class="user-cabinet-block">
-                                    <a href="">{% trans 'Кабінет користувача' %}</a>
+                                    <a href="{% url 'user-cabinet' %}">{% trans 'Кабінет користувача' %}</a>
                                 </div>
                                 <div class="exit-block">
                                     <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
