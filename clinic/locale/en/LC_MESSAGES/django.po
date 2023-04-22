@@ -400,7 +400,7 @@ msgid "Докладніше..."
 msgstr "More..."
 
 #: .\clinic\templates\registration\login.html:22
-msgid "Аутентифікація"
+msgid "Автентифікація"
 msgstr "Authentication"
 
 #: .\clinic\templates\registration\login.html:30
@@ -510,3 +510,24 @@ msgstr "Error: the doctor, with whom the contract had been agreed, wasn't found.
 
 msgid "Оберіть лікаря"
 msgstr "Choose a doctor"
+
+msgid "Кабінет користувача"
+msgstr "User cabinet"
+
+msgid "Дані про пацієнта"
+msgstr "Patient data"
+
+msgid "ПІБ"
+msgstr "Full name"
+
+msgid "ПІБ сімейного лікаря"
+msgstr "Family doctor's full name"
+
+msgid "не визначено"
+msgstr "unknown"
+
+msgid "У вас немає заходів"
+msgstr "You haven't got any appointments"
+
+msgid "Записи до лікаря"
+msgstr "Recordings to the doctor"

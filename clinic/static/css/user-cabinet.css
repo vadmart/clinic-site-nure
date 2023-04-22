@@ -6,6 +6,7 @@
 .appointments__wrapper {
     display: grid;
     justify-items: center;
+    margin-top: 2em;
 }
 
 .appointments {

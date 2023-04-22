@@ -160,10 +160,9 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
 
 def get_user_cabinet(request):
     try:
-        patient_appointments = sorted(Schedule.objects.filter(patient__user=request.user))
-        print(patient_appointments)
+        patient_appointments = sorted(Schedule.objects.filter(patient__user=request.user,
+                                                              start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)))
         return render(request, template_name="clinic/pages/user-cabinet.html", context={"appointments": patient_appointments,
                                                                                         "current_date": datetime.datetime.now()})
     except Schedule.DoesNotExist:
         return render(request, template_name="clinic/pages/user-cabinet.html")
-    pass
