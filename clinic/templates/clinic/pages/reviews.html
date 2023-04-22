@@ -92,7 +92,7 @@
         {% if not doctor.review_set.all %}
             <p class="no-reviews">{% trans 'Немає жодного відгуку' %}</p>
         {% else %}
-            {% for review in doctor.review_set.all.reverse %}
+            {% for review in doctor.review_set.all reversed %}
                 <div class="review">
                     <blockquote class="account">
                         <cite>{{ review.patient.lastname }} {{ review.patient.name }}</cite>

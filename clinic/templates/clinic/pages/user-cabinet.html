@@ -20,20 +20,29 @@
         <div class="appointments">
             <div class="user-info__block">
                 <div class="user-info__title">
-                    <h2 class="fz_2 fw_600">Дані про пацієнта</h2>
+                    <h2 class="fz_2 fw_600">{% trans 'Дані про пацієнта' %}</h2>
                 </div>
                 <div class="user-info">
-                    <div class="user-info__row">
-                        <span class="fz_12">ПІБ: {{ user.patient.lastname }} {{ user.patient.name }} {{ user.patient.patronymic }}</span>
-                    </div>
-                    <div class="user-info__row">
-                        <span class="fz_12">ПІБ сімейного лікаря: {{ user.patient.doctor.lastname }} {{ user.patient.doctor.name }} {{ user.patient.doctor.patronymic }}</span>
-                    </div>
+                    {% if user.patient %}
+                        <div class="user-info__row">
+                            <span class="fz_12">{% trans 'ПІБ' %}: {{ user.patient.lastname }} {{ user.patient.name }} {{ user.patient.patronymic }}</span>
+                        </div>
+                        <div class="user-info__row">
+                            <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {{ user.patient.doctor.lastname }} {{ user.patient.doctor.name }} {{ user.patient.doctor.patronymic }}</span>
+                        </div>
+                    {% else %}
+                        <div class="user-info__row">
+                            <span class="fz_12">{% trans 'ПІБ' %}: {% trans 'не визначено' %}</span>
+                        </div>
+                        <div class="user-info__row">
+                            <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {% trans 'не визначено' %}</span>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="appointments__block">
                 <div class="appointments__title">
-                    <h2 class="fz_2 fw_600">Записи до лікаря</h2>
+                    <h2 class="fz_2 fw_600">{% trans 'Записи до лікаря' %}</h2>
                 </div>
                 {% if appointments %}
                     <div class="appointments__data">
@@ -45,7 +54,7 @@
                     </div>
                 {% else %}
                     <div class="no-appointments-block">
-                        <h4>У вас немає заходів</h4>
+                        <h4>{% trans 'У вас немає заходів' %}</h4>
                     </div>
                 {% endif %}
             </div>
