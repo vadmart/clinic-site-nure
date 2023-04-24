@@ -23,7 +23,7 @@
                     {% for language in languages %}
                         <div class="lang {% if language.code == CURRENT_LANGUAGE %}chosen{% endif %}">
                             <a
-                                    {% if language.code != CURRENT_LANGUAGE %}{% block language_href %}href="/{{ language.code }}/index"
+                                    {% if language.code != CURRENT_LANGUAGE %}{% block language_href %}href="/{{ language.code }}"
                                     {% endblock %}
                                     {% else %}disabled {% endif %}>{{ language.code|upper }}</a>
                         </div>
@@ -79,13 +79,13 @@
                                 {% endblock %}
                             </div>
                             <div class="exit-block">
-                                <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
+                                <a href="{% url 'logout' %}?next={{ request.path }}">{% trans 'Вихід' %}</a>
                             </div>
                         </div>
                     {% endblock %}
                 {% else %}
                     {% block header_login %}
-                        <a class="btn" href="{% url 'login' %}">{% trans 'Вхід' %}</a>
+                        <a class="btn" href="{% url 'login' %}?next={{ request.path }}">{% trans 'Вхід' %}</a>
                     {% endblock %}
                 {% endif %}
             </li>
@@ -147,13 +147,13 @@
                                     <a href="{% url 'user-cabinet' %}">{% trans 'Кабінет користувача' %}</a>
                                 </div>
                                 <div class="exit-block">
-                                    <a href="{% url 'logout' %}">{% trans 'Вихід' %}</a>
+                                    <a href="{% url 'logout' %}?next={{ request.path }}">{% trans 'Вихід' %}</a>
                                 </div>
                             </div>
                         {% endblock %}
                     {% else %}
                         {% block mobile-menu_login %}
-                            <a class="btn" href="{% url 'login' %}">{% trans 'Вхід' %}</a>
+                            <a class="btn" href="{% url 'login' %}?next={{ request.path }}">{% trans 'Вхід' %}</a>
                         {% endblock %}
                     {% endif %}
                 </li>

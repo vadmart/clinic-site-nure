@@ -44,45 +44,17 @@
 
 
 .form-container form .user-details {
-    display: grid;
-    width: 100%;
-    grid-template-areas: "ln name"
-            "contract contract"
-            "family family"
-            "date date"
-            "tm tm"
-            "complaint-desc complaint-desc";
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-}
-
-form .user-details > #patient-firstname {
-    grid-area: name;
-}
-
-form .user-details > #patient-lastname {
-    grid-area: ln;
-}
-
-form .user-details > #patient-contract {
-    grid-area: contract;
-}
-
-form .user-details > #family-doctor-block {
-    grid-area: family;
-}
-
-form .user-details > #health-complaint {
-    grid-area: complaint-desc;
-}
-
-form .user-details > #record-date-block {
-    grid-area: date;
-}
-
-form .user-details > #record-time-block {
-    grid-area: tm;
+    /*display: grid;*/
+    /*width: 100%;*/
+    /*grid-template-areas: "ln name"*/
+    /*        "contract contract"*/
+    /*        "family family"*/
+    /*        "date date"*/
+    /*        "tm tm"*/
+    /*        "complaint-desc complaint-desc";*/
+    /*grid-template-columns: repeat(2, 1fr);*/
+    /*grid-template-rows: repeat(2, 1fr);*/
+    /*grid-column-gap: 30px;*/
 }
 
 form .user-details .inner-box {
@@ -103,20 +75,10 @@ form .user-details .inner-box {
     text-align: center;
 }
 
-.user-details .inner-box .doctor-block {
-    font-style: normal;
-    font-size: 22px;
-    color: #000;
-    text-align: center;
-}
-
-.user-details .inner-box .details {
+.user-details .inner-box label.details {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
-}
-
-.user-details .details {
     font-size: 1.4rem;
 }
 
@@ -126,12 +88,7 @@ form .user-details .inner-box {
     resize: none;
 }
 
-.user-details .inner-box input[type=date] {
-    font-size: 1.2rem;
-    width: 100%;
-}
-
-.user-details .inner-box .textholder {
+.user-details .inner-box textarea.textholder {
     height: 45px;
     width: 100%;
     outline: none;
@@ -161,7 +118,6 @@ form .user-details .inner-box {
     grid-template-columns: 1fr 3fr;
 }
 
-
 .inner-box .info-block input {
     width: 100%;
     padding: 10px 20px;
@@ -174,20 +130,16 @@ form .user-details .inner-box {
     color: #fff;
 }
 
-.info-block #calendar {
-    border-radius: 10px;
-}
-
 .user-details .inner-box .textholder:focus,
 .user-details .inner-box input:valid {
     border-color: rgba(68, 120, 242, 1);
 }
 
-form .button {
+form input.button {
     height: 2.25em;
 }
 
-form #buttons {
+form div#buttons {
     display: flex;
 }
 
@@ -244,34 +196,24 @@ input.button#record:hover {
     font-size: 1.2em;
 }
 
-@media screen and (max-width: 768px) {
-    .form-wrapper {
-        padding: 10px;
-    }
-
-    .form-container > * {
-        font-size: 0.8rem;
-    }
-}
 
 @media screen and (max-width: 660px) {
     .form-container .title-block {
-        font-size: 1.3rem;
+        font-size: 1.1em;
     }
 
-    .form-container .inner-box .details {
-        font-size: 1rem;
+    .form-container .inner-box label.details {
+        font-size: calc(0.8em + 0.3 * (100vw / 40));
     }
 
     .user-details .inner-box .textholder {
-        font-size: 0.8rem;
+        font-size: 0.8em;
         height: 30px;
     }
 
-    form .button,
-    .user-details .inner-box .info-block,
-    .inner-box .info-block input[type=button] {
-        font-size: 0.8rem;
+    form input.button,
+    .user-details .inner-box .info-block {
+        font-size: 0.8em;
         padding: 0;
     }
 
@@ -286,10 +228,6 @@ input.button#record:hover {
 
     .user-details textarea#complaint {
         width: 100%;
-    }
-
-    .user-details .textholder {
-        font-size: 0.8rem;
     }
 
     .user-details .inner-box input[type=date] {
@@ -311,33 +249,5 @@ input.button#record:hover {
 
     span.err-msg {
         font-size: 0.75rem;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .form-container {
-        padding: 25px 25px;
-    }
-
-    .form-container .user-details {
-        grid-template-areas: "ln"
-                             "name"
-                             "contract"
-                             "family"
-                             "date"
-                             "tm"
-                             "complaint-desc" !important;
-        grid-template-columns: 1fr !important;
-        grid-template-rows: 1fr !important;
-    }
-
-    .inner-box .info-block#time {
-        flex-direction: column;
-        row-gap: 5px;
-        align-items: center;
-    }
-
-    .inner-box .info-block input[type=button] {
-        width: 80%;
     }
 }

@@ -45,7 +45,7 @@ def get_reviews(request, doctor_slug):
 
 def get_appointment_page(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(redirect_to="login")
+        return HttpResponseRedirect(redirect_to=f"login?next={request.path}")
     if request.method == "GET":
         try:
             doctor = Patient.objects.get(user=request.user).doctor
@@ -128,13 +128,11 @@ def send_review(request):
 
 
 class ClinicLogin(LoginView):
-    def get_success_url(self):
-        return "index"
+    pass
 
 
 class ClinicLogout(LogoutView):
-    def get_success_url(self):
-        return "index"
+    pass
 
 
 def get_full_time(tm):
