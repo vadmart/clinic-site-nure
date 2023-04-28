@@ -531,3 +531,21 @@ msgstr "You haven't got any appointments"
 
 msgid "Записи до лікаря"
 msgstr "Recordings to the doctor"
+
+msgid "Харківській регіональній клініці №496 потребуються"
+msgstr "Kharkiv Regional Clinic No. 496 needs"
+
+msgid "Вбиральник"
+msgstr "Cleaner"
+
+msgid "Менеджер"
+msgstr "Manager"
+
+msgid "Повна зайнятість"
+msgstr "Full employment"
+
+msgid "Резюме висилати за адресою"
+msgstr "Send a CV to the address"
+
+msgid "Запис за тел."
+msgstr "Phone recording"
