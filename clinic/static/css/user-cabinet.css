@@ -9,6 +9,10 @@
     margin-top: 2em;
 }
 
+.appointments h2.err-auth {
+    color: yellow;
+}
+
 .appointments {
     padding: 1em;
     display: grid;
@@ -51,3 +55,4 @@
 .fw_600 {
     font-weight: 600;
 }
+

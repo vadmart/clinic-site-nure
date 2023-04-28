@@ -18,46 +18,51 @@
 {% block content %}
     <div class="appointments__wrapper">
         <div class="appointments">
-            <div class="user-info__block">
-                <div class="user-info__title">
-                    <h2 class="fz_2 fw_600">{% trans 'Дані про пацієнта' %}</h2>
+            {% if user.is_authenticated %}
+                <div class="user-info__block">
+                    <div class="user-info__title">
+                        <h2 class="fz_2 fw_600">{% trans 'Дані про пацієнта' %}</h2>
+                    </div>
+                    <div class="user-info">
+                        {% if user.patient %}
+                            <div class="user-info__row">
+                                <span class="fz_12">{% trans 'ПІБ' %}: {{ user.patient.lastname }} {{ user.patient.name }} {{ user.patient.patronymic }}</span>
+                            </div>
+                            <div class="user-info__row">
+                                <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {{ user.patient.doctor.lastname }} {{ user.patient.doctor.name }} {{ user.patient.doctor.patronymic }}</span>
+                            </div>
+                        {% else %}
+                            <div class="user-info__row">
+                                <span class="fz_12">{% trans 'ПІБ' %}: {% trans 'не визначено' %}</span>
+                            </div>
+                            <div class="user-info__row">
+                                <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {% trans 'не визначено' %}</span>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="user-info">
-                    {% if user.patient %}
-                        <div class="user-info__row">
-                            <span class="fz_12">{% trans 'ПІБ' %}: {{ user.patient.lastname }} {{ user.patient.name }} {{ user.patient.patronymic }}</span>
-                        </div>
-                        <div class="user-info__row">
-                            <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {{ user.patient.doctor.lastname }} {{ user.patient.doctor.name }} {{ user.patient.doctor.patronymic }}</span>
+                <div class="appointments__block">
+                    <div class="appointments__title">
+                        <h2 class="fz_2 fw_600">{% trans 'Записи до лікаря' %}</h2>
+                    </div>
+                    {% if appointments %}
+                        <div class="appointments__data">
+                            {% for appnt in appointments %}
+                                <div class="appointment {% if appnt.start_datetime < current_date %}past{% else %}future{% endif %}">
+                                    <span class="fz_12">{{ appnt.start_datetime }} — {{ appnt.end_datetime }}</span>
+                                </div>
+                            {% endfor %}
                         </div>
                     {% else %}
-                        <div class="user-info__row">
-                            <span class="fz_12">{% trans 'ПІБ' %}: {% trans 'не визначено' %}</span>
-                        </div>
-                        <div class="user-info__row">
-                            <span class="fz_12">{% trans 'ПІБ сімейного лікаря' %}: {% trans 'не визначено' %}</span>
+                        <div class="no-appointments-block">
+                            <h4>{% trans 'У вас немає заходів' %}</h4>
                         </div>
                     {% endif %}
                 </div>
-            </div>
-            <div class="appointments__block">
-                <div class="appointments__title">
-                    <h2 class="fz_2 fw_600">{% trans 'Записи до лікаря' %}</h2>
-                </div>
-                {% if appointments %}
-                    <div class="appointments__data">
-                        {% for appnt in appointments %}
-                            <div class="appointment {% if appnt.start_datetime < current_date %}past{% else %}future{% endif %}">
-                                <span class="fz_12">{{ appnt.start_datetime }} — {{ appnt.end_datetime }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <div class="no-appointments-block">
-                        <h4>{% trans 'У вас немає заходів' %}</h4>
-                    </div>
-                {% endif %}
-            </div>
+            {% else %}
+                <h2 class="err-auth">Ви не автентифіковані. <a href="{% url 'login' %}?next={{ request.path }}">Увійдіть</a>, щоб можна було побачити дані про Вашого лікаря та
+                    записи на прийом</h2>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -49,7 +49,8 @@ def get_appointment_page(request):
     if request.method == "GET":
         try:
             doctor = Patient.objects.get(user=request.user).doctor
-            appointments = sorted(doctor.schedule_set.filter(patient=None))
+            appointments = sorted(doctor.schedule_set.filter(patient=None,
+                                                             start_datetime__gt=datetime.datetime.now()))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor": doctor,
@@ -158,9 +159,12 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
 
 def get_user_cabinet(request):
     try:
-        patient_appointments = sorted(Schedule.objects.filter(patient__user=request.user,
-                                                              start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)))
-        return render(request, template_name="clinic/pages/user-cabinet.html", context={"appointments": patient_appointments,
+        if request.user.is_authenticated:
+            patient_appointments = sorted(Schedule.objects.filter(patient__user=request.user,
+                                                                  start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)))
+            return render(request, template_name="clinic/pages/user-cabinet.html", context={"appointments": patient_appointments,
                                                                                         "current_date": datetime.datetime.now()})
+        else:
+            return render(request, template_name="clinic/pages/user-cabinet.html")
     except Schedule.DoesNotExist:
         return render(request, template_name="clinic/pages/user-cabinet.html")
