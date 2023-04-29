@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --main-font-family: "Inter", sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.form-container {
+    max-width: 576px;
+    width: 100%;
+    background-color: rgba(155, 222, 209, 1);
+    display: grid;
+    grid-row-gap: 15px;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 15px rgba(75, 150, 120, 0.5);
+}
+
+.form-container .title-block {
+    font-family: var(--main-font-family);
+    position: relative;
+    padding-bottom: 0.25em;
+}
+
+.form-container .title-block:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #000000;
+}
+
+
+.form-container form .user-details {
+    /*display: grid;*/
+    /*width: 100%;*/
+    /*grid-template-areas: "ln name"*/
+    /*        "contract contract"*/
+    /*        "family family"*/
+    /*        "date date"*/
+    /*        "tm tm"*/
+    /*        "complaint-desc complaint-desc";*/
+    /*grid-template-columns: repeat(2, 1fr);*/
+    /*grid-template-rows: repeat(2, 1fr);*/
+    /*grid-column-gap: 30px;*/
+}
+
+form .user-details .inner-box {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.user-details .inner-box span.info {
+    font-style: italic;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.user-details .inner-box span.unknown-block {
+    font-style: italic;
+    font-size: 1.2em;
+    color: #777777;
+    text-align: center;
+}
+
+.user-details .inner-box label.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.user-details .inner-box textarea {
+    width: 100%;
+    height: 300px !important;
+    resize: none;
+}
+
+.user-details .inner-box textarea.textholder {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.user-details .inner-box .info-block {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(115px, 0.5fr));
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+}
+
+.user-details .inner-box .appointment-date {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.user-details .inner-box .appointment-time {
+    display: none;
+    grid-template-columns: 1fr 3fr;
+}
+
+.inner-box .info-block input {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1.3rem;
+}
+
+.inner-box .info-block input#active-time {
+    background-color: #1975BB;
+    border-color: #0CC5BF;
+    color: #fff;
+}
+
+.user-details .inner-box .textholder:focus,
+.user-details .inner-box input:valid {
+    border-color: rgba(68, 120, 242, 1);
+}
+
+form input.button {
+    height: 2.25em;
+}
+
+form div#buttons {
+    display: flex;
+}
+
+form input.button {
+    width: 50%;
+    margin: 0 12px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: all 0.5s ease;
+}
+
+input.button#record {
+    color: #fff;
+    background-color: rgba(100, 149, 237, 1);
+}
+
+input.button#record:hover {
+    color: #eee;
+    background-color: rgba(0, 149, 237, 1);
+}
+
+.button#clear:hover {
+    color: #eee;
+    background-color: #BBBBBB;
+}
+
+.user-details #health-complaint textarea {
+    outline: none;
+}
+
+.user-details #health-complaint textarea:focus {
+    outline: #9b59b6;
+}
+
+.err-msg {
+    color: red;
+    font-size: 0.95rem;
+}
+
+
+.disable-block {
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+}
+
+.form-success {
+    color: #086a5d;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+
+@media screen and (max-width: 660px) {
+    .form-container .title-block {
+        font-size: 1.1em;
+    }
+
+    .form-container .inner-box label.details {
+        font-size: calc(0.8em + 0.3 * (100vw / 40));
+    }
+
+    .user-details .inner-box .textholder {
+        font-size: 0.8em;
+        height: 30px;
+    }
+
+    form input.button,
+    .user-details .inner-box .info-block {
+        font-size: 0.8em;
+        padding: 0;
+    }
+
+    .inner-box .info-block input[type=button] {
+        height: 25px;
+    }
+
+    .user-details .inner-box .unknown-block,
+    .user-details .inner-box .doctor-block {
+        font-size: 1rem;
+    }
+
+    .user-details textarea#complaint {
+        width: 100%;
+    }
+
+    .user-details .inner-box input[type=date] {
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .popup__content {
+        padding: 10px;
+    }
+
+    .popup__title {
+        font-size: 1rem;
+    }
+
+    .popup__text {
+        font-size: 0.8rem;
+    }
+
+    span.err-msg {
+        font-size: 0.75rem;
+    }
+}

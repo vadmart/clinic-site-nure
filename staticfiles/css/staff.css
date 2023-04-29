@@ -1,0 +1,165 @@
+.block-doctor {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 20px 20px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgba(80, 170, 170, .5);
+}
+
+.block-doctor .full-description {
+    display: grid;
+}
+
+.block-doctor .photo {
+    display: flex;
+    justify-content: center;
+}
+
+.block-doctor > * {
+    padding: 0 10px;
+}
+
+.block-doctor img {
+    border-radius: 10px;
+    outline: none;
+}
+
+.doctors {
+    width: 100%;
+    box-sizing: content-box;
+    padding: 5px 0;
+    text-align: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.description-block:first-child {
+    font-weight: bold;
+}
+
+.full-description .description-block .experience-description {
+    font-weight: 800;
+}
+
+.full-description .description-header {
+    font-size: 1.4rem;
+}
+
+
+.description-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(80, 170, 170, 1);
+    border-radius: 15px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.07);
+    margin: 15px 10px 80px 0;
+    padding: 10px;
+    position: relative;
+}
+
+.description-block .description {
+    line-height: 30px;
+}
+
+.description-block .doctor-btn {
+    text-decoration: none;
+    color: black;
+    background-color: #0CC5EE;
+    position: absolute;
+    padding: 10px 15px;
+    border-radius: 20px;
+    right: 0;
+    bottom: -60px;
+}
+
+.description-block .doctor-btn:hover {
+    background-color: #1975BB;
+}
+
+.description-block::before {
+    content: '\201C';
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    top: -10px;
+    font-size: 25px;
+    font-weight: 800;
+    color: #fff;
+    background-color: rgba(6, 151, 214, 1);
+    height: 23px;
+    width: 45px;
+}
+
+.description-block * {
+    font-size: 1.2rem;
+    font-family: "Inter", sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+@media screen and (max-width: 1300px) {
+    .full-description .description-header {
+        font-size: 1.2rem;
+    }
+
+    .description-block * {
+        font-size: 1rem;
+    }
+
+    .description {
+        line-height: 20px;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .full-description .description-header {
+        font-size: 1rem;
+    }
+
+    .block-doctor {
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .doctors {
+        grid-template-columns: 1fr;
+        grid-row-gap: 15px;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .description-block .doctor-btn {
+        position: relative;
+    }
+
+    .full-description .description-header {
+        font-size: 1.2rem;
+    }
+
+    .block-doctor {
+        width: calc(192px + 192 * (100vw / 768));
+        margin: 0 auto;
+    }
+
+    .description-block * {
+        font-size: 0.8rem;
+    }
+
+    .doctor-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .doctor-info .feedback_btn {
+        position: relative;
+        text-align: center;
+        margin: 10px 0;
+    }
+}
