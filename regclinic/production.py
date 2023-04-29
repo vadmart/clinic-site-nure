@@ -1,7 +1,6 @@
 import os
 
 from .settings import *
-from .settings import BASE_DIR  # noqa
 
 ALLOWED_HOSTS = [os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
 CSRF_TRUSTED_ORIGINS = ["https://" + os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
@@ -24,9 +23,7 @@ MIDDLEWARE = [
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
