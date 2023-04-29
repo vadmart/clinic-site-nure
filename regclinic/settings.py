@@ -11,12 +11,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
+
 # from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
-# dotenv_path = "regclinic/vars.env"
-# load_dotenv(dotenv_path)
+dotenv_path = "regclinic/vars.env"
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +35,8 @@ DEBUG = True
 ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1", "8e9b-178-150-167-216.ngrok-free.app", "polyclinic.azurewebsites.net"]
 
 # Application definition
+
+CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -86,7 +90,7 @@ DATABASES = {
         'USER': os.getenv("POSTGRES_USER"),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
         'HOST': os.getenv("POSTGRES_HOST"),
-        'PORT': os.getenv("POSTGRES_PORT")
+        'PORT': int(os.getenv("POSTGRES_PORT"))
     }
 }
 
@@ -142,5 +146,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 LOGIN_REDIRECT_URL = "/index"
-
-CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]
