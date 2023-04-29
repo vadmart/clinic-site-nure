@@ -1,16 +1,15 @@
 import os
 
-from .settings import *
+from .settings import * # noqa
+from .settings import BASE_DIR
 
 ALLOWED_HOSTS = [os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
 CSRF_TRUSTED_ORIGINS = ["https://" + os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
 DEBUG = False
 
-conn_str = os.getenv("AZURE_POSTGRESQL_CONNECTIONSTRING")
-conn_str_params = {pair.split("=")[0]: pair.split("=")[1] for pair in conn_str.split(" ")}
-
 
 MIDDLEWARE = [
+    "whitenoise.runserver_nostatic",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -22,6 +21,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+conn_str = os.getenv("AZURE_POSTGRESQL_CONNECTIONSTRING")
+conn_str_params = {pair.split("=")[0]: pair.split("=")[1] for pair in conn_str.split(" ")}
 
 DATABASES = {
     "default": {
@@ -33,6 +38,7 @@ DATABASES = {
         'PORT': conn_str_params["port"]
     }
 }
+
 
 
 
