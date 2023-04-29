@@ -41,7 +41,6 @@ ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1", "8e9b-178-150-167-216.ngrok-free.
 
 CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]
 
-
 INSTALLED_APPS = [
     'modeltranslation',
     'django.contrib.admin',
@@ -150,5 +149,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 LOGIN_REDIRECT_URL = "/index"
-
-

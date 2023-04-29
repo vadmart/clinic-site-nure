@@ -10,6 +10,19 @@ DEBUG = False
 conn_str = os.getenv("AZURE_POSTGRESQL_CONNECTIONSTRING")
 conn_str_params = {pair.split("=")[0]: pair.split("=")[1] for pair in conn_str.split(" ")}
 
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+]
+
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql',
@@ -20,3 +33,10 @@ DATABASES = {
         'PORT': conn_str_params["port"]
     }
 }
+
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+
