@@ -17,8 +17,11 @@ from pathlib import Path
 # from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
-dotenv_path = "regclinic/vars.env"
-load_dotenv(dotenv_path)
+DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
+
+if DJANGO_SETTINGS_MODULE == "regclinic.settings":
+    dotenv_path = "regclinic/vars.env"
+    load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +40,7 @@ ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1", "8e9b-178-150-167-216.ngrok-free.
 # Application definition
 
 CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]
+
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -89,8 +93,8 @@ DATABASES = {
         'NAME': os.getenv("POSTGRES_NAME"),
         'USER': os.getenv("POSTGRES_USER"),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv("POSTGRES_HOST"),
-        'PORT': int(os.getenv("POSTGRES_PORT"))
+        'HOST': "localhost",
+        'PORT': 5432
     }
 }
 
@@ -146,3 +150,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 LOGIN_REDIRECT_URL = "/index"
+
+
