@@ -11,20 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 
-# from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
-DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
-
-if DJANGO_SETTINGS_MODULE == "regclinic.settings":
-    dotenv_path = "regclinic/vars.env"
-    load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -33,16 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v(l07qvqd1q0@1_521)pho5_lzw_ttgjjcvt-fhink_o0*#^ot'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["192.168.1.246", "127.0.0.1", "8e9b-178-150-167-216.ngrok-free.app", "polyclinic.azurewebsites.net"]
 
 # Application definition
 
-CSRF_TRUSTED_ORIGINS = ["https://8e9b-178-150-167-216.ngrok-free.app"]
-
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +42,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,20 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'regclinic.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("POSTGRES_NAME"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': "localhost",
-        'PORT': 5432
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -135,18 +107,19 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = [
-    BASE_DIR / 'locale/',
+    os.path.join(BASE_DIR, "clinic", "locale")
 ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "clinic/static")
+    os.path.join(BASE_DIR, "clinic", "static")
 ]
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
