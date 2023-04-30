@@ -1,0 +1,58 @@
+* {
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+}
+
+.appointments__wrapper {
+    display: grid;
+    justify-items: center;
+    margin-top: 2em;
+}
+
+.appointments h2.err-auth {
+    color: yellow;
+}
+
+.appointments {
+    padding: 1em;
+    display: grid;
+    grid-row-gap: 1em;
+    border-radius: 10px;
+    border: solid 1px rgb(100, 100, 100)
+}
+
+.appointments__data {
+    display: grid;
+    grid-row-gap: 1em;
+}
+
+.appointment.past {
+    background-color: rgb(200, 200, 200);
+    padding: 0.5em;
+    border-radius: 15px;
+}
+
+.appointment.future {
+    background-color: rgb(150, 150, 255);
+    padding: 0.5em;
+    border-radius: 15px;
+}
+
+.user-info__block,
+.appointments__block {
+    display: grid;
+    row-gap: 1em;
+}
+
+.fz_12 {
+    font-size: 1.2em;
+}
+
+.fz_2 {
+    font-size: 2em;
+}
+
+.fw_600 {
+    font-weight: 600;
+}
+

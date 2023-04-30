@@ -1,0 +1,310 @@
+.brief-info {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.brief-info picture {
+    display: block;
+    height: auto;
+}
+
+.brief-info picture img {
+    display: block;
+    vertical-align: bottom;
+    object-fit: contain;
+}
+
+.brief-info .about-services {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.brief-info .about-services h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.brief-info .about-services span {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color: #777;
+}
+
+.brief-info .about-services a {
+    text-decoration: none;
+    padding: 15px 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+.brief-info .about-services #record-btn {
+    color: white;
+    background-color: rgba(80, 170, 170, 1);
+}
+
+.brief-info .about-services #record-btn:hover {
+    background-color: rgba(0, 150, 150, 1);
+}
+
+.brief-info .about-services #more-info-btn {
+    color: black;
+}
+
+.brief-info .about-services #more-info-btn:hover {
+    background-color: #ccc;
+}
+
+.about-clinic {
+    display: grid;
+    justify-items: center;
+    row-gap: 40px;
+}
+
+.about-clinic .description {
+    line-height: 30px;
+    width: 80%;
+    font-size: 1.1rem;
+    font-family: "Arial", sans-serif;
+}
+
+.quote-wrapper {
+    width: 80%;
+}
+
+.quote-wrapper .quote {
+    position: relative;
+    padding: 50px;
+    font-family: 'Times New Roman', cursive;
+    background-color: rgba(208, 255, 255, .8);
+    border-radius: 10px;
+}
+
+.quote-wrapper .quote:before {
+    content: open-quote;
+    top: 15px;
+    left: 15px;
+}
+
+.quote-wrapper .quote:after {
+    content: close-quote;
+    bottom: 15px;
+    right: 100px;
+}
+
+.quote-wrapper .quote:before,
+.quote-wrapper .quote:after {
+    display: block;
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.8);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 50%;
+}
+
+.quote-author {
+    position: absolute;
+    right: 20%;
+    background-color: inherit;
+    font-family: 'Satisfy', cursive;
+}
+
+br.show-for-mobile {
+    content: '';
+}
+
+.select {
+    display: flex;
+    width: 100%;
+    height: 3em;
+    line-height: 3;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: .25em;
+    position: relative;
+}
+
+select:focus .select {
+    border: 1px solid #ccc;
+}
+
+.select::after {
+    content: '▼';
+    color: #000;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    pointer-events: none;
+    transition: all .25s ease;
+}
+
+.select:hover::after {
+    color: rgba(68, 120, 242, 1);
+}
+
+.what-makes-us-special-grid {
+    display: grid;
+    font-size: 1.2rem;
+    font-family: "Roboto", sans-serif;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.what-makes-us-special-article {
+    background-color: rgba(230, 230, 230, 0.5);
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.what-makes-us-special-article > * {
+    margin: 15px 0;
+}
+
+.what-makes-us-special-article img {
+    height: 75px;
+    margin: 0;
+}
+
+.reminder-popup {
+    position: fixed;
+    z-index: 1500;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    font-family: "Roboto", sans-serif;
+    line-height: 30px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.reminder-popup.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.reminder-popup__body {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px;
+}
+
+.reminder-popup__content {
+    background-color: #ffffff;
+    max-width: 800px;
+    padding: 30px;
+    position: relative;
+}
+
+.reminder-popup__title {
+    font-size: 1.6rem;
+    margin-bottom: 2em;
+}
+
+.reminder-popup__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 1300px) {
+    .brief-info .about-services h2 {
+        font-size: 2rem;
+    }
+
+    .brief-info .about-services span {
+        font-size: 1.2rem;
+    }
+
+    .brief-info .about-services a {
+        padding: 12px 14px;
+    }
+
+    .full-description .description-header {
+        font-size: 1.2rem;
+    }
+
+}
+
+@media screen and (max-width: 1250px) {
+    .brief-info .about-services h2 {
+        font-size: calc(1.5rem + 1 * (100vw / 1250));
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .about-clinic .description {
+        width: 95%;
+    }
+
+    .what-makes-us-special-grid {
+        width: 95%;
+    }
+
+    .about-clinic * {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media screen and (max-width: 932px) {
+    .about-services .buttons * {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .brief-info {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .brief-info .buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        height: 15px;
+    }
+
+    .brief-info .buttons * {
+        text-align: center;
+        margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    br.show-for-mobile {
+        content: none;
+    }
+
+    .what-makes-us-special-grid {
+        grid-template-columns: none;
+        font-size: 1rem;
+    }
+
+    .about-clinic .description {
+        font-size: 0.9rem;
+    }
+}

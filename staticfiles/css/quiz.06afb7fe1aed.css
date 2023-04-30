@@ -1,0 +1,236 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.form {
+    color: white;
+    background-color: rgb(50, 80, 150);
+    border: solid 1px white;
+    border-radius: 10px;
+    position: relative;
+    width: 50%;
+}
+
+#form__content {
+    background-color: rgba(50, 150, 220, 0.7);
+    border-radius: 0 0 10px 10px;
+    margin: 0;
+}
+
+#form__title {
+    text-align: center;
+}
+
+.form__variant__block {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    margin: 1.2em 0;
+}
+
+.form__button__block {
+    display: grid;
+    margin: 0.5em 0;
+    justify-content: right;
+}
+
+.form__button {
+    display: inline;
+    border: none;
+    background-color: #0CC5BF;
+    text-decoration: none;
+    border-radius: 20px;
+    color: white;
+    padding: 0.8em 1em;
+    margin-right: 1em;
+}
+
+.form__button:hover {
+    background-color: #0AA0AA;
+}
+
+.results-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.results {
+    font-size: 1.2rem;
+    margin: 40px 40px;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-color: rgba(90, 180, 200, 0.3);
+}
+
+.total__title {
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+    margin-bottom: 0.5em;
+}
+
+.total__diagrams {
+    display: grid;
+    row-gap: 25px;
+}
+
+.variants {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.variants__title {
+    font-family: Inter, sans-serif;
+    font-style: italic;
+}
+
+.variants__answer {
+    font-family: Inter, sans-serif;
+    color: rgba(92, 92, 92, 1);
+}
+
+.result {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    align-items: center;
+    width: 100%;
+}
+
+.result__variant {
+    font-style: italic;
+    font-weight: 600;
+}
+
+.result__variant__scale {
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+
+.green {
+    background-color: rgba(32, 202, 39, 0.7);
+}
+
+.red {
+    background-color: rgba(227, 32, 32, 0.7);
+}
+
+.scale-wrapper {
+    width: 100%;
+    height: 5em;
+}
+
+.scale {
+    height: 100%;
+}
+
+.percentage {
+    text-align: right;
+    font-family: Roboto, sans-serif;
+}
+
+.home-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+a.home {
+    background-color: rgba(80, 170, 170, 1);
+    color: rgba(255, 253, 253, 1);
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    display: inline-block;
+    width: 200px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+a.home:hover {
+    background-color: rgba(80, 100, 100, 1);
+}
+
+.verdict-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+}
+
+.verdict {
+    color: rgba(26, 85, 17, 1);
+    font-family: Inter, sans-serif;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#loader {
+    border: 12px solid #f3f3f3;
+    border-top: 12px solid rgba(80, 170, 170, 1);
+    border-radius: 50%;
+    width: 80px;
+    aspect-ratio: 1;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #form__title {
+        font-size: calc(0.8em + 0.4 * (100vw / 64));
+    }
+
+    .form {
+        width: 90%;
+    }
+
+    .form__button {
+        font-size: calc(0.5em + 0.4 * (100vw / 64));
+    }
+
+    .form__variant__block {
+        font-size: calc(0.6em + 0.4 * (100vw / 64));
+    }
+
+    .result__variant,
+    .result__variant__scale {
+        font-size: calc(0.7em + 0.3 * (100vw / 64));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .result {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+    }
+
+    .scale-wrapper {
+        height: calc(2.5em + 2 * (100vw / 48));
+    }
+
+    .variants__title,
+    .variants__answers > *,
+    .verdict,
+    a.home {
+        font-size: calc(0.7em + 0.3 * (100vw / 48));
+    }
+
+    .total__title {
+        font-size: calc(0.8em + 0.3 * (100vw / 48));
+    }
+}
+

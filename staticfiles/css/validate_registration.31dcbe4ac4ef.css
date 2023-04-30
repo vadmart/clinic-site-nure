@@ -1,0 +1,59 @@
+:root {
+    --main-font-family: Inter, sans-serif;
+}
+
+.validate-form-wrapper {
+    display: flex;
+    justify-content: center;
+    font-family: var(--main-font-family);
+    padding-top: 5%;
+}
+
+form.validate-form {
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 1em;
+    display: grid;
+    grid-row-gap: 0.5em;
+    max-width: 768px;
+    background-color: rgba(155, 222, 209, 1);
+    box-shadow: 5px 3px 21px 5px rgba(112,112,112,0.75);
+    -webkit-box-shadow: 5px 3px 21px 5px rgba(112,112,112,0.75);
+    -moz-box-shadow: 5px 3px 21px 5px rgba(112,112,112,0.75);
+}
+
+.validate-form__body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 1em;
+}
+
+.validate-form__body > * {
+    font-size: 1.2em;
+}
+
+.validate-form__body input[type=text] {
+    border: solid 1px rgb(50, 150, 150);
+    border-radius: 10px;
+    transition: box-shadow ease;
+    padding: 0.25em;
+}
+
+.validate-form__body input[type=text]:focus {
+    outline: none;
+    box-shadow: 0 0 7px 2px rgba(50, 150, 150);
+}
+
+.validate-form__body input[type=submit] {
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(50, 150, 150);
+}
+
+.validate-form__body input[type=submit]:hover {
+    background-color: rgb(25, 75, 75);
+}
+
+.validate-form__body input[type=submit]:active {
+    background-color: rgb(35, 100, 100);
+}
