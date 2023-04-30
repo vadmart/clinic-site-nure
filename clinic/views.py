@@ -30,7 +30,7 @@ def get_vacancy(request):
 
 
 def quiz(request):
-    return render(request, template_name="clinic/pages/")
+    return render(request, template_name="clinic/pages/", context={"lang": request.LANGUAGE_CODE})
 
 
 def get_staff(request):
