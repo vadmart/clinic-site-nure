@@ -5,6 +5,7 @@ DEBUG = False
 ALLOWED_HOSTS = [os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
 CSRF_TRUSTED_ORIGINS = ["https://" + os.getenv("WEBSITE_HOSTNAME")] if "WEBSITE_HOSTNAME" in os.environ else []
 
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 conn_str = os.getenv("AZURE_POSTGRESQL_CONNECTIONSTRING")
 conn_str_params = {pair.split("=")[0]: pair.split("=")[1] for pair in conn_str.split(" ")}
