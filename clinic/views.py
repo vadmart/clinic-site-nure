@@ -1,6 +1,9 @@
 import datetime
 
 from django.shortcuts import render, get_object_or_404
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, FormView
+
 from clinic.models import Doctor, Patient, Review, Recording, Schedule
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
@@ -33,14 +36,27 @@ def quiz(request):
     return render(request, template_name="clinic/pages/", context={"lang": request.LANGUAGE_CODE})
 
 
-def get_staff(request):
-    doctors = Doctor.objects.all()
-    return render(request, template_name="clinic/pages/staff.html", context={"doctors": doctors})
+class DoctorList(ListView):
+    model = Doctor
+    template_name = "clinic/pages/staff.html"
+    context_object_name = "doctors"
 
 
-def get_reviews(request, doctor_slug):
-    doctor = get_object_or_404(Doctor, slug=doctor_slug)
-    return render(request, template_name="clinic/pages/reviews.html", context={"doctor": doctor})
+class DoctorReviews(DetailView):
+    model = Doctor
+    template_name = "clinic/pages/reviews.html"
+    context_object_name = "doctor"
+    slug_url_kwarg = "doctor_slug"
+
+
+
+# class AppointmentForm(CreateView):
+#     template_name = "clinic/pages/making-an-appointment.html"
+#     model = Patient
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["doctor"] =
 
 
 def get_appointment_page(request):
@@ -145,7 +161,7 @@ def get_full_time(tm):
         return time_lst[0]
     elif time_lst[1] == "p.m." and time[0] == "12":
         return "12:" + time[1]
-    return str(int(time_lst[0]) + 12)
+    return str(int(time[0]) + 12) + ":" + time[1]
 
 
 def get_appointments_dates(appointments) -> list[datetime.datetime]:
@@ -156,15 +172,18 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
             app_dates.append(app_date)
     return list(map(lambda dt_tm: dt_tm.strftime("%d.%m.%Y"), app_dates))
 
+class UserCabinet(ListView):
+    model = Schedule
+    template_name = "clinic/pages/user-cabinet.html"
+    context_object_name = "appointments"
 
-def get_user_cabinet(request):
-    try:
-        if request.user.is_authenticated:
-            patient_appointments = sorted(Schedule.objects.filter(patient__user=request.user,
-                                                                  start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)))
-            return render(request, template_name="clinic/pages/user-cabinet.html", context={"appointments": patient_appointments,
-                                                                                        "current_date": datetime.datetime.now()})
-        else:
-            return render(request, template_name="clinic/pages/user-cabinet.html")
-    except Schedule.DoesNotExist:
-        return render(request, template_name="clinic/pages/user-cabinet.html")
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_date"] = datetime.datetime.now()
+        return context
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return self.model.objects.filter(patient__user=self.request.user,
+                                             start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5))
+
