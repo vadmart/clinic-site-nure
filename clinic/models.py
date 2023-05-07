@@ -16,6 +16,7 @@ class DoctorCategory(models.Model):
     class Meta:
         verbose_name = "Категорія доктора"
         verbose_name_plural = "Категорії докторів"
+        ordering = ["id"]
 
 
 class Doctor(models.Model):
@@ -33,9 +34,13 @@ class Doctor(models.Model):
     class Meta:
         verbose_name = "Доктор"
         verbose_name_plural = "Доктори"
+        ordering = ("-work_start_date",)
 
     def get_absolute_url(self):
         return reverse("reviews", kwargs={"doctor_slug": self.slug})
+
+    def full_name(self):
+        return f"{self.lastname} {self.name} {self.patronymic}"
 
 
 class DoctorPhoneNumber(models.Model):
@@ -94,11 +99,15 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return textwrap.shorten(self.text, 30)
+        return textwrap.shorten(self.text, 50)
+
+    def get_absolute_url(self):
+        return reverse("reviews", kwargs={"doctor_slug": self.doctor.slug})
 
     class Meta:
         verbose_name = "Відгук"
         verbose_name_plural = "Відгуки"
+        ordering = ("created_at",)
 
 
 class Recording(models.Model):
@@ -113,6 +122,7 @@ class Recording(models.Model):
     class Meta:
         verbose_name = "Запис на прийом"
         verbose_name_plural = "Записи на прийом"
+        ordering = ("-created_at",)
 
 
 class Cabinet(models.Model):
@@ -126,6 +136,7 @@ class Cabinet(models.Model):
     class Meta:
         verbose_name = "Кабінет"
         verbose_name_plural = "Кабінети"
+        ordering = ("-cabinet_no",)
 
 
 class Schedule(models.Model):
@@ -143,6 +154,7 @@ class Schedule(models.Model):
     class Meta:
         verbose_name = "Графік роботи"
         verbose_name_plural = "Графіки роботи"
+        ordering = ("-start_datetime",)
 
     def clean(self):
         if self.patient:

@@ -502,8 +502,8 @@ msgstr "Have an account already? <a href=\"/login\">Log in</a>"
 msgid "Сімейний лікар"
 msgstr "Family doctor"
 
-msgid "Запис на прийом успішно виконано! За необхідно можете записатися ще"
-msgstr "Making an appointment was completed successfully! You can make a new recordings else"
+msgid "Запис на прийом успішно виконано! За необхідністю можете записатися ще"
+msgstr "Making an appointment was completed successfully! If you need, you could make new recordings else"
 
 msgid "Помилка: не знайдено лікаря, із яким узгоджено контракт. Перевірте свій акаунт або перезавантажте сторінку!"
 msgstr "Error: the doctor, with whom the contract had been agreed, wasn't found. Check your account or refresh a page!"
@@ -549,3 +549,6 @@ msgstr "Send a CV to the address"
 
 msgid "Запис за тел."
 msgstr "Phone recording"
+
+msgid "Введіть текст відгуку..."
+msgstr "Type a review text..."

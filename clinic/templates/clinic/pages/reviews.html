@@ -105,7 +105,7 @@
         {% endif %}
     </div>
     <div class="review-blank-wrapper hidden">
-        {% if user.is_authenticated %}
+        {% if form %}
             {% if user.patient.doctor == doctor %}
                 <div class="review-blank">
                     <div class="close-block">
@@ -113,10 +113,11 @@
                     </div>
                     <form method="post" action="{% url 'send_review' %}" class="blank">
                         {% csrf_token %}
-                        <input type="hidden" name="doctor_url" value="{{ doctor.slug }}">
+                        {{ form.doctor }}
+                        {{ form.patient }}
                         <div class="inner-box" id="review-box">
-                            <label for="review-text">{% trans 'Текст відгуку' %}</label>
-                            <textarea class="review-textarea" id="review-text" name="review_text"></textarea>
+                            <label for="review_text">{{ form.text.label }}</label>
+                            {{ form.text }}
                         </div>
                         <div class="inner-box" id="submit-button-wrapper">
                             <input type="submit" class="submit-review-button" value="{% trans 'Відправити' %}">

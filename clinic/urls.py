@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView, LoginView
 from . import views
 
 urlpatterns = [
@@ -13,9 +14,9 @@ urlpatterns = [
     path("registration", views.get_registration_form, name="registration"),
     path("register", views.validate_registration, name="register"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num"),
-    path("login", views.ClinicLogin.as_view(), name="login"),
+    path("login", LoginView.as_view(), name="login"),
     path("user-cabinet", views.UserCabinet.as_view(), name="user-cabinet"),
-    path("logout", views.ClinicLogout.as_view(), name="logout"),
-    path("sendReview", views.send_review, name="send_review"),
+    path("logout", LogoutView.as_view(), name="logout"),
+    path("sendReview", views.SendReview.as_view(), name="send_review"),
     path("<str:doctor_img_name>", views.index, name="index")
 ]

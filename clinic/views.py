@@ -1,16 +1,15 @@
 import datetime
 
-from django.shortcuts import render, get_object_or_404
-from django.views import View
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView, CreateView
+from .forms import ReviewForm
 
-from clinic.models import Doctor, Patient, Review, Recording, Schedule
+from clinic.models import Doctor, Patient, Recording, Schedule
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LogoutView, LoginView
 from django.utils.translation import gettext_lazy as _
 import json
 
@@ -48,15 +47,22 @@ class DoctorReviews(DetailView):
     context_object_name = "doctor"
     slug_url_kwarg = "doctor_slug"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated and not self.request.user.is_superuser:
+            context["form"] = ReviewForm(initial={
+                "doctor": self.get_object(),
+                "patient": self.request.user.patient
+            })
+        return context
 
 
-# class AppointmentForm(CreateView):
-#     template_name = "clinic/pages/making-an-appointment.html"
-#     model = Patient
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["doctor"] =
+class SendReview(CreateView):
+    model = Doctor
+    form_class = ReviewForm
+    template_name = "clinic/pages/reviews.html"
+    context_object_name = "doctor"
+    slug_url_kwarg = "doctor_slug"
 
 
 def get_appointment_page(request):
@@ -95,14 +101,15 @@ def get_appointment_page(request):
             patient = request.user.patient
             schedule.patient = patient
             schedule.save()
-            appointments = sorted(doctor.schedule_set.filter(patient=None))
+            appointments = sorted(doctor.schedule_set.filter(patient=None,
+                                                             start_datetime__gt=datetime.datetime.now()))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor": doctor,
                                    "appointments": appointments,
                                    "app_dates": get_appointments_dates(appointments),
                                    "success_message": _(
-                                       "Запис на прийом успішно виконано! За необхідно можете записатися ще")})
+                                       "Запис на прийом успішно виконано! За необхідністю можете записатися ще")})
         except ValidationError:
             err = "Помилка: цей час вже зайнято, перезавантажте сторінку та оберіть інший"
             appointments = sorted(doctor.schedule_set.filter(patient=None))
@@ -136,22 +143,6 @@ def validate_registration(request):
     return HttpResponseRedirect(redirect_to="/index")
 
 
-def send_review(request):
-    doctor = Doctor.objects.get(slug=request.POST['doctor_url'])
-    Review.objects.create(doctor=doctor,
-                          patient=request.user.patient,
-                          text=request.POST["review_text"])
-    return HttpResponseRedirect(redirect_to=f"/reviews/{doctor.slug}")
-
-
-class ClinicLogin(LoginView):
-    pass
-
-
-class ClinicLogout(LogoutView):
-    pass
-
-
 def get_full_time(tm):
     time_lst = tm.split()
     time = time_lst[0].split(":")
@@ -172,6 +163,7 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
             app_dates.append(app_date)
     return list(map(lambda dt_tm: dt_tm.strftime("%d.%m.%Y"), app_dates))
 
+
 class UserCabinet(ListView):
     model = Schedule
     template_name = "clinic/pages/user-cabinet.html"
@@ -185,5 +177,4 @@ class UserCabinet(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             return self.model.objects.filter(patient__user=self.request.user,
-                                             start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5))
-
+                                             start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)).order_by("start_datetime")
