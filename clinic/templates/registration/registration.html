@@ -20,6 +20,9 @@
 {% block content %}
     <div class="registration-form-wrapper">
         <div class="registration-form">
+            {% if user_already_exists %}
+                <h2 class="err-header" style="color: red;">{% trans 'Такий користувач вже існує' %}</h2>
+            {% endif %}
             <div class="registration-form-title">
                 <h3>{% trans 'Укладення контракту' %}</h3>
             </div>
@@ -43,7 +46,11 @@
                     <div class="user-info__second">
                         <div class="field-block">
                             <label for="registration-phone-num">{% trans 'Номер телефону' %}</label>
-                            <input type="text" id="registration-phone-num" name="phone_number" required>
+                            <input type="text"
+                                   id="registration-phone-num"
+                                   name="phone_number"
+                                   pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{6}$"
+                                   required>
                         </div>
                         <div class="field-block">
                             <label for="registration-doctor-choice">{% trans 'Із яким доктором узгоджуєте контракт?' %}</label>

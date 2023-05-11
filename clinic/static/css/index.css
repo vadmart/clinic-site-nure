@@ -52,13 +52,6 @@
     background-color: rgba(0, 150, 150, 1);
 }
 
-.brief-info .about-services #more-info-btn {
-    color: black;
-}
-
-.brief-info .about-services #more-info-btn:hover {
-    background-color: #ccc;
-}
 
 .about-clinic {
     display: grid;

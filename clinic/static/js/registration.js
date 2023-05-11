@@ -1,4 +1,3 @@
-const registrationForm = document.querySelector("form.form-data");
 const contractSenderButton = document.getElementById("registration-contract-num-button");
 const contractSenderButtonText = document.querySelector("button#registration-contract-num-button i");
 const contractField = window["registration-contract-num"];
@@ -8,12 +7,15 @@ let timerID = 0;
 let contractNum = null;
 
 contractSenderButton.addEventListener("click", (e) => {
+    window["registration-phone-num"].setCustomValidity("");
     const phoneNumber = window["registration-phone-num"].value;
     if (!phoneNumber) {
         window["registration-phone-num"].setCustomValidity("Укажите номер телефона");
         return;
+    } else if (window["registration-phone-num"].validity.patternMismatch) {
+        window["registration-phone-num"].setCustomValidity("Укажите номер телефона в формате +38XXXXXXXXXX");
+        return
     }
-    window["registration-phone-num"].setCustomValidity("");
     fetch("send_contract_num", {
         "method": "POST",
         "mode": "same-origin",

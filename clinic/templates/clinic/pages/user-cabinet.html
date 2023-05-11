@@ -60,8 +60,7 @@
                     {% endif %}
                 </div>
             {% else %}
-                <h2 class="err-auth">Ви не автентифіковані. <a href="{% url 'login' %}?next={{ request.path }}">Увійдіть</a>, щоб можна було побачити дані про Вашого лікаря та
-                    записи на прийом</h2>
+                <h2 class="err-auth">{% trans 'Ви не автентифіковані' %}. <a href="{% url 'login' %}?next={{ request.path }}">{% trans 'Увійдіть' %}</a>{% trans ', щоб можна було побачити дані про Вашого лікаря та записи на прийом' %}</h2>
             {% endif %}
         </div>
     </div>

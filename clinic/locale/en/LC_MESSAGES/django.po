@@ -552,3 +552,15 @@ msgstr "Phone recording"
 
 msgid "Введіть текст відгуку..."
 msgstr "Type a review text..."
+
+msgid "Ви не автентифіковані"
+msgstr "You are not authed"
+
+msgid "Увійдіть"
+msgstr "Log in"
+
+msgid ", щоб можна було побачити дані про Вашого лікаря та записи на прийом"
+msgstr " to see data about your doctor and appointments"
+
+msgid "Такий користувач вже існує"
+msgstr "This user already exists"

@@ -1,11 +1,12 @@
 import datetime
 
+from django.db import IntegrityError
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, View
 from .forms import ReviewForm
 
 from clinic.models import Doctor, Patient, Recording, Schedule
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.exceptions import ValidationError
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
@@ -65,10 +66,8 @@ class SendReview(CreateView):
     slug_url_kwarg = "doctor_slug"
 
 
-def get_appointment_page(request):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(redirect_to=f"login?next={request.path}")
-    if request.method == "GET":
+class AppointmentForm(View):
+    def get(self, request):
         try:
             doctor = Patient.objects.get(user=request.user).doctor
             appointments = sorted(doctor.schedule_set.filter(patient=None,
@@ -84,7 +83,8 @@ def get_appointment_page(request):
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor_err": doctor_err})
-    elif request.method == "POST":
+
+    def post(self, request):
         doctor = Doctor.objects.get(pk=request.POST["appointment_doctor_pk"])
         recording = Recording(person=request.user.patient,
                               doctor=Doctor.objects.get(pk=request.POST["appointment_doctor_pk"]),
@@ -98,8 +98,7 @@ def get_appointment_page(request):
             schedule = Schedule.objects.get(doctor=doctor,
                                             start_datetime=dt_tm,
                                             patient=None)
-            patient = request.user.patient
-            schedule.patient = patient
+            schedule.patient = request.user.patient
             schedule.save()
             appointments = sorted(doctor.schedule_set.filter(patient=None,
                                                              start_datetime__gt=datetime.datetime.now()))
@@ -135,15 +134,22 @@ def send_contract_num(request):
 
 
 def validate_registration(request):
-    user = User.objects.create_user(username=request.POST["name"],
-                                    last_name=request.POST["lastname"],
-                                    password=request.POST["contract_num"])
-    user.save()
-    Patient().create_patient_from_dict(user, request.POST)
+    try:
+        user = User.objects.create_user(username=request.POST["name"],
+                                        last_name=request.POST["lastname"],
+                                        password=request.POST["contract_num"])
+        user.save()
+        Patient().create_patient_from_dict(user, request.POST)
+    except IntegrityError:
+        doctors = Doctor.objects.all()
+        return render(request,
+                      template_name="registration/registration.html",
+                      context={"user_already_exists": True,
+                               "doctors": doctors})
     return HttpResponseRedirect(redirect_to="/index")
 
 
-def get_full_time(tm):
+def get_full_time(tm: str) -> str:
     time_lst = tm.split()
     time = time_lst[0].split(":")
     if time_lst[1] == "a.m." and time[0] == "12":

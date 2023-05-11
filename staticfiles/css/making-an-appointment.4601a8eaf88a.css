@@ -42,21 +42,6 @@
     background: #000000;
 }
 
-
-.form-container form .user-details {
-    /*display: grid;*/
-    /*width: 100%;*/
-    /*grid-template-areas: "ln name"*/
-    /*        "contract contract"*/
-    /*        "family family"*/
-    /*        "date date"*/
-    /*        "tm tm"*/
-    /*        "complaint-desc complaint-desc";*/
-    /*grid-template-columns: repeat(2, 1fr);*/
-    /*grid-template-rows: repeat(2, 1fr);*/
-    /*grid-column-gap: 30px;*/
-}
-
 form .user-details .inner-box {
     margin-bottom: 15px;
     width: 100%;
@@ -103,7 +88,7 @@ form .user-details .inner-box {
 .user-details .inner-box .info-block {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(115px, 0.5fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
     grid-row-gap: 1em;
     grid-column-gap: 1em;
 }
@@ -128,6 +113,10 @@ form .user-details .inner-box {
     background-color: #1975BB;
     border-color: #0CC5BF;
     color: #fff;
+}
+
+.info-block#time label {
+    white-space: nowrap;
 }
 
 .user-details .inner-box .textholder:focus,
@@ -233,18 +222,6 @@ input.button#record:hover {
     .user-details .inner-box input[type=date] {
         font-size: 0.8rem;
         width: 100%;
-    }
-
-    .popup__content {
-        padding: 10px;
-    }
-
-    .popup__title {
-        font-size: 1rem;
-    }
-
-    .popup__text {
-        font-size: 0.8rem;
     }
 
     span.err-msg {
