@@ -166,6 +166,18 @@ input#registration-contract-num:focus {
     box-shadow: -1px 0 2px 1px #6499e9;
 }
 
+h4#ajax-info {
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
 @media screen and (max-width: 1024px) {
     * {
         font-size: 0.98em;

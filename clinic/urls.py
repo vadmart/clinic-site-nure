@@ -1,5 +1,4 @@
 from django.urls import path
-from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth.decorators import login_required
 from . import views
 
@@ -15,7 +14,7 @@ urlpatterns = [
     path("registration", views.get_registration_form, name="registration"),
     path("register", views.validate_registration, name="register"),
     path("send_contract_num", views.send_contract_num, name="send_contract_num"),
-    path("user-cabinet", views.UserCabinet.as_view(), name="user-cabinet"),
+    path("user-cabinet", login_required(views.UserCabinet.as_view()), name="user-cabinet"),
     path("sendReview", views.SendReview.as_view(), name="send_review"),
     path("<str:doctor_img_name>", views.index, name="index")
 ]

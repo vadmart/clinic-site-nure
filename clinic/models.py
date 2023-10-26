@@ -1,10 +1,10 @@
 # Create your models here.
-from django.db import models
 from django.core.exceptions import ValidationError
 import textwrap
-from django.contrib.auth.models import User
 from django.http import QueryDict
+from django.contrib.auth.models import User
 from django.urls import reverse
+from django.db import models
 
 
 class DoctorCategory(models.Model):
@@ -53,6 +53,7 @@ class DoctorPhoneNumber(models.Model):
     class Meta:
         verbose_name = "Телефонний номер доктора"
         verbose_name_plural = "Телефонні номери докторів"
+        ordering = ("doctor__id",)
 
 
 class Patient(models.Model):
@@ -72,10 +73,6 @@ class Patient(models.Model):
     def __str__(self):
         return f"{self.lastname} {self.name}"
 
-    class Meta:
-        verbose_name = "Пацієнт"
-        verbose_name_plural = "Пацієнти"
-
     def create_patient_from_dict(self, user: User, dct: QueryDict):
         self.user = user
         self.doctor = Doctor.objects.get(pk=int(dct["doctor_choice"]))
@@ -90,6 +87,10 @@ class Patient(models.Model):
         self.flat_number = dct["flat_number"]
         self.post_index = dct["post_index"]
         self.save(force_insert=True)
+
+    class Meta:
+        verbose_name = "Пацієнт"
+        verbose_name_plural = "Пацієнти"
 
 
 class Review(models.Model):
@@ -112,12 +113,11 @@ class Review(models.Model):
 
 class Recording(models.Model):
     person = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     health_complaint = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"From: {self.person.name}, To: {self.doctor.name}"
+        return f"From: {self.person.name}"
 
     class Meta:
         verbose_name = "Запис на прийом"
@@ -144,12 +144,13 @@ class Schedule(models.Model):
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
     cabinet = models.ForeignKey(Cabinet, null=True, blank=True, on_delete=models.SET_NULL)
-    patient = models.ForeignKey(Patient, null=True, blank=True, on_delete=models.SET_NULL)
+    recording = models.OneToOneField(Recording, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        if not self.patient:
+        if not self.recording:
             return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}"
-        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}, patient: {self.patient}"
+        return f"Doctor: {self.doctor.lastname} {self.doctor.name}, date: {self.start_datetime.date()}, " \
+               f"patient: {self.recording.person}"
 
     class Meta:
         verbose_name = "Графік роботи"
@@ -157,7 +158,7 @@ class Schedule(models.Model):
         ordering = ("-start_datetime",)
 
     def clean(self):
-        if self.patient:
+        if self.recording:
             raise ValidationError("Цей запис вже зайнято. Оберіть інший час!")
 
     def __lt__(self, other):

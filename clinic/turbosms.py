@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 
@@ -23,6 +25,6 @@ class TurboSMSMessage:
         print(f"Sending SMS to numbers: {self.recipients}")
         response = requests.post(url=self.url,
                                  json=self.json_data,
-                                 headers={"Authorization": "Bearer 188f6660a9d156cd3a9599a13bdfc9796925c3cf"})
+                                 headers={"Authorization": f"Bearer {os.environ.get('TURBOSMS_API_KEY')}"})
         print(f"Status: {response.status_code}")
         return response.status_code
