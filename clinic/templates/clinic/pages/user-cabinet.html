@@ -49,7 +49,7 @@
                         <div class="appointments__data">
                             {% for appnt in appointments %}
                                 <div class="appointment {% if appnt.start_datetime < current_date %}past{% else %}future{% endif %}">
-                                    <span class="fz_12">{{ appnt.start_datetime }} — {{ appnt.end_datetime }}</span>
+                                    <span class="fz_12">{{ appnt.schedule.start_datetime }} — {{ appnt.schedule.end_datetime }}</span>
                                 </div>
                             {% endfor %}
                         </div>

@@ -39,12 +39,8 @@ LOGGING = {
 }
 
 DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': conn_str_params["dbname"],
-        'USER': conn_str_params["user"],
-        'PASSWORD': conn_str_params["password"],
-        'HOST': conn_str_params["host"],
-        'PORT': int(conn_str_params["port"])
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'clinic.sqlite3'
     }
 }

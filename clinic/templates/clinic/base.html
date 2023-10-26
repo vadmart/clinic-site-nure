@@ -71,7 +71,13 @@
                         <div class="account-block">
                             <div id="user">
                                 <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
-                                <span>{{ user.username }} {{ user.last_name }}</span>
+                                <span>
+                                    {% if user.first_name and  user.last_name %}
+                                    {{ user.first_name }} {{ user.last_name }}
+                                    {% else %}
+                                        {{ user.username }}
+                                    {% endif %}
+                                </span>
                             </div>
                             <div class="user-cabinet-block">
                                 {% block user_cabinet %}
@@ -141,7 +147,7 @@
                             <div class="account-block">
                                 <div id="user">
                                     <img src="{% static 'icons/user.png' %}" alt="Користувач" height="16" width="16">
-                                    <span>{{ user.username }} {{ user.last_name }}</span>
+                                    <span>{{ user.first_name }} {{ user.last_name }}</span>
                                 </div>
                                 <div class="user-cabinet-block">
                                     <a href="{% url 'user-cabinet' %}">{% trans 'Кабінет користувача' %}</a>

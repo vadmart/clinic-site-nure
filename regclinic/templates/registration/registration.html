@@ -45,11 +45,11 @@
                     </div>
                     <div class="user-info__second">
                         <div class="field-block">
-                            <label for="registration-phone-num">{% trans 'Номер телефону' %}</label>
+                            <label for="registration-phone-num">{% trans 'Номер телефону' %} (+380xx-xxx-xx-xx)</label>
                             <input type="text"
                                    id="registration-phone-num"
                                    name="phone_number"
-                                   pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{6}$"
+                                   pattern="^\+38\s?0[356789][0-9]\s?\d{3}\s?\d{2}\s?\d{2}"
                                    required>
                         </div>
                         <div class="field-block">
@@ -105,6 +105,7 @@
                                     <button id="registration-contract-num-button">
                                         <i>{% trans 'Отримати номер контракту' %}</i>
                                     </button>
+                                    <h4 id="ajax-info"></h4>
                                 </div>
                             </div>
                         </div>

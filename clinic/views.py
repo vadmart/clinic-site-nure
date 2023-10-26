@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, View
 from .forms import ReviewForm
 
 from clinic.models import Doctor, Patient, Recording, Schedule
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from clinic.contract import get_rand_contract_num
 from clinic.turbosms import TurboSMSMessage
@@ -70,7 +70,7 @@ class AppointmentForm(View):
     def get(self, request):
         try:
             doctor = Patient.objects.get(user=request.user).doctor
-            appointments = sorted(doctor.schedule_set.filter(patient=None,
+            appointments = sorted(doctor.schedule_set.filter(recording=None,
                                                              start_datetime__gt=datetime.datetime.now()))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
@@ -87,20 +87,17 @@ class AppointmentForm(View):
     def post(self, request):
         doctor = Doctor.objects.get(pk=request.POST["appointment_doctor_pk"])
         recording = Recording(person=request.user.patient,
-                              doctor=Doctor.objects.get(pk=request.POST["appointment_doctor_pk"]),
-                              health_complaint=request.POST["appointment_complaint"]
-                              )
+                              health_complaint=request.POST["appointment_complaint"])
         recording.save()
         time = get_full_time(request.POST["appointment_time"]) if request.LANGUAGE_CODE.lower() == "en" else \
             request.POST["appointment_time"]
         dt_tm = datetime.datetime.strptime(request.POST["appointment_date"] + "T" + time, "%d.%m.%YT%H:%M")
         try:
             schedule = Schedule.objects.get(doctor=doctor,
-                                            start_datetime=dt_tm,
-                                            patient=None)
-            schedule.patient = request.user.patient
+                                            start_datetime=dt_tm)
+            schedule.recording = recording
             schedule.save()
-            appointments = sorted(doctor.schedule_set.filter(patient=None,
+            appointments = sorted(doctor.schedule_set.filter(recording=None,
                                                              start_datetime__gt=datetime.datetime.now()))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
@@ -111,7 +108,8 @@ class AppointmentForm(View):
                                        "Запис на прийом успішно виконано! За необхідністю можете записатися ще")})
         except ValidationError:
             err = "Помилка: цей час вже зайнято, перезавантажте сторінку та оберіть інший"
-            appointments = sorted(doctor.schedule_set.filter(patient=None))
+            appointments = sorted(doctor.schedule_set.filter(recording=None,
+                                                             start_datetime__gt=datetime.datetime.now()))
             return render(request,
                           template_name="clinic/pages/making-an-appointment.html",
                           context={"doctor": doctor,
@@ -128,25 +126,26 @@ def get_registration_form(request):
 def send_contract_num(request):
     contract_num = get_rand_contract_num()
     print(contract_num)
-    ts_message = TurboSMSMessage(contract_num=contract_num, recipients=[json.loads(request.body)["phone_number"]])
+    ts_message = TurboSMSMessage(contract_num=contract_num, recipients=[request.POST["phone_number"]])
     ts_message.send()
     return HttpResponse(contract_num)
 
 
 def validate_registration(request):
     try:
-        user = User.objects.create_user(username=request.POST["name"],
-                                        last_name=request.POST["lastname"],
-                                        password=request.POST["contract_num"])
+        user = User.objects.create_user(username=request.POST["phone_number"],
+                                        password=request.POST["contract_num"],
+                                        first_name=request.POST["name"],
+                                        last_name=request.POST["lastname"])
         user.save()
         Patient().create_patient_from_dict(user, request.POST)
+        return HttpResponseRedirect(redirect_to="/index")
     except IntegrityError:
         doctors = Doctor.objects.all()
         return render(request,
                       template_name="registration/registration.html",
                       context={"user_already_exists": True,
                                "doctors": doctors})
-    return HttpResponseRedirect(redirect_to="/index")
 
 
 def get_full_time(tm: str) -> str:
@@ -171,7 +170,7 @@ def get_appointments_dates(appointments) -> list[datetime.datetime]:
 
 
 class UserCabinet(ListView):
-    model = Schedule
+    model = Recording
     template_name = "clinic/pages/user-cabinet.html"
     context_object_name = "appointments"
 
@@ -182,5 +181,6 @@ class UserCabinet(ListView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.model.objects.filter(patient__user=self.request.user,
-                                             start_datetime__gte=datetime.datetime.now() - datetime.timedelta(days=5)).order_by("start_datetime")
+            return self.model.objects.filter(person__user=self.request.user,
+                                             schedule__start_datetime__gte=datetime.datetime.now() - datetime.timedelta(
+                                                 days=5)).order_by("schedule__start_datetime")

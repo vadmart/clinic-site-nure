@@ -40,7 +40,6 @@
                     <h5 class="description-header">{{ doctor.lastname }} {{ doctor.name }} {{ doctor.patronymic }}</h5>
                     <div class="description-block">
                         <p class="description">{{ doctor.category.name }} {% trans 'кваліфікаційна категорія' %}<br>
-                            {% trans 'Номер кабінету №' %} 4<br>
                             {% trans 'Номери телефону' %}:
                             {% for phone_obj in doctor.doctorphonenumber_set.values %}
                                 {{ phone_obj.phone_number_value }}{% if not forloop.last %},{% endif %}
